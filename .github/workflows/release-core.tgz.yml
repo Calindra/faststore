@@ -1,0 +1,67 @@
+name: Release Core Package
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: true
+
+      - name: Build core package
+        run: pnpm turbo run build --filter=@faststore/core
+
+      - name: Create package
+        run: |
+          cd packages/core
+          pnpm pack
+
+      - name: Get package info
+        id: package_info
+        run: |
+          PACKAGE_NAME=$(jq -r .name packages/core/package.json | cut -d '/' -f2)
+          PACKAGE_VERSION=$(jq -r .version packages/core/package.json)
+          echo "package_name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
+          echo "package_version=$PACKAGE_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Create git tag
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "${{ steps.package_info.outputs.package_name }}-${{ steps.package_info.outputs.package_version }}" -m "Release ${{ steps.package_info.outputs.package_name }}-${{ steps.package_info.outputs.package_version }}"
+          git push origin --tags
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.package_info.outputs.package_name }}-${{ steps.package_info.outputs.package_version }}
+          release_name: Release ${{ steps.package_info.outputs.package_name }} ${{ steps.package_info.outputs.package_version }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./packages/core/${{ steps.package_info.outputs.package_name }}-${{ steps.package_info.outputs.package_version }}.tgz
+          asset_name: ${{ steps.package_info.outputs.package_name }}-${{ steps.package_info.outputs.package_version }}.tgz
+          asset_content_type: application/gzip
