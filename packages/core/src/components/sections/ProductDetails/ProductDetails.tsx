@@ -110,6 +110,7 @@ function ProductDetails({
     ProductTitle,
     SKUMatrix,
     SKUMatrixTrigger,
+    ProductDetailsPresentational,
     __experimentalImageGallery: ImageGallery,
     __experimentalShippingSimulation: ShippingSimulation,
     __experimentalNotAvailableButton: NotAvailableButton,
@@ -186,152 +187,196 @@ function ProductDetails({
     [availability]
   )
 
+  const shippingProps = {
+    formatter: useFormattedPrice,
+    ...ShippingSimulation.props,
+    idkPostalCodeLinkProps: {
+      ...ShippingSimulation.props.idkPostalCodeLinkProps,
+      href:
+        shippingSimulatorLinkUrl ??
+        ShippingSimulation.props.idkPostalCodeLinkProps?.href,
+      children:
+        shippingSimulatorLinkText ??
+        ShippingSimulation.props.idkPostalCodeLinkProps?.children,
+    },
+    productShippingInfo: {
+      id,
+      quantity,
+      seller: seller.identifier,
+    },
+    title: shippingSimulatorTitle ?? ShippingSimulation.props.title,
+    inputLabel:
+      shippingSimulatorInputLabel ?? ShippingSimulation.props.inputLabel,
+    optionsLabel:
+      shippingSimulatorOptionsTableTitle ??
+      ShippingSimulation.props.optionsLabel,
+  }
+
   return (
     <Section className={`${styles.section} section-product-details`}>
-      <section data-fs-product-details>
-        <section data-fs-product-details-body data-fs-content="product-details">
-          <header data-fs-product-details-title data-fs-product-details-section>
-            <ProductTitle.Component
-              // TODO: We should review this prop. There's now way to override the title and use the dynamic name value.
-              // Maybe passing a ProductTitleHeader component as a prop would be better, as it would be overridable.
-              // Maybe now it's worth to make title always a h1 and receive only the name, as it would be easier for users to override.
-              title={<h1>{name}</h1>}
-              {...ProductTitle.props}
-              label={
-                showDiscountBadge && (
-                  <DiscountBadge.Component
-                    {...DiscountBadge.props}
-                    size={discountBadgeSize ?? DiscountBadge.props.size}
+      <ProductDetailsPresentational.Component
+        product={product}
+        outOfStock={outOfStock}
+        quantity={quantity}
+        seller={seller}
+        shippingProps={shippingProps}
+        ShippingSimulation={ShippingSimulation.Component}
+      >
+        <section data-fs-product-details>
+          <section
+            data-fs-product-details-body
+            data-fs-content="product-details"
+          >
+            <header
+              data-fs-product-details-title
+              data-fs-product-details-section
+            >
+              <ProductTitle.Component
+                // TODO: We should review this prop. There's now way to override the title and use the dynamic name value.
+                // Maybe passing a ProductTitleHeader component as a prop would be better, as it would be overridable.
+                // Maybe now it's worth to make title always a h1 and receive only the name, as it would be easier for users to override.
+                title={<h1>{name}</h1>}
+                {...ProductTitle.props}
+                label={
+                  showDiscountBadge && (
+                    <DiscountBadge.Component
+                      {...DiscountBadge.props}
+                      size={discountBadgeSize ?? DiscountBadge.props.size}
+                      // Dynamic props shouldn't be overridable
+                      // This decision can be reviewed later if needed
+                      listPrice={
+                        taxesConfiguration?.usePriceWithTaxes
+                          ? listPriceWithTaxes
+                          : listPrice
+                      }
+                      spotPrice={
+                        taxesConfiguration?.usePriceWithTaxes
+                          ? lowPriceWithTaxes
+                          : lowPrice
+                      }
+                    />
+                  )
+                }
+                refNumber={showRefNumber && productId}
+              />
+            </header>
+            <ImageGallery.Component
+              data-fs-product-details-gallery
+              {...ImageGallery.props}
+              images={productImages}
+            />
+
+            {isClientOfferEnabled && isValidating ? (
+              <section data-fs-product-details-info>
+                <section
+                  data-fs-product-details-settings
+                  data-fs-product-details-section
+                >
+                  <p>Loading...</p>
+                </section>
+              </section>
+            ) : (
+              <section data-fs-product-details-info>
+                <section
+                  data-fs-product-details-settings
+                  data-fs-product-details-section
+                >
+                  <ProductDetailsSettings.Component
+                    buyButtonTitle={buyButtonTitle}
+                    buyButtonIcon={buyButtonIcon}
+                    notAvailableButtonTitle={
+                      notAvailableButtonTitle ?? NotAvailableButton.props.title
+                    }
+                    useUnitMultiplier={
+                      quantitySelector?.useUnitMultiplier ?? false
+                    }
+                    {...ProductDetailsSettings.props}
                     // Dynamic props shouldn't be overridable
                     // This decision can be reviewed later if needed
-                    listPrice={
-                      taxesConfiguration?.usePriceWithTaxes
-                        ? listPriceWithTaxes
-                        : listPrice
+                    quantity={quantity}
+                    setQuantity={setQuantity}
+                    product={product}
+                    isValidating={isValidating}
+                    taxesConfiguration={taxesConfiguration}
+                  />
+
+                  {skuMatrix?.shouldDisplaySKUMatrix &&
+                    Object.keys(slugsMap).length > 1 && (
+                      <>
+                        <div data-fs-product-details-settings-separator>
+                          {skuMatrix.separatorButtonsText}
+                        </div>
+
+                        <SKUMatrix.Component>
+                          <SKUMatrixTrigger.Component disabled={isValidating}>
+                            {skuMatrix.triggerButtonLabel}
+                          </SKUMatrixTrigger.Component>
+
+                          <SKUMatrixSidebar.Component
+                            formatter={useFormattedPrice}
+                            columns={skuMatrix.columns}
+                            overlayProps={{ className: styles.section }}
+                          />
+                        </SKUMatrix.Component>
+                      </>
+                    )}
+                </section>
+
+                {!outOfStock && (
+                  <ShippingSimulation.Component
+                    data-fs-product-details-section
+                    data-fs-product-details-shipping
+                    formatter={useFormattedPrice}
+                    {...ShippingSimulation.props}
+                    idkPostalCodeLinkProps={{
+                      ...ShippingSimulation.props.idkPostalCodeLinkProps,
+                      href:
+                        shippingSimulatorLinkUrl ??
+                        ShippingSimulation.props.idkPostalCodeLinkProps?.href,
+                      children:
+                        shippingSimulatorLinkText ??
+                        ShippingSimulation.props.idkPostalCodeLinkProps
+                          ?.children,
+                    }}
+                    productShippingInfo={{
+                      id,
+                      quantity,
+                      seller: seller.identifier,
+                    }}
+                    title={
+                      shippingSimulatorTitle ?? ShippingSimulation.props.title
                     }
-                    spotPrice={
-                      taxesConfiguration?.usePriceWithTaxes
-                        ? lowPriceWithTaxes
-                        : lowPrice
+                    inputLabel={
+                      shippingSimulatorInputLabel ??
+                      ShippingSimulation.props.inputLabel
+                    }
+                    optionsLabel={
+                      shippingSimulatorOptionsTableTitle ??
+                      ShippingSimulation.props.optionsLabel
                     }
                   />
-                )
-              }
-              refNumber={showRefNumber && productId}
-            />
-          </header>
-          <ImageGallery.Component
-            data-fs-product-details-gallery
-            {...ImageGallery.props}
-            images={productImages}
-          />
-
-          {isClientOfferEnabled && isValidating ? (
-            <section data-fs-product-details-info>
-              <section
-                data-fs-product-details-settings
-                data-fs-product-details-section
-              >
-                <p>Loading...</p>
+                )}
               </section>
-            </section>
-          ) : (
-            <section data-fs-product-details-info>
-              <section
-                data-fs-product-details-settings
-                data-fs-product-details-section
-              >
-                <ProductDetailsSettings.Component
-                  buyButtonTitle={buyButtonTitle}
-                  buyButtonIcon={buyButtonIcon}
-                  notAvailableButtonTitle={
-                    notAvailableButtonTitle ?? NotAvailableButton.props.title
-                  }
-                  useUnitMultiplier={
-                    quantitySelector?.useUnitMultiplier ?? false
-                  }
-                  {...ProductDetailsSettings.props}
-                  // Dynamic props shouldn't be overridable
-                  // This decision can be reviewed later if needed
-                  quantity={quantity}
-                  setQuantity={setQuantity}
-                  product={product}
-                  isValidating={isValidating}
-                  taxesConfiguration={taxesConfiguration}
-                />
+            )}
 
-                {skuMatrix?.shouldDisplaySKUMatrix &&
-                  Object.keys(slugsMap).length > 1 && (
-                    <>
-                      <div data-fs-product-details-settings-separator>
-                        {skuMatrix.separatorButtonsText}
-                      </div>
-
-                      <SKUMatrix.Component>
-                        <SKUMatrixTrigger.Component disabled={isValidating}>
-                          {skuMatrix.triggerButtonLabel}
-                        </SKUMatrixTrigger.Component>
-
-                        <SKUMatrixSidebar.Component
-                          formatter={useFormattedPrice}
-                          columns={skuMatrix.columns}
-                          overlayProps={{ className: styles.section }}
-                        />
-                      </SKUMatrix.Component>
-                    </>
-                  )}
-              </section>
-
-              {!outOfStock && (
-                <ShippingSimulation.Component
-                  data-fs-product-details-section
-                  data-fs-product-details-shipping
-                  formatter={useFormattedPrice}
-                  {...ShippingSimulation.props}
-                  idkPostalCodeLinkProps={{
-                    ...ShippingSimulation.props.idkPostalCodeLinkProps,
-                    href:
-                      shippingSimulatorLinkUrl ??
-                      ShippingSimulation.props.idkPostalCodeLinkProps?.href,
-                    children:
-                      shippingSimulatorLinkText ??
-                      ShippingSimulation.props.idkPostalCodeLinkProps?.children,
-                  }}
-                  productShippingInfo={{
-                    id,
-                    quantity,
-                    seller: seller.identifier,
-                  }}
-                  title={
-                    shippingSimulatorTitle ?? ShippingSimulation.props.title
-                  }
-                  inputLabel={
-                    shippingSimulatorInputLabel ??
-                    ShippingSimulation.props.inputLabel
-                  }
-                  optionsLabel={
-                    shippingSimulatorOptionsTableTitle ??
-                    ShippingSimulation.props.optionsLabel
-                  }
-                />
-              )}
-            </section>
-          )}
-
-          {shouldDisplayProductDescription && (
-            <ProductDescription.Component
-              initiallyExpanded={
-                productDescriptionInitiallyExpanded ??
-                ProductDescription.props.initiallyExpanded
-              }
-              descriptionData={[
-                { content: description, title: productDescriptionDetailsTitle },
-              ]}
-              {...ProductDescription.props}
-            />
-          )}
+            {shouldDisplayProductDescription && (
+              <ProductDescription.Component
+                initiallyExpanded={
+                  productDescriptionInitiallyExpanded ??
+                  ProductDescription.props.initiallyExpanded
+                }
+                descriptionData={[
+                  {
+                    content: description,
+                    title: productDescriptionDetailsTitle,
+                  },
+                ]}
+                {...ProductDescription.props}
+              />
+            )}
+          </section>
         </section>
-      </section>
+      </ProductDetailsPresentational.Component>
     </Section>
   )
 }
