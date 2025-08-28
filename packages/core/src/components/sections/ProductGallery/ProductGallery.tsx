@@ -36,11 +36,17 @@ function ProductGallerySection({
     useOverrideComponents<'ProductGallery'>()
 
   const context = usePage<SearchPageContext | PLPContext>()
-  const [title, searchTerm] = isSearchPage(context)
-    ? [context?.data?.title, context?.data?.searchTerm]
-    : isPLP(context)
-      ? [context?.data?.collection?.seo?.title]
-      : ['']
+  const [title, searchTerm] = (() => {
+    if (isSearchPage(context)) {
+      return [context?.data?.title, context?.data?.searchTerm]
+    }
+
+    if (isPLP(context)) {
+      return [context?.data?.collection?.seo?.title]
+    }
+
+    return ['']
+  })()
 
   const totalCount = context?.data?.search?.products?.pageInfo?.totalCount ?? 0
 
