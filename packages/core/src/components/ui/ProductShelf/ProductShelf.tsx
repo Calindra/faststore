@@ -102,7 +102,10 @@ function ProductShelf(props: ProductShelfProps) {
     }
   }, [inView, productEdges.length, sendViewItemListEvent])
 
-  if (products?.edges.length === 0) {
+  if (
+    products?.edges.length === 0 &&
+    (!cmsProducts || cmsProducts.length === 0)
+  ) {
     return null
   }
 
