@@ -8,11 +8,17 @@ const storeConfig = require('./discovery.config')
 const nextConfig = {
   /* config options here */
   /* Replaces terser by swc for minifying. It's the default in NextJS 13 */
-  swcMinify: true,
+  // swcMinify: true,
   images: {
     domains: [`${storeConfig.api.storeId}.vtexassets.com`],
     deviceSizes: [360, 412, 540, 768, 1280, 1440],
     imageSizes: [34, 68, 154, 320],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
   i18n: {
     locales: [storeConfig.session.locale],
