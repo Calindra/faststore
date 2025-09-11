@@ -83,28 +83,29 @@ export interface ProductDetailsProps {
   }
 }
 
-function ProductDetails({
-  productTitle: {
-    refNumber: showRefNumber,
-    discountBadge: { showDiscountBadge, size: discountBadgeSize },
-  },
-  buyButton: { icon: buyButtonIcon, title: buyButtonTitle },
-  shippingSimulator: {
-    title: shippingSimulatorTitle,
-    inputLabel: shippingSimulatorInputLabel,
-    shippingOptionsTableTitle: shippingSimulatorOptionsTableTitle,
-    link: { to: shippingSimulatorLinkUrl, text: shippingSimulatorLinkText },
-  },
-  productDescription: {
-    title: productDescriptionDetailsTitle,
-    initiallyExpanded: productDescriptionInitiallyExpanded,
-    displayDescription: shouldDisplayProductDescription,
-  },
-  skuMatrix,
-  notAvailableButton: { title: notAvailableButtonTitle },
-  quantitySelector,
-  taxesConfiguration,
-}: ProductDetailsProps) {
+function ProductDetails(props: ProductDetailsProps) {
+  const {
+    productTitle: {
+      refNumber: showRefNumber,
+      discountBadge: { showDiscountBadge, size: discountBadgeSize },
+    },
+    buyButton: { icon: buyButtonIcon, title: buyButtonTitle },
+    shippingSimulator: {
+      title: shippingSimulatorTitle,
+      inputLabel: shippingSimulatorInputLabel,
+      shippingOptionsTableTitle: shippingSimulatorOptionsTableTitle,
+      link: { to: shippingSimulatorLinkUrl, text: shippingSimulatorLinkText },
+    },
+    productDescription: {
+      title: productDescriptionDetailsTitle,
+      initiallyExpanded: productDescriptionInitiallyExpanded,
+      displayDescription: shouldDisplayProductDescription,
+    },
+    skuMatrix,
+    notAvailableButton: { title: notAvailableButtonTitle },
+    quantitySelector,
+    taxesConfiguration,
+  } = props
   const {
     DiscountBadge,
     ProductTitle,
@@ -215,6 +216,7 @@ function ProductDetails({
   return (
     <Section className={`${styles.section} section-product-details`}>
       <ProductDetailsPresentational.Component
+        {...props}
         product={product}
         outOfStock={outOfStock}
         quantity={quantity}
