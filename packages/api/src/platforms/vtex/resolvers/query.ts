@@ -7,6 +7,7 @@ import type {
   QueryPickupPointsArgs,
   QueryProductArgs,
   QueryProductCountArgs,
+  QueryProductsArgs,
   QueryProfileArgs,
   QueryRedirectArgs,
   QuerySearchArgs,
@@ -15,7 +16,13 @@ import type {
   QueryUserOrderArgs,
   UserOrderFromList,
 } from '../../../__generated__/schema'
-import { BadRequestError, ForbiddenError, NotFoundError } from '../../errors'
+import {
+  BadRequestError,
+  ForbiddenError,
+  NotFoundError,
+  isForbiddenError,
+  isNotFoundError,
+} from '../../errors'
 import type { CategoryTree } from '../clients/commerce/types/CategoryTree'
 import type { ProfileAddress } from '../clients/commerce/types/Profile'
 import type { SearchArgs } from '../clients/search'
@@ -222,6 +229,34 @@ export const Query = {
       })),
     }
   },
+  products: async (
+    _: unknown,
+    { productIds }: QueryProductsArgs,
+    ctx: Context
+  ) => {
+    const {
+      clients: { search },
+    } = ctx
+
+    if (!productIds.length) {
+      return []
+    }
+
+    const query = `id:${productIds.join(';')}`
+    const products = await search.products({
+      page: 0,
+      count: productIds.length,
+      query,
+    })
+
+    return products.products
+      .flatMap((product) =>
+        product.items.map((sku) => enhanceSku(sku, product))
+      )
+      .filter(
+        (sku) => productIds.includes(sku.itemId) && sku.sellers.length > 0
+      )
+  },
   allCollections: async (
     _: unknown,
     { first, after: maybeAfter }: QueryAllCollectionsArgs,
@@ -418,7 +453,7 @@ export const Query = {
       } catch (err: any) {}
 
       const shopperSearch =
-        (await commerce.masterData.getShopperNameById({
+        (await commerce.masterData.getShopperById({
           userId: order.purchaseAgentData?.purchaseAgents?.[0]?.userId ?? '',
         })) ?? []
       const shopper = shopperSearch[0] ?? {}
@@ -441,28 +476,47 @@ export const Query = {
             order.status === 'waiting-for-authorization') &&
           !!ruleForAuthorization,
         ruleForAuthorization,
-        shopperName: {
+        shopper: {
           firstName: shopper?.firstName || '',
           lastName: shopper?.lastName || '',
+          email: shopper?.email || '',
+          phone: shopper?.phone || '',
         },
       }
     } catch (error) {
-      const result = JSON.parse((error as Error).message).error as {
-        code: string
-        message: string
-        exception: any
+      const errorMessage = (error as Error).message
+
+      let result: {
+        code?: string
+        message?: string
+        exception?: any
+      } = {}
+
+      /** The errorMessage can be in:
+       * JSON format: {"error":{"code":"OMS007","message":"Order Not Found","exception":null}}
+       * Plain text format: "No authorized"
+       * Unknown format
+       */
+      try {
+        const parsed = JSON.parse(errorMessage)
+        result = parsed.error || parsed
+      } catch {
+        result = { message: errorMessage }
       }
 
-      if (result?.message?.toLowerCase()?.includes('order not found')) {
-        throw new NotFoundError(`No order found for id ${orderId}`)
+      const message = result?.message || errorMessage
+
+      if (isNotFoundError(error)) {
+        throw new NotFoundError(`No order found for id ${orderId}. ${message}.`)
       }
 
-      if (result?.message?.toLowerCase()?.includes('acesso negado')) {
+      if (isForbiddenError(error)) {
         throw new ForbiddenError(
-          `You are forbidden to interact with order with id ${orderId}`
+          `You are forbidden to interact with order with id ${orderId}. ${message}.`
         )
       }
 
+      // Fallback for other Errors
       throw error
     }
   },
@@ -589,11 +643,16 @@ export const Query = {
       }
 
       const profile = sessionData.namespaces.profile ?? null
+      const contract = await commerce.masterData.getContractById({
+        contractId: profile?.id?.value ?? '',
+      })
+
+      const name =
+        contract?.corporateName ??
+        `${(profile?.firstName?.value ?? '').trim()} ${(profile?.lastName?.value ?? '').trim()}`.trim()
 
       return {
-        name:
-          `${(profile?.firstName?.value ?? '').trim()} ${(profile?.lastName?.value ?? '').trim()}`.trim() ||
-          '',
+        name: name || '',
         email: profile?.email?.value || '',
         id: profile?.id?.value || '',
         // createdAt: '',

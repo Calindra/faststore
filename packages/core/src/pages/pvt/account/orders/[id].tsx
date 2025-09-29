@@ -15,6 +15,7 @@ import type {
   ServerOrderDetailsQueryQuery,
   ServerOrderDetailsQueryQueryVariables,
 } from '@generated/graphql'
+import storeConfig from 'discovery.config'
 import { getGlobalSectionsData } from 'src/components/cms/GlobalSections'
 import { default as AfterSection } from 'src/customizations/src/myAccount/extensions/orders/[id]/after'
 import { default as BeforeSection } from 'src/customizations/src/myAccount/extensions/orders/[id]/before'
@@ -24,7 +25,6 @@ import { execute } from 'src/server'
 import { injectGlobalSections } from 'src/server/cms/global'
 import { getMyAccountRedirect } from 'src/utils/myAccountRedirect'
 import { extractStatusFromError } from 'src/utils/utilities'
-import storeConfig from '../../../../discovery.config'
 
 const COMPONENTS: Record<string, ComponentType<any>> = {
   ...GLOBAL_COMPONENTS,
@@ -250,9 +250,11 @@ const query = gql(`
         name
         value
       }
-      shopperName {
+      shopper {
         firstName
         lastName
+        email
+        phone
       }
     }
     accountName
@@ -321,13 +323,14 @@ export const getServerSideProps: GetServerSideProps<
   ])
 
   if (orderDetails.errors) {
+    console.error(...orderDetails.errors)
     const status = extractStatusFromError(orderDetails.errors?.[0])
 
     const isForbidden = status === 403 || status === 401
 
     return {
       redirect: {
-        destination: isForbidden ? '/account/403' : '/account/404',
+        destination: isForbidden ? '/pvt/account/403' : '/pvt/account/404',
         permanent: false,
       },
     }

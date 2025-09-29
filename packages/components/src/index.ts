@@ -28,6 +28,8 @@ export { default as Price } from './atoms/Price'
 export type { PriceProps } from './atoms/Price'
 export { default as Radio } from './atoms/Radio'
 export type { RadioProps } from './atoms/Radio'
+export { default as RichText } from './atoms/RichText'
+export type { RichTextProps } from './atoms/RichText'
 export { default as Skeleton } from './atoms/Skeleton'
 export type { SkeletonProps } from './atoms/Skeleton'
 export { default as Select } from './atoms/Select'
@@ -336,6 +338,20 @@ export type { PaymentMethodsProps } from './organisms/PaymentMethods'
 
 export { default as PriceRange } from './organisms/PriceRange'
 export type { PriceRangeProps } from './organisms/PriceRange'
+
+export {
+  default as ProductComparison,
+  ProductComparisonTrigger,
+  ProductComparisonToolbar,
+  ProductComparisonSidebar,
+} from './organisms/ProductComparison'
+export type {
+  IProductComparison,
+  ProductComparisonProps,
+  ProductComparisonTriggerProps,
+  ProductComparisonToolbarProps,
+  ProductComparisonSidebarProps,
+} from './organisms/ProductComparison'
 
 export {
   default as ProductGrid,

@@ -1,34 +1,36 @@
 /* ######################################### */
 /* Mocked Page until development is finished, it will be removed after */
 
-import type { Locator } from '@vtex/client-cms'
-import type { GetServerSideProps } from 'next'
 import { NextSeo } from 'next-seo'
 import type { ComponentType } from 'react'
 import { MyAccountLayout } from 'src/components/account'
-import { ProfileSection } from 'src/components/account/profile'
 import RenderSections from 'src/components/cms/RenderSections'
 import { default as GLOBAL_COMPONENTS } from 'src/components/cms/global/Components'
 import CUSTOM_COMPONENTS from 'src/customizations/src/components'
+
+import type { Locator } from '@vtex/client-cms'
+import type { GetServerSideProps } from 'next'
 
 import { getGlobalSectionsData } from 'src/components/cms/GlobalSections'
 
 import { gql } from '@generated/gql'
 import type {
-  ServerProfileQueryQuery,
-  ServerProfileQueryQueryVariables,
+  ServerSecurityQuery,
+  ServerSecurityQueryVariables,
 } from '@generated/graphql'
-import { default as AfterSection } from 'src/customizations/src/myAccount/extensions/profile/after'
-import { default as BeforeSection } from 'src/customizations/src/myAccount/extensions/profile/before'
+import { default as AfterSection } from 'src/customizations/src/myAccount/extensions/security/after'
+import { default as BeforeSection } from 'src/customizations/src/myAccount/extensions/security/before'
 import type { MyAccountProps } from 'src/experimental/myAccountSeverSideProps'
 import { getIsRepresentative } from 'src/sdk/account/getIsRepresentative'
-import { validateUser } from 'src/sdk/account/validateUser'
+import { execute } from 'src/server'
 import { injectGlobalSections } from 'src/server/cms/global'
 import { getMyAccountRedirect } from 'src/utils/myAccountRedirect'
 
+import { validateUser } from 'src/sdk/account/validateUser'
 import PageProvider from 'src/sdk/overrides/PageProvider'
-import { execute } from 'src/server'
-import storeConfig from '../../../discovery.config'
+
+import storeConfig from 'discovery.config'
+import { SecuritySection } from 'src/components/account/security'
 
 /* A list of components that can be used in the CMS. */
 const COMPONENTS: Record<string, ComponentType<any>> = {
@@ -36,20 +38,17 @@ const COMPONENTS: Record<string, ComponentType<any>> = {
   ...CUSTOM_COMPONENTS,
 }
 
-type ProfilePagePros = {
-  accountProfile: {
-    name: string | null
-    email: string | null
-    id: string | null
-  }
+type SecurityPageProps = {
+  accountName: string
+  userEmail: string
 } & MyAccountProps
 
-export default function Profile({
+export default function Page({
   globalSections: globalSectionsProp,
   accountName,
-  accountProfile,
   isRepresentative,
-}: ProfilePagePros) {
+  userEmail,
+}: SecurityPageProps) {
   const { sections: globalSections, settings: globalSettings } =
     globalSectionsProp ?? {}
 
@@ -63,7 +62,7 @@ export default function Profile({
           accountName={accountName}
         >
           <BeforeSection />
-          <ProfileSection profile={accountProfile} />
+          <SecuritySection userEmail={userEmail} />
           <AfterSection />
         </MyAccountLayout>
       </RenderSections>
@@ -72,12 +71,10 @@ export default function Profile({
 }
 
 const query = gql(`
-  query ServerProfileQuery {
+  query ServerSecurity {
     accountName
-    accountProfile {
-      name
+    userDetails {
       email
-      id
     }
   }
 `)
@@ -117,9 +114,9 @@ export const getServerSideProps: GetServerSideProps<
     globalSectionsFooterPromise,
   ] = getGlobalSectionsData(context.previewData)
 
-  const [profile, globalSections, globalSectionsHeader, globalSectionsFooter] =
+  const [security, globalSections, globalSectionsHeader, globalSectionsFooter] =
     await Promise.all([
-      execute<ServerProfileQueryQueryVariables, ServerProfileQueryQuery>(
+      execute<ServerSecurityQueryVariables, ServerSecurityQuery>(
         {
           variables: {},
           operation: query,
@@ -131,10 +128,11 @@ export const getServerSideProps: GetServerSideProps<
       globalSectionsFooterPromise,
     ])
 
-  if (profile.errors) {
-    const statusCode: number = (profile.errors[0] as any)?.extensions?.status
+  if (security.errors) {
+    console.error(...security.errors)
+    const statusCode: number = (security.errors[0] as any)?.extensions?.status
     const destination: string =
-      statusCode === 403 ? '/account/403' : '/account/404'
+      statusCode === 403 ? '/pvt/account/403' : '/pvt/account/404'
 
     return {
       redirect: {
@@ -152,9 +150,9 @@ export const getServerSideProps: GetServerSideProps<
 
   return {
     props: {
+      accountName: security.data.accountName,
+      userEmail: security.data?.userDetails.email || '',
       globalSections: globalSectionsResult,
-      accountName: profile.data.accountName,
-      accountProfile: profile.data.accountProfile,
       isRepresentative,
     },
   }

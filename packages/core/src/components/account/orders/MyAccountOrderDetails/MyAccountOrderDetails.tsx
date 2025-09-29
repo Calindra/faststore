@@ -31,7 +31,7 @@ export default function MyAccountOrderDetails({
     <div className={styles.page} data-fs-order-details>
       <header data-fs-order-details-header>
         <div data-fs-order-details-header-title>
-          <a href="/account/orders">
+          <a href="/pvt/account/orders">
             <UIIconButton
               data-fs-order-details-header-back-button
               size="small"
@@ -68,7 +68,7 @@ export default function MyAccountOrderDetails({
 
         <MyAccountOrderedByCard
           clientProfileData={order.clientProfileData}
-          shopperName={order.shopperName}
+          shopper={order.shopper}
         />
 
         <MyAccountDeliveryCard
