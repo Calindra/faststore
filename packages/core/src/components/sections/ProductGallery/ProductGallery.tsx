@@ -39,11 +39,14 @@ function ProductGallerySection({
   const context = usePage<SearchPageContext | PLPContext>()
   const [title, searchTerm] = (() => {
     if (isSearchPage(context)) {
-      return [context?.data?.title, context?.data?.searchTerm]
+      return [
+        (context as SearchPageContext)?.data?.title,
+        context?.data?.searchTerm,
+      ]
     }
 
     if (isPLP(context)) {
-      return [context?.data?.collection?.seo?.title]
+      return [(context as PLPContext)?.data?.collection?.seo?.title]
     }
 
     return ['']
