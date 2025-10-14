@@ -7,7 +7,8 @@ export type {
 } from './src/sdk/overrides/PageProvider'
 
 export { useProductsQuery } from './src/sdk/product/useProductsQuery'
-
+export { useProductGalleryQuery } from './src/sdk/product/useProductGalleryQuery'
+export { useGalleryPage } from './src/sdk/product/usePageProductsQuery'
 export * from './src/typings/overrides'
 export { getOverriddenSection } from './src/sdk/overrides/getOverriddenSection'
 export { getMyAccountRoutes } from './src/sdk/account/getMyAccountRoutes'
