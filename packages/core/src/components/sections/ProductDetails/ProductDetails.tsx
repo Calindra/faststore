@@ -143,8 +143,14 @@ function ProductDetails(props: ProductDetailsProps) {
     image: productImages,
     offers: {
       offers: [
-        { availability, price, listPrice, listPriceWithTaxes, seller } = {},
-      ] = [],
+        {
+          availability = '',
+          price = 0,
+          listPrice = 0,
+          listPriceWithTaxes = 0,
+          seller = { identifier: '1' },
+        },
+      ] = [{}],
       lowPrice,
       lowPriceWithTaxes,
     } = {},
