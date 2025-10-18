@@ -138,14 +138,16 @@ function ProductDetails(props: ProductDetailsProps) {
     isVariantOf: {
       name,
       productGroupID: productId,
-      skuVariants: { slugsMap },
-    },
+      skuVariants: { slugsMap } = {},
+    } = {},
     image: productImages,
     offers: {
-      offers: [{ availability, price, listPrice, listPriceWithTaxes, seller }],
+      offers: [
+        { availability, price, listPrice, listPriceWithTaxes, seller } = {},
+      ] = [],
       lowPrice,
       lowPriceWithTaxes,
-    },
+    } = {},
   } = product
 
   useEffect(() => {
