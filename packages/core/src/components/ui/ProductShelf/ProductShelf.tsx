@@ -57,7 +57,7 @@ function ProductShelf(props: ProductShelfProps) {
     numberOfItems,
     itemsPerPage = 5,
     taxesConfiguration = {},
-    products: cmsProducts,
+    products: cmsProducts = [],
     ...otherProps
   } = props
   const {
