@@ -6,6 +6,8 @@ export type {
   SearchPageContext,
 } from './src/sdk/overrides/PageProvider'
 
+export { default as useSuggestions } from './src/sdk/search/useSuggestions'
+
 export { useProductsQuery } from './src/sdk/product/useProductsQuery'
 export { useProductGalleryQuery } from './src/sdk/product/useProductGalleryQuery'
 export { useGalleryPage } from './src/sdk/product/usePageProductsQuery'
