@@ -13,7 +13,7 @@ const query = gql(`
     $selectedFacets: [IStoreSelectedFacet!]
   ) {
     ...ClientTopSearchSuggestions
-    search(first: 5, term: $term, selectedFacets: $selectedFacets) {
+    search(first: 10, term: $term, selectedFacets: $selectedFacets) {
       suggestions {
         terms {
           value

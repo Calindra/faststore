@@ -28,11 +28,11 @@ const documents = {
     types.ClientProductFragmentDoc,
   '\n  fragment ClientProductGallery on Query {\n    search(\n      first: $first\n      after: $after\n      sort: $sort\n      term: $term\n      selectedFacets: $selectedFacets\n    ) {\n      products {\n        pageInfo {\n          totalCount\n        }\n      }\n    }\n  }\n':
     types.ClientProductGalleryFragmentDoc,
-  '\n  fragment ClientSearchSuggestions on Query {\n    search(first: 5, term: $term, selectedFacets: $selectedFacets) {\n      suggestions {\n        terms {\n          value\n        }\n      }\n    }\n  }\n':
+  '\n  fragment ClientSearchSuggestions on Query {\n    search(first: 10, term: $term, selectedFacets: $selectedFacets) {\n      suggestions {\n        terms {\n          value\n        }\n      }\n    }\n  }\n':
     types.ClientSearchSuggestionsFragmentDoc,
   '\n  fragment ClientShippingSimulation on Query {\n    shipping(items: $items, postalCode: $postalCode, country: $country) {\n      address {\n        city\n      }\n    }\n  }\n':
     types.ClientShippingSimulationFragmentDoc,
-  '\n  fragment ClientTopSearchSuggestions on Query {\n    search(first: 5, term: $term, selectedFacets: $selectedFacets) {\n      suggestions {\n        terms {\n          value\n        }\n      }\n    }\n  }\n':
+  '\n  fragment ClientTopSearchSuggestions on Query {\n    search(first: 10, term: $term, selectedFacets: $selectedFacets) {\n      suggestions {\n        terms {\n          value\n        }\n      }\n    }\n  }\n':
     types.ClientTopSearchSuggestionsFragmentDoc,
   '\n  fragment ServerCollectionPage on Query {\n    collection(slug: $slug) {\n      id\n    }\n  }\n':
     types.ServerCollectionPageFragmentDoc,
@@ -82,9 +82,9 @@ const documents = {
     types.ClientManyProductsSelectedQueryDocument,
   '\n  query ClientProfileQuery($id: String!) {\n    profile(id: $id) {\n      addresses {\n        country\n        postalCode\n        geoCoordinate\n        city\n      }\n    }\n  }\n':
     types.ClientProfileQueryDocument,
-  '\n  query ClientSearchSuggestionsQuery(\n    $term: String!\n    $selectedFacets: [IStoreSelectedFacet!]\n  ) {\n    ...ClientSearchSuggestions\n    search(first: 5, term: $term, selectedFacets: $selectedFacets) {\n      suggestions {\n        terms {\n          value\n        }\n        products {\n          ...ProductSummary_product\n        }\n      }\n      products {\n        pageInfo {\n          totalCount\n        }\n      }\n      metadata {\n        ...SearchEvent_metadata\n      }\n    }\n  }\n':
+  '\n  query ClientSearchSuggestionsQuery(\n    $term: String!\n    $selectedFacets: [IStoreSelectedFacet!]\n  ) {\n    ...ClientSearchSuggestions\n    search(first: 10, term: $term, selectedFacets: $selectedFacets) {\n      suggestions {\n        terms {\n          value\n        }\n        products {\n          ...ProductSummary_product\n        }\n      }\n      products {\n        pageInfo {\n          totalCount\n        }\n      }\n      metadata {\n        ...SearchEvent_metadata\n      }\n    }\n  }\n':
     types.ClientSearchSuggestionsQueryDocument,
-  '\n  query ClientTopSearchSuggestionsQuery(\n    $term: String!\n    $selectedFacets: [IStoreSelectedFacet!]\n  ) {\n    ...ClientTopSearchSuggestions\n    search(first: 5, term: $term, selectedFacets: $selectedFacets) {\n      suggestions {\n        terms {\n          value\n        }\n      }\n    }\n  }\n':
+  '\n  query ClientTopSearchSuggestionsQuery(\n    $term: String!\n    $selectedFacets: [IStoreSelectedFacet!]\n  ) {\n    ...ClientTopSearchSuggestions\n    search(first: 10, term: $term, selectedFacets: $selectedFacets) {\n      suggestions {\n        terms {\n          value\n        }\n      }\n    }\n  }\n':
     types.ClientTopSearchSuggestionsQueryDocument,
   '\n  mutation ValidateSession($session: IStoreSession!, $search: String!) {\n    validateSession(session: $session, search: $search) {\n      locale\n      channel\n      country\n      addressType\n      postalCode\n      city\n      deliveryMode {\n        deliveryChannel\n        deliveryMethod\n        deliveryWindow {\n          startDate\n          endDate\n        }\n      }\n      geoCoordinates {\n        latitude\n        longitude\n      }\n      currency {\n        code\n        symbol\n      }\n      person {\n        id\n        email\n        givenName\n        familyName\n      }\n      b2b {\n        customerId\n        isRepresentative\n        unitName\n        unitId\n        firstName\n        lastName\n        userName\n        userEmail\n        savedPostalCode\n      }\n      marketingData {\n        utmCampaign\n        utmMedium\n        utmSource\n        utmiCampaign\n        utmiPage\n        utmiPart\n      }\n      refreshAfter\n    }\n  }\n':
     types.ValidateSessionDocument,
@@ -146,7 +146,7 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: '\n  fragment ClientSearchSuggestions on Query {\n    search(first: 5, term: $term, selectedFacets: $selectedFacets) {\n      suggestions {\n        terms {\n          value\n        }\n      }\n    }\n  }\n'
+  source: '\n  fragment ClientSearchSuggestions on Query {\n    search(first: 10, term: $term, selectedFacets: $selectedFacets) {\n      suggestions {\n        terms {\n          value\n        }\n      }\n    }\n  }\n'
 ): typeof import('./graphql').ClientSearchSuggestionsFragmentDoc
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -158,7 +158,7 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: '\n  fragment ClientTopSearchSuggestions on Query {\n    search(first: 5, term: $term, selectedFacets: $selectedFacets) {\n      suggestions {\n        terms {\n          value\n        }\n      }\n    }\n  }\n'
+  source: '\n  fragment ClientTopSearchSuggestions on Query {\n    search(first: 10, term: $term, selectedFacets: $selectedFacets) {\n      suggestions {\n        terms {\n          value\n        }\n      }\n    }\n  }\n'
 ): typeof import('./graphql').ClientTopSearchSuggestionsFragmentDoc
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
@@ -308,13 +308,13 @@ export function gql(
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: '\n  query ClientSearchSuggestionsQuery(\n    $term: String!\n    $selectedFacets: [IStoreSelectedFacet!]\n  ) {\n    ...ClientSearchSuggestions\n    search(first: 5, term: $term, selectedFacets: $selectedFacets) {\n      suggestions {\n        terms {\n          value\n        }\n        products {\n          ...ProductSummary_product\n        }\n      }\n      products {\n        pageInfo {\n          totalCount\n        }\n      }\n      metadata {\n        ...SearchEvent_metadata\n      }\n    }\n  }\n'
+  source: '\n  query ClientSearchSuggestionsQuery(\n    $term: String!\n    $selectedFacets: [IStoreSelectedFacet!]\n  ) {\n    ...ClientSearchSuggestions\n    search(first: 10, term: $term, selectedFacets: $selectedFacets) {\n      suggestions {\n        terms {\n          value\n        }\n        products {\n          ...ProductSummary_product\n        }\n      }\n      products {\n        pageInfo {\n          totalCount\n        }\n      }\n      metadata {\n        ...SearchEvent_metadata\n      }\n    }\n  }\n'
 ): typeof import('./graphql').ClientSearchSuggestionsQueryDocument
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(
-  source: '\n  query ClientTopSearchSuggestionsQuery(\n    $term: String!\n    $selectedFacets: [IStoreSelectedFacet!]\n  ) {\n    ...ClientTopSearchSuggestions\n    search(first: 5, term: $term, selectedFacets: $selectedFacets) {\n      suggestions {\n        terms {\n          value\n        }\n      }\n    }\n  }\n'
+  source: '\n  query ClientTopSearchSuggestionsQuery(\n    $term: String!\n    $selectedFacets: [IStoreSelectedFacet!]\n  ) {\n    ...ClientTopSearchSuggestions\n    search(first: 10, term: $term, selectedFacets: $selectedFacets) {\n      suggestions {\n        terms {\n          value\n        }\n      }\n    }\n  }\n'
 ): typeof import('./graphql').ClientTopSearchSuggestionsQueryDocument
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.

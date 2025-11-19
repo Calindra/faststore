@@ -3718,13 +3718,19 @@ export class TypedDocumentString<TResult, TVariables>
   extends String
   implements DocumentTypeDecoration<TResult, TVariables>
 {
-  __apiType?: DocumentTypeDecoration<TResult, TVariables>['__apiType']
+  __apiType?: NonNullable<
+    DocumentTypeDecoration<TResult, TVariables>['__apiType']
+  >
+  private value: string
+  public __meta__?: Record<string, any> | undefined
 
-  constructor(private value: string, public __meta__?: Record<string, any>) {
+  constructor(value: string, __meta__?: Record<string, any> | undefined) {
     super(value)
+    this.value = value
+    this.__meta__ = __meta__
   }
 
-  toString(): string & DocumentTypeDecoration<TResult, TVariables> {
+  override toString(): string & DocumentTypeDecoration<TResult, TVariables> {
     return this.value
   }
 }
@@ -4147,7 +4153,7 @@ export const ClientProductGalleryFragmentDoc = new TypedDocumentString(
 export const ClientSearchSuggestionsFragmentDoc = new TypedDocumentString(
   `
     fragment ClientSearchSuggestions on Query {
-  search(first: 5, term: $term, selectedFacets: $selectedFacets) {
+  search(first: 10, term: $term, selectedFacets: $selectedFacets) {
     suggestions {
       terms {
         value
@@ -4173,7 +4179,7 @@ export const ClientShippingSimulationFragmentDoc = new TypedDocumentString(
 export const ClientTopSearchSuggestionsFragmentDoc = new TypedDocumentString(
   `
     fragment ClientTopSearchSuggestions on Query {
-  search(first: 5, term: $term, selectedFacets: $selectedFacets) {
+  search(first: 10, term: $term, selectedFacets: $selectedFacets) {
     suggestions {
       terms {
         value
@@ -4477,7 +4483,7 @@ export const ClientProfileQueryDocument = {
 export const ClientSearchSuggestionsQueryDocument = {
   __meta__: {
     operationName: 'ClientSearchSuggestionsQuery',
-    operationHash: 'bbaa2ed75c4fb04842189e8d53a1d65481154e2b',
+    operationHash: '35f1838f1381829e6ecf2cbce538654d974a2552',
   },
 } as unknown as TypedDocumentString<
   ClientSearchSuggestionsQueryQuery,
@@ -4486,7 +4492,7 @@ export const ClientSearchSuggestionsQueryDocument = {
 export const ClientTopSearchSuggestionsQueryDocument = {
   __meta__: {
     operationName: 'ClientTopSearchSuggestionsQuery',
-    operationHash: 'e2385b0f11726d0068f96548f57a8dd441c064e3',
+    operationHash: 'f4aada0547e04db9b5e61fc41ae01a0ca8bb97f8',
   },
 } as unknown as TypedDocumentString<
   ClientTopSearchSuggestionsQueryQuery,
