@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 
 import dynamic from 'next/dynamic'
 
@@ -18,6 +18,7 @@ const UIToast = dynamic(
 function Toast() {
   const { toasts, pushToast } = useUI()
   const { messages } = useCart()
+  const processedMessages = useRef(new Set<string>())
 
   /**
    * Send cart notifications to toast in case the cart
@@ -29,13 +30,27 @@ function Toast() {
     }
 
     messages.forEach((message) => {
+      // maybe remove the ERROR filter
       if (message.status === 'ERROR') {
-        pushToast({
-          message: message.text,
-          status: message.status,
-        })
+        // Create unique key for this message to prevent duplicates
+        const messageKey = `${message.status}-${message.text}`
+
+        // Only show if not already processed
+        if (!processedMessages.current.has(messageKey)) {
+          pushToast({
+            message: message.text,
+            status: message.status,
+          })
+          processedMessages.current.add(messageKey)
+        }
       }
     })
+
+    // Clear processed messages tracking when cart messages are cleared
+    // This prevents the Set from growing indefinitely
+    if (messages.length === 0) {
+      processedMessages.current.clear()
+    }
   }, [messages, pushToast])
 
   return (
