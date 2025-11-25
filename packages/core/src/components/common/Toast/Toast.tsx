@@ -28,12 +28,14 @@ function Toast() {
       return
     }
 
-    messages.forEach((message) =>
-      pushToast({
-        message: message.text,
-        status: message.status,
-      })
-    )
+    messages.forEach((message) => {
+      if (message.status === 'ERROR') {
+        pushToast({
+          message: message.text,
+          status: message.status,
+        })
+      }
+    })
   }, [messages, pushToast])
 
   return (
