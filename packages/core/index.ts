@@ -9,6 +9,7 @@ export type {
 export { default as useSuggestions } from './src/sdk/search/useSuggestions'
 export { default as useTopSearch } from './src/sdk/search/useTopSearch'
 export { default as useSearchHistory } from './src/sdk/search/useSearchHistory'
+export { useCart, cartStore } from './src/sdk/cart/index'
 
 export { useProductsQuery } from './src/sdk/product/useProductsQuery'
 export { useProductGalleryQuery } from './src/sdk/product/useProductGalleryQuery'
