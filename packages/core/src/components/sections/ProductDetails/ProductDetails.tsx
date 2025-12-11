@@ -409,8 +409,38 @@ export const fragment = gql(`
         slugsMap
         availableVariations
         allVariantProducts {
+          sku
           name
           productID
+          image {
+            url
+            alternateName
+          }
+          offers {
+            highPrice
+            lowPrice
+            lowPriceWithTaxes
+            offerCount
+            priceCurrency
+            offers {
+              listPrice
+              listPriceWithTaxes
+              sellingPrice
+              priceCurrency
+              price
+              priceWithTaxes
+              priceValidUntil
+              itemCondition
+              availability
+              quantity
+            }
+          }
+          additionalProperty {
+            propertyID
+            value
+            name
+            valueReference
+          }
         }
       }
     }

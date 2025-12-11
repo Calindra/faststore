@@ -2490,7 +2490,37 @@ export type ProductDetailsFragment_ProductFragment = {
       activeVariations: any | null
       slugsMap: any | null
       availableVariations: any | null
-      allVariantProducts: Array<{ name: string; productID: string }> | null
+      allVariantProducts: Array<{
+        sku: string
+        name: string
+        productID: string
+        image: Array<{ url: string; alternateName: string }>
+        offers: {
+          highPrice: number
+          lowPrice: number
+          lowPriceWithTaxes: number
+          offerCount: number
+          priceCurrency: string
+          offers: Array<{
+            listPrice: number
+            listPriceWithTaxes: number
+            sellingPrice: number
+            priceCurrency: string
+            price: number
+            priceWithTaxes: number
+            priceValidUntil: string
+            itemCondition: string
+            availability: string
+            quantity: number
+          }>
+        }
+        additionalProperty: Array<{
+          propertyID: string
+          value: any
+          name: string
+          valueReference: any
+        }>
+      }> | null
     } | null
   }
   image: Array<{ url: string; alternateName: string }>
@@ -2509,8 +2539,8 @@ export type ProductDetailsFragment_ProductFragment = {
   }
   additionalProperty: Array<{
     propertyID: string
-    name: string
     value: any
+    name: string
     valueReference: any
   }>
 }
@@ -2709,13 +2739,43 @@ export type ServerProductQueryQuery = {
         activeVariations: any | null
         slugsMap: any | null
         availableVariations: any | null
-        allVariantProducts: Array<{ name: string; productID: string }> | null
+        allVariantProducts: Array<{
+          sku: string
+          name: string
+          productID: string
+          image: Array<{ url: string; alternateName: string }>
+          offers: {
+            highPrice: number
+            lowPrice: number
+            lowPriceWithTaxes: number
+            offerCount: number
+            priceCurrency: string
+            offers: Array<{
+              listPrice: number
+              listPriceWithTaxes: number
+              sellingPrice: number
+              priceCurrency: string
+              price: number
+              priceWithTaxes: number
+              priceValidUntil: string
+              itemCondition: string
+              availability: string
+              quantity: number
+            }>
+          }
+          additionalProperty: Array<{
+            propertyID: string
+            value: any
+            name: string
+            valueReference: any
+          }>
+        }> | null
       } | null
     }
     additionalProperty: Array<{
       propertyID: string
-      name: string
       value: any
+      name: string
       valueReference: any
     }>
   }
@@ -3301,8 +3361,8 @@ export type ClientManyProductsQueryQuery = {
           }
           additionalProperty: Array<{
             propertyID: string
-            name: string
             value: any
+            name: string
             valueReference: any
           }>
           advertisement: { adId: string; adResponseId: string } | null
@@ -3380,7 +3440,37 @@ export type ClientProductQueryQuery = {
         activeVariations: any | null
         slugsMap: any | null
         availableVariations: any | null
-        allVariantProducts: Array<{ name: string; productID: string }> | null
+        allVariantProducts: Array<{
+          sku: string
+          name: string
+          productID: string
+          image: Array<{ url: string; alternateName: string }>
+          offers: {
+            highPrice: number
+            lowPrice: number
+            lowPriceWithTaxes: number
+            offerCount: number
+            priceCurrency: string
+            offers: Array<{
+              listPrice: number
+              listPriceWithTaxes: number
+              sellingPrice: number
+              priceCurrency: string
+              price: number
+              priceWithTaxes: number
+              priceValidUntil: string
+              itemCondition: string
+              availability: string
+              quantity: number
+            }>
+          }
+          additionalProperty: Array<{
+            propertyID: string
+            value: any
+            name: string
+            valueReference: any
+          }>
+        }> | null
       } | null
     }
     image: Array<{ url: string; alternateName: string }>
@@ -3399,8 +3489,8 @@ export type ClientProductQueryQuery = {
     }
     additionalProperty: Array<{
       propertyID: string
-      name: string
       value: any
+      name: string
       valueReference: any
     }>
   }
@@ -3536,8 +3626,8 @@ export type ClientSearchSuggestionsQueryQuery = {
         }
         additionalProperty: Array<{
           propertyID: string
-          name: string
           value: any
+          name: string
           valueReference: any
         }>
         advertisement: { adId: string; adResponseId: string } | null
@@ -3695,8 +3785,8 @@ export type ServerManyProductsQueryQuery = {
           }
           additionalProperty: Array<{
             propertyID: string
-            name: string
             value: any
+            name: string
             valueReference: any
           }>
           advertisement: { adId: string; adResponseId: string } | null
@@ -3892,8 +3982,38 @@ export const ProductDetailsFragment_ProductFragmentDoc =
       slugsMap
       availableVariations
       allVariantProducts {
+        sku
         name
         productID
+        image {
+          url
+          alternateName
+        }
+        offers {
+          highPrice
+          lowPrice
+          lowPriceWithTaxes
+          offerCount
+          priceCurrency
+          offers {
+            listPrice
+            listPriceWithTaxes
+            sellingPrice
+            priceCurrency
+            price
+            priceWithTaxes
+            priceValidUntil
+            itemCondition
+            availability
+            quantity
+          }
+        }
+        additionalProperty {
+          propertyID
+          value
+          name
+          valueReference
+        }
       }
     }
   }
@@ -4312,7 +4432,7 @@ export const ServerCollectionPageQueryDocument = {
 export const ServerProductQueryDocument = {
   __meta__: {
     operationName: 'ServerProductQuery',
-    operationHash: 'e855903879c6504e90269e6e010549bc6de933eb',
+    operationHash: '7fa17164c1a6dd025b5a57c7744a2a40a7f72cf1',
   },
 } as unknown as TypedDocumentString<
   ServerProductQueryQuery,
@@ -4456,7 +4576,7 @@ export const ClientProductGalleryQueryDocument = {
 export const ClientProductQueryDocument = {
   __meta__: {
     operationName: 'ClientProductQuery',
-    operationHash: '47aa22eb750cb2c529e5eeafb921bfeadb67db71',
+    operationHash: '12580848721b74fe462009ed456f4fa834d5cf55',
   },
 } as unknown as TypedDocumentString<
   ClientProductQueryQuery,
