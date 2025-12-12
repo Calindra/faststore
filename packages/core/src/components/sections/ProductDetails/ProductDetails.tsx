@@ -430,9 +430,13 @@ export const fragment = gql(`
           sku
           name
           productID
+          slug
           image {
             url
             alternateName
+          }
+          brand {
+            name
           }
           offers {
             highPrice
@@ -458,6 +462,28 @@ export const fragment = gql(`
             value
             name
             valueReference
+          }
+          skuSpecifications {
+            field {
+              name
+              originalName
+              id
+            }
+            values {
+              name
+              originalName
+              id
+              fieldId
+            }
+          }
+          specificationGroups {
+            name
+            originalName
+            specifications {
+              name
+              originalName
+              values
+            }
           }
         }
       }

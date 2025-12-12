@@ -2506,7 +2506,9 @@ export type ProductDetailsFragment_ProductFragment = {
         sku: string
         name: string
         productID: string
+        slug: string
         image: Array<{ url: string; alternateName: string }>
+        brand: { name: string }
         offers: {
           highPrice: number
           lowPrice: number
@@ -2531,6 +2533,28 @@ export type ProductDetailsFragment_ProductFragment = {
           value: any
           name: string
           valueReference: any
+        }>
+        skuSpecifications: Array<{
+          field: {
+            name: string
+            originalName: string | null
+            id: string | null
+          }
+          values: Array<{
+            name: string
+            originalName: string | null
+            id: string | null
+            fieldId: string | null
+          }>
+        }>
+        specificationGroups: Array<{
+          name: string
+          originalName: string
+          specifications: Array<{
+            name: string
+            originalName: string
+            values: Array<string>
+          }>
         }>
       }> | null
     } | null
@@ -2781,7 +2805,9 @@ export type ServerProductQueryQuery = {
           sku: string
           name: string
           productID: string
+          slug: string
           image: Array<{ url: string; alternateName: string }>
+          brand: { name: string }
           offers: {
             highPrice: number
             lowPrice: number
@@ -2806,6 +2832,28 @@ export type ServerProductQueryQuery = {
             value: any
             name: string
             valueReference: any
+          }>
+          skuSpecifications: Array<{
+            field: {
+              name: string
+              originalName: string | null
+              id: string | null
+            }
+            values: Array<{
+              name: string
+              originalName: string | null
+              id: string | null
+              fieldId: string | null
+            }>
+          }>
+          specificationGroups: Array<{
+            name: string
+            originalName: string
+            specifications: Array<{
+              name: string
+              originalName: string
+              values: Array<string>
+            }>
           }>
         }> | null
       } | null
@@ -3512,7 +3560,9 @@ export type ClientProductQueryQuery = {
           sku: string
           name: string
           productID: string
+          slug: string
           image: Array<{ url: string; alternateName: string }>
+          brand: { name: string }
           offers: {
             highPrice: number
             lowPrice: number
@@ -3537,6 +3587,28 @@ export type ClientProductQueryQuery = {
             value: any
             name: string
             valueReference: any
+          }>
+          skuSpecifications: Array<{
+            field: {
+              name: string
+              originalName: string | null
+              id: string | null
+            }
+            values: Array<{
+              name: string
+              originalName: string | null
+              id: string | null
+              fieldId: string | null
+            }>
+          }>
+          specificationGroups: Array<{
+            name: string
+            originalName: string
+            specifications: Array<{
+              name: string
+              originalName: string
+              values: Array<string>
+            }>
           }>
         }> | null
       } | null
@@ -4087,9 +4159,13 @@ export const ProductDetailsFragment_ProductFragmentDoc =
         sku
         name
         productID
+        slug
         image {
           url
           alternateName
+        }
+        brand {
+          name
         }
         offers {
           highPrice
@@ -4115,6 +4191,28 @@ export const ProductDetailsFragment_ProductFragmentDoc =
           value
           name
           valueReference
+        }
+        skuSpecifications {
+          field {
+            name
+            originalName
+            id
+          }
+          values {
+            name
+            originalName
+            id
+            fieldId
+          }
+        }
+        specificationGroups {
+          name
+          originalName
+          specifications {
+            name
+            originalName
+            values
+          }
         }
       }
     }
@@ -4556,7 +4654,7 @@ export const ServerCollectionPageQueryDocument = {
 export const ServerProductQueryDocument = {
   __meta__: {
     operationName: 'ServerProductQuery',
-    operationHash: '271446d0f81e5c3530140c7ca3ea39b6411a0fcb',
+    operationHash: 'e1090e1e88b31a8c0935f402d949650cb5b12683',
   },
 } as unknown as TypedDocumentString<
   ServerProductQueryQuery,
@@ -4700,7 +4798,7 @@ export const ClientProductGalleryQueryDocument = {
 export const ClientProductQueryDocument = {
   __meta__: {
     operationName: 'ClientProductQuery',
-    operationHash: 'e843e78fd0dff5bfa657dd245a6d6d2fe99c2a49',
+    operationHash: '398d2b3b67a8a8059005681fe373f3e97636aa9c',
   },
 } as unknown as TypedDocumentString<
   ClientProductQueryQuery,
