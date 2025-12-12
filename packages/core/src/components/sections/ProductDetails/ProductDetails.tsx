@@ -401,6 +401,24 @@ export const fragment = gql(`
     gtin
     description
     unitMultiplier
+    slug
+    hasSpecifications
+
+    seo {
+      title
+      titleTemplate
+      description
+      canonical
+    }
+
+    breadcrumbList {
+      itemListElement {
+        item
+        name
+        position
+      }
+      numberOfItems
+    }
     isVariantOf {
       name
       productGroupID
@@ -474,6 +492,30 @@ export const fragment = gql(`
       name
       value
       valueReference
+    }
+
+    skuSpecifications {
+      field {
+        name
+        originalName
+        id
+      }
+      values {
+        name
+        originalName
+        id
+        fieldId
+      }
+    }
+
+    specificationGroups {
+      name
+      originalName
+      specifications {
+        name
+        originalName
+        values
+      }
     }
 
     # Contains necessary info to add this item to cart

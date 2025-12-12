@@ -2482,7 +2482,19 @@ export type ProductDetailsFragment_ProductFragment = {
   gtin: string
   description: string
   unitMultiplier: number | null
+  slug: string
+  hasSpecifications: boolean | null
   id: string
+  seo: {
+    title: string
+    titleTemplate: string
+    description: string
+    canonical: string
+  }
+  breadcrumbList: {
+    numberOfItems: number
+    itemListElement: Array<{ item: string; name: string; position: number }>
+  }
   isVariantOf: {
     name: string
     productGroupID: string
@@ -2542,6 +2554,24 @@ export type ProductDetailsFragment_ProductFragment = {
     value: any
     name: string
     valueReference: any
+  }>
+  skuSpecifications: Array<{
+    field: { name: string; originalName: string | null; id: string | null }
+    values: Array<{
+      name: string
+      originalName: string | null
+      id: string | null
+      fieldId: string | null
+    }>
+  }>
+  specificationGroups: Array<{
+    name: string
+    originalName: string
+    specifications: Array<{
+      name: string
+      originalName: string
+      values: Array<string>
+    }>
   }>
 }
 
@@ -2708,10 +2738,18 @@ export type ServerProductQueryQuery = {
     description: string
     releaseDate: string
     unitMultiplier: number | null
+    slug: string
+    hasSpecifications: boolean | null
     id: string
-    seo: { title: string; description: string; canonical: string }
+    seo: {
+      title: string
+      description: string
+      canonical: string
+      titleTemplate: string
+    }
     brand: { name: string }
     breadcrumbList: {
+      numberOfItems: number
       itemListElement: Array<{ item: string; name: string; position: number }>
     }
     image: Array<{ url: string; alternateName: string }>
@@ -2777,6 +2815,24 @@ export type ServerProductQueryQuery = {
       value: any
       name: string
       valueReference: any
+    }>
+    skuSpecifications: Array<{
+      field: { name: string; originalName: string | null; id: string | null }
+      values: Array<{
+        name: string
+        originalName: string | null
+        id: string | null
+        fieldId: string | null
+      }>
+    }>
+    specificationGroups: Array<{
+      name: string
+      originalName: string
+      specifications: Array<{
+        name: string
+        originalName: string
+        values: Array<string>
+      }>
     }>
   }
 }
@@ -3432,7 +3488,19 @@ export type ClientProductQueryQuery = {
     gtin: string
     description: string
     unitMultiplier: number | null
+    slug: string
+    hasSpecifications: boolean | null
     id: string
+    seo: {
+      title: string
+      titleTemplate: string
+      description: string
+      canonical: string
+    }
+    breadcrumbList: {
+      numberOfItems: number
+      itemListElement: Array<{ item: string; name: string; position: number }>
+    }
     isVariantOf: {
       name: string
       productGroupID: string
@@ -3492,6 +3560,24 @@ export type ClientProductQueryQuery = {
       value: any
       name: string
       valueReference: any
+    }>
+    skuSpecifications: Array<{
+      field: { name: string; originalName: string | null; id: string | null }
+      values: Array<{
+        name: string
+        originalName: string | null
+        id: string | null
+        fieldId: string | null
+      }>
+    }>
+    specificationGroups: Array<{
+      name: string
+      originalName: string
+      specifications: Array<{
+        name: string
+        originalName: string
+        values: Array<string>
+      }>
     }>
   }
 }
@@ -3974,6 +4060,22 @@ export const ProductDetailsFragment_ProductFragmentDoc =
   gtin
   description
   unitMultiplier
+  slug
+  hasSpecifications
+  seo {
+    title
+    titleTemplate
+    description
+    canonical
+  }
+  breadcrumbList {
+    itemListElement {
+      item
+      name
+      position
+    }
+    numberOfItems
+  }
   isVariantOf {
     name
     productGroupID
@@ -4043,6 +4145,28 @@ export const ProductDetailsFragment_ProductFragmentDoc =
     name
     value
     valueReference
+  }
+  skuSpecifications {
+    field {
+      name
+      originalName
+      id
+    }
+    values {
+      name
+      originalName
+      id
+      fieldId
+    }
+  }
+  specificationGroups {
+    name
+    originalName
+    specifications {
+      name
+      originalName
+      values
+    }
   }
   ...CartProductItem
 }
@@ -4432,7 +4556,7 @@ export const ServerCollectionPageQueryDocument = {
 export const ServerProductQueryDocument = {
   __meta__: {
     operationName: 'ServerProductQuery',
-    operationHash: '7fa17164c1a6dd025b5a57c7744a2a40a7f72cf1',
+    operationHash: '271446d0f81e5c3530140c7ca3ea39b6411a0fcb',
   },
 } as unknown as TypedDocumentString<
   ServerProductQueryQuery,
@@ -4576,7 +4700,7 @@ export const ClientProductGalleryQueryDocument = {
 export const ClientProductQueryDocument = {
   __meta__: {
     operationName: 'ClientProductQuery',
-    operationHash: '12580848721b74fe462009ed456f4fa834d5cf55',
+    operationHash: 'e843e78fd0dff5bfa657dd245a6d6d2fe99c2a49',
   },
 } as unknown as TypedDocumentString<
   ClientProductQueryQuery,
