@@ -2508,7 +2508,6 @@ export type ProductDetailsFragment_ProductFragment = {
         productID: string
         slug: string
         image: Array<{ url: string; alternateName: string }>
-        brand: { name: string }
         offers: {
           highPrice: number
           lowPrice: number
@@ -2533,19 +2532,6 @@ export type ProductDetailsFragment_ProductFragment = {
           value: any
           name: string
           valueReference: any
-        }>
-        skuSpecifications: Array<{
-          field: {
-            name: string
-            originalName: string | null
-            id: string | null
-          }
-          values: Array<{
-            name: string
-            originalName: string | null
-            id: string | null
-            fieldId: string | null
-          }>
         }>
         specificationGroups: Array<{
           name: string
@@ -2807,7 +2793,6 @@ export type ServerProductQueryQuery = {
           productID: string
           slug: string
           image: Array<{ url: string; alternateName: string }>
-          brand: { name: string }
           offers: {
             highPrice: number
             lowPrice: number
@@ -2832,19 +2817,6 @@ export type ServerProductQueryQuery = {
             value: any
             name: string
             valueReference: any
-          }>
-          skuSpecifications: Array<{
-            field: {
-              name: string
-              originalName: string | null
-              id: string | null
-            }
-            values: Array<{
-              name: string
-              originalName: string | null
-              id: string | null
-              fieldId: string | null
-            }>
           }>
           specificationGroups: Array<{
             name: string
@@ -3562,7 +3534,6 @@ export type ClientProductQueryQuery = {
           productID: string
           slug: string
           image: Array<{ url: string; alternateName: string }>
-          brand: { name: string }
           offers: {
             highPrice: number
             lowPrice: number
@@ -3587,19 +3558,6 @@ export type ClientProductQueryQuery = {
             value: any
             name: string
             valueReference: any
-          }>
-          skuSpecifications: Array<{
-            field: {
-              name: string
-              originalName: string | null
-              id: string | null
-            }
-            values: Array<{
-              name: string
-              originalName: string | null
-              id: string | null
-              fieldId: string | null
-            }>
           }>
           specificationGroups: Array<{
             name: string
@@ -4164,9 +4122,6 @@ export const ProductDetailsFragment_ProductFragmentDoc =
           url
           alternateName
         }
-        brand {
-          name
-        }
         offers {
           highPrice
           lowPrice
@@ -4191,19 +4146,6 @@ export const ProductDetailsFragment_ProductFragmentDoc =
           value
           name
           valueReference
-        }
-        skuSpecifications {
-          field {
-            name
-            originalName
-            id
-          }
-          values {
-            name
-            originalName
-            id
-            fieldId
-          }
         }
         specificationGroups {
           name
@@ -4654,7 +4596,7 @@ export const ServerCollectionPageQueryDocument = {
 export const ServerProductQueryDocument = {
   __meta__: {
     operationName: 'ServerProductQuery',
-    operationHash: 'e1090e1e88b31a8c0935f402d949650cb5b12683',
+    operationHash: 'fb6d9f95c1f363e1cb10e9ee45052092656c9d71',
   },
 } as unknown as TypedDocumentString<
   ServerProductQueryQuery,
@@ -4798,7 +4740,7 @@ export const ClientProductGalleryQueryDocument = {
 export const ClientProductQueryDocument = {
   __meta__: {
     operationName: 'ClientProductQuery',
-    operationHash: '398d2b3b67a8a8059005681fe373f3e97636aa9c',
+    operationHash: '956636873dd652f013a71e01ef69b5a0b8b5b8c1',
   },
 } as unknown as TypedDocumentString<
   ClientProductQueryQuery,
