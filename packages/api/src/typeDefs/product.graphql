@@ -47,6 +47,10 @@ type StoreProduct {
   """
   gtin: String!
   """
+  Product reference ID (Código de referência).
+  """
+  refId: String!
+  """
   Array with review information.
   """
   review: [StoreReview!]!

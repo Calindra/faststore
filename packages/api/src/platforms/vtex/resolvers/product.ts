@@ -148,6 +148,7 @@ export const StoreProduct: Record<string, Resolver<Root>> & {
   },
   sku: ({ itemId }) => itemId,
   gtin: ({ ean, referenceId }) => (ean ? ean : (referenceId[0]?.Value ?? '')),
+  refId: ({ isVariantOf }) => isVariantOf.productReference ?? '',
   review: () => [],
   aggregateRating: () => ({}),
   offers: (root) =>
