@@ -1441,6 +1441,8 @@ export type StoreProduct = {
   offers: StoreAggregateOffer
   /** Product ID, such as [ISBN](https://www.isbn-international.org/content/what-isbn) or similar global IDs. */
   productID: Scalars['String']['output']
+  /** Product reference ID (Código de referência). */
+  refId: Scalars['String']['output']
   /** The product's release date. Formatted using https://en.wikipedia.org/wiki/ISO_8601 */
   releaseDate: Scalars['String']['output']
   /** Array with review information. */
@@ -2480,6 +2482,7 @@ export type ProductDetailsFragment_ProductFragment = {
   sku: string
   name: string
   gtin: string
+  refId: string
   description: string
   unitMultiplier: number | null
   slug: string
@@ -2747,6 +2750,7 @@ export type ServerProductQueryQuery = {
     name: string
     description: string
     releaseDate: string
+    refId: string
     unitMultiplier: number | null
     slug: string
     hasSpecifications: boolean | null
@@ -3506,6 +3510,7 @@ export type ClientProductQueryQuery = {
     sku: string
     name: string
     gtin: string
+    refId: string
     description: string
     unitMultiplier: number | null
     slug: string
@@ -4088,6 +4093,7 @@ export const ProductDetailsFragment_ProductFragmentDoc =
   sku
   name
   gtin
+  refId
   description
   unitMultiplier
   slug
@@ -4596,7 +4602,7 @@ export const ServerCollectionPageQueryDocument = {
 export const ServerProductQueryDocument = {
   __meta__: {
     operationName: 'ServerProductQuery',
-    operationHash: 'fb6d9f95c1f363e1cb10e9ee45052092656c9d71',
+    operationHash: '157eb69eb080db0a3a168c8a121c66eafefc5f7d',
   },
 } as unknown as TypedDocumentString<
   ServerProductQueryQuery,
@@ -4740,7 +4746,7 @@ export const ClientProductGalleryQueryDocument = {
 export const ClientProductQueryDocument = {
   __meta__: {
     operationName: 'ClientProductQuery',
-    operationHash: '956636873dd652f013a71e01ef69b5a0b8b5b8c1',
+    operationHash: '7b404261ff9855fa149f97768f585559dc819bee',
   },
 } as unknown as TypedDocumentString<
   ClientProductQueryQuery,
