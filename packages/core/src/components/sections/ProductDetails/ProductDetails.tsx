@@ -399,7 +399,6 @@ export const fragment = gql(`
     sku
     name
     gtin
-    refId
     description
     unitMultiplier
     slug
