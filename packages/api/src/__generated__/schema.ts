@@ -1523,6 +1523,8 @@ export type StoreProduct = {
   offers: StoreAggregateOffer;
   /** Product ID, such as [ISBN](https://www.isbn-international.org/content/what-isbn) or similar global IDs. */
   productID: Scalars['String'];
+  /** Product reference ID (Código de referência). */
+  refId: Scalars['String'];
   /** The product's release date. Formatted using https://en.wikipedia.org/wiki/ISO_8601 */
   releaseDate: Scalars['String'];
   /** Array with review information. */
