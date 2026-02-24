@@ -74,7 +74,7 @@ const AccordionItem = forwardRef(function AccordionItem<
       </Component>
     </AccordionItemContext.Provider>
   )
-}) as AccordionItemComponent
+} as any) as unknown as AccordionItemComponent
 
 export function useAccordionItem() {
   const context = useContext(AccordionItemContext)

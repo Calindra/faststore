@@ -40,6 +40,6 @@ const List = forwardRef(function List<T extends ElementType = 'ul'>(
       {...otherProps}
     />
   )
-}) as ListComponent
+} as any) as unknown as ListComponent
 
 export default List
