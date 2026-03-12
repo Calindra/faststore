@@ -13,7 +13,7 @@ import type {
   useMyAccountFilter,
 } from 'src/sdk/search/useMyAccountFilter'
 import FilterFacetDateRange from './MyAccountFilterFacetDateRange'
-import FilterFacetPlacedBy from './MyAccountFilterFacetPlacedBy'
+import FilterFacetPendingApproval from './MyAccountFilterFacetPendingApproval'
 import styles from './section.module.scss'
 
 export interface FilterSliderProps {
@@ -92,8 +92,8 @@ function MyAccountFilterSlider({
             : [value]
         }
 
-        if (key === 'purchaseAgentId') {
-          acc['purchaseAgentId'] = value
+        if (key === 'pendingMyApproval') {
+          acc['pendingMyApproval'] = value
         }
 
         return acc
@@ -182,25 +182,37 @@ function MyAccountFilterSlider({
             >
               {type === 'StoreFacetBoolean' && isExpanded && (
                 <UIFilterFacetBoolean>
-                  {facet.values.map((item) => (
-                    <UIFilterFacetBooleanItem
-                      key={`${testId}-${facet.label}-${item.label}`}
-                      id={`${testId}-${facet.label}-${item.label}`}
-                      testId={`mobile-${testId}`}
-                      onFacetChange={(facet) =>
-                        dispatch({ type: 'toggleFacet', payload: facet })
-                      }
-                      selected={item.selected}
-                      value={item.value}
-                      quantity={item.quantity}
-                      facetKey={facet.key}
-                      label={item.label}
-                    />
-                  ))}
+                  {facet.values.map((item) => {
+                    const normalizedTestId = testId?.trim().toLowerCase() || ''
+                    const normalizedFacetLabel =
+                      facet.label?.trim().toLowerCase() || ''
+                    const normalizedItemLabel =
+                      item.label?.trim().toLowerCase() || ''
+                    const itemId = `${normalizedTestId}-${normalizedFacetLabel}-${normalizedItemLabel}`
+
+                    return (
+                      <UIFilterFacetBooleanItem
+                        key={itemId}
+                        id={itemId}
+                        testId={`mobile-${normalizedTestId}`}
+                        onFacetChange={(facet) =>
+                          dispatch({ type: 'toggleFacet', payload: facet })
+                        }
+                        selected={item.selected}
+                        value={item.value}
+                        quantity={item.quantity}
+                        facetKey={facet.key}
+                        label={item.label}
+                      />
+                    )
+                  })}
                 </UIFilterFacetBoolean>
               )}
-              {type === 'StoreFacetPlacedBy' && isExpanded && (
-                <FilterFacetPlacedBy selected={selected} dispatch={dispatch} />
+              {type === 'StoreFacetPendingApproval' && isExpanded && (
+                <FilterFacetPendingApproval
+                  selected={selected}
+                  dispatch={dispatch}
+                />
               )}
               {type === 'StoreFacetRange' && isExpanded && (
                 <FilterFacetDateRange

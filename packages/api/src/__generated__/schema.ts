@@ -412,10 +412,12 @@ export type IShippingItem = {
 };
 
 export type IStoreB2B = {
+  contractName?: Maybe<Scalars['String']>;
   customerId: Scalars['String'];
   firstName?: Maybe<Scalars['String']>;
   isRepresentative?: Maybe<Scalars['Boolean']>;
   lastName?: Maybe<Scalars['String']>;
+  organizationManager?: Maybe<Scalars['Boolean']>;
   savedPostalCode?: Maybe<Scalars['String']>;
   unitId?: Maybe<Scalars['String']>;
   unitName?: Maybe<Scalars['String']>;
@@ -850,8 +852,6 @@ export type ProfileAddress = {
 
 export type Query = {
   __typename?: 'Query';
-  /** Returns the account name of the current user or the B2B contract name if applicable. */
-  accountName?: Maybe<Scalars['String']>;
   /** Returns the account profile information for the current authenticated user (b2b or b2c user). */
   accountProfile: StoreAccountProfile;
   /** Returns information about all collections. */
@@ -860,7 +860,7 @@ export type Query = {
   allProducts: StoreProductConnection;
   /** Returns the details of a collection based on the collection slug. */
   collection: StoreCollection;
-  /** Returns information about the list of Orders that the User can view. */
+  /** Returns the list of Orders that the User can view. */
   listUserOrders?: Maybe<UserOrderListMinimalResult>;
   /** Returns a list of pickup points near to the given geo coordinates. */
   pickupPoints?: Maybe<PickupPoints>;
@@ -911,6 +911,7 @@ export type QueryListUserOrdersArgs = {
   dateFinal?: Maybe<Scalars['String']>;
   dateInitial?: Maybe<Scalars['String']>;
   page?: Maybe<Scalars['Int']>;
+  pendingMyApproval?: Maybe<Scalars['Boolean']>;
   perPage?: Maybe<Scalars['Int']>;
   status?: Maybe<Array<Maybe<Scalars['String']>>>;
   text?: Maybe<Scalars['String']>;
@@ -1180,10 +1181,12 @@ export type StoreAuthor = {
 
 export type StoreB2B = {
   __typename?: 'StoreB2B';
+  contractName?: Maybe<Scalars['String']>;
   customerId: Scalars['String'];
   firstName?: Maybe<Scalars['String']>;
   isRepresentative?: Maybe<Scalars['Boolean']>;
   lastName?: Maybe<Scalars['String']>;
+  organizationManager?: Maybe<Scalars['Boolean']>;
   savedPostalCode?: Maybe<Scalars['String']>;
   unitId?: Maybe<Scalars['String']>;
   unitName?: Maybe<Scalars['String']>;
@@ -1749,6 +1752,7 @@ export type UserOrder = {
   allowCancellation?: Maybe<Scalars['Boolean']>;
   allowEdition?: Maybe<Scalars['Boolean']>;
   authorizedDate?: Maybe<Scalars['String']>;
+  budgetData?: Maybe<UserOrderBudgetData>;
   callCenterOperatorData?: Maybe<Scalars['String']>;
   canProcessOrderAuthorization?: Maybe<Scalars['Boolean']>;
   cancelReason?: Maybe<Scalars['String']>;
@@ -1856,6 +1860,51 @@ export type UserOrderAttachments = {
   __typename?: 'UserOrderAttachments';
   content?: Maybe<Scalars['JSONObject']>;
   name?: Maybe<Scalars['String']>;
+};
+
+export type UserOrderBudget = {
+  __typename?: 'UserOrderBudget';
+  allocations?: Maybe<Array<Maybe<UserOrderBudgetAllocation>>>;
+  balance?: Maybe<UserOrderBudgetBalance>;
+  cycleConfiguration?: Maybe<UserOrderBudgetCycleConfiguration>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+  unitId?: Maybe<Scalars['String']>;
+};
+
+export type UserOrderBudgetAllocation = {
+  __typename?: 'UserOrderBudgetAllocation';
+  ToBeSpent?: Maybe<Scalars['Float']>;
+  balance?: Maybe<UserOrderBudgetBalance>;
+  id?: Maybe<Scalars['String']>;
+  linkedEntity?: Maybe<UserOrderBudgetAllocationLinkedEntity>;
+  reservations?: Maybe<Scalars['JSONObject']>;
+};
+
+export type UserOrderBudgetAllocationLinkedEntity = {
+  __typename?: 'UserOrderBudgetAllocationLinkedEntity';
+  id?: Maybe<Scalars['String']>;
+  type?: Maybe<Scalars['String']>;
+};
+
+export type UserOrderBudgetBalance = {
+  __typename?: 'UserOrderBudgetBalance';
+  amount?: Maybe<Scalars['Float']>;
+  balanceAdjustment?: Maybe<Scalars['Float']>;
+  remaining?: Maybe<Scalars['Float']>;
+};
+
+export type UserOrderBudgetCycleConfiguration = {
+  __typename?: 'UserOrderBudgetCycleConfiguration';
+  autoResetOnPeriodEnd?: Maybe<Scalars['Boolean']>;
+  carryOverBalance?: Maybe<Scalars['Boolean']>;
+  endDate?: Maybe<Scalars['String']>;
+  startDate?: Maybe<Scalars['String']>;
+};
+
+export type UserOrderBudgetData = {
+  __typename?: 'UserOrderBudgetData';
+  budgets?: Maybe<Array<Maybe<UserOrderBudget>>>;
 };
 
 export type UserOrderCancel = {
@@ -2038,7 +2087,10 @@ export type UserOrderDeliveryOptionsItems = {
   name?: Maybe<Scalars['String']>;
   price?: Maybe<Scalars['Float']>;
   quantity?: Maybe<Scalars['Int']>;
+  sellingPrice?: Maybe<Scalars['Float']>;
   tax?: Maybe<Scalars['Float']>;
+  taxPriceTags?: Maybe<Array<Maybe<UserOrderPriceTag>>>;
+  taxPriceTagsTotal?: Maybe<Scalars['Float']>;
   total?: Maybe<Scalars['Float']>;
   uniqueId?: Maybe<Scalars['String']>;
 };
@@ -2474,6 +2526,7 @@ export type UserOrderRestitutions = {
 export type UserOrderResult = {
   __typename?: 'UserOrderResult';
   allowCancellation?: Maybe<Scalars['Boolean']>;
+  budgetData?: Maybe<UserOrderBudgetData>;
   canProcessOrderAuthorization?: Maybe<Scalars['Boolean']>;
   clientProfileData?: Maybe<UserOrderClientProfileData>;
   creationDate?: Maybe<Scalars['String']>;

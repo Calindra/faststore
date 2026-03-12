@@ -13,10 +13,11 @@ module.exports = {
     pdp: {
       titleTemplate: '%s | FastStore PDP',
       descriptionTemplate: '%s products on FastStore Product Detail Page',
+      minPriceAmountFractionDigits: undefined,
     },
     search: {
-      titleTemplate: '%s: Search results title',
-      descriptionTemplate: '%s: Search results description',
+      titleTemplate: '%s | Search results',
+      descriptionTemplate: '%s Search results description',
       noIndex: true,
       noFollow: true,
       bodyH1: 'Showing results for:',
@@ -139,6 +140,7 @@ module.exports = {
   experimental: {
     cypressVersion: 12,
     enableCypressExtension: false,
+    enableScriptsLogs: false,
     noRobots: false,
     noindex: false,
     nofollow: false,
@@ -146,11 +148,14 @@ module.exports = {
     enableRedirects: false,
     enableSearchSSR: false,
     enableFaststoreMyAccount: false,
-    enableVtexAssetsLoader: false,
     graphqlCacheControl: {
       maxAge: 0, // 0 disables cache, 5 * 60 enable cache control maxAge 5 minutes
-      staleWhileRevalidate: 60,
+      staleWhileRevalidate: 60 * 60, // 1 hour
     },
     refreshToken: false,
+    scrollRestoration: false,
   },
+
+  // Text direction: 'ltr' (left-to-right) or 'rtl' (right-to-left)
+  direction: 'ltr',
 }

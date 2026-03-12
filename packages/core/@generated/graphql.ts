@@ -413,10 +413,12 @@ export type IShippingItem = {
 }
 
 export type IStoreB2B = {
+  contractName: InputMaybe<Scalars['String']['input']>
   customerId: Scalars['String']['input']
   firstName: InputMaybe<Scalars['String']['input']>
   isRepresentative: InputMaybe<Scalars['Boolean']['input']>
   lastName: InputMaybe<Scalars['String']['input']>
+  organizationManager: InputMaybe<Scalars['Boolean']['input']>
   savedPostalCode: InputMaybe<Scalars['String']['input']>
   unitId: InputMaybe<Scalars['String']['input']>
   unitName: InputMaybe<Scalars['String']['input']>
@@ -829,8 +831,6 @@ export type ProfileAddress = {
 }
 
 export type Query = {
-  /** Returns the account name of the current user or the B2B contract name if applicable. */
-  accountName: Maybe<Scalars['String']['output']>
   /** Returns the account profile information for the current authenticated user (b2b or b2c user). */
   accountProfile: StoreAccountProfile
   /** Returns information about all collections. */
@@ -839,7 +839,7 @@ export type Query = {
   allProducts: StoreProductConnection
   /** Returns the details of a collection based on the collection slug. */
   collection: StoreCollection
-  /** Returns information about the list of Orders that the User can view. */
+  /** Returns the list of Orders that the User can view. */
   listUserOrders: Maybe<UserOrderListMinimalResult>
   /** Returns a list of pickup points near to the given geo coordinates. */
   pickupPoints: Maybe<PickupPoints>
@@ -886,6 +886,7 @@ export type QueryListUserOrdersArgs = {
   dateFinal: InputMaybe<Scalars['String']['input']>
   dateInitial: InputMaybe<Scalars['String']['input']>
   page: InputMaybe<Scalars['Int']['input']>
+  pendingMyApproval: InputMaybe<Scalars['Boolean']['input']>
   perPage: InputMaybe<Scalars['Int']['input']>
   status: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>
   text: InputMaybe<Scalars['String']['input']>
@@ -1126,10 +1127,12 @@ export type StoreAuthor = {
 }
 
 export type StoreB2B = {
+  contractName: Maybe<Scalars['String']['output']>
   customerId: Scalars['String']['output']
   firstName: Maybe<Scalars['String']['output']>
   isRepresentative: Maybe<Scalars['Boolean']['output']>
   lastName: Maybe<Scalars['String']['output']>
+  organizationManager: Maybe<Scalars['Boolean']['output']>
   savedPostalCode: Maybe<Scalars['String']['output']>
   unitId: Maybe<Scalars['String']['output']>
   unitName: Maybe<Scalars['String']['output']>
@@ -1647,6 +1650,7 @@ export type UserOrder = {
   allowCancellation: Maybe<Scalars['Boolean']['output']>
   allowEdition: Maybe<Scalars['Boolean']['output']>
   authorizedDate: Maybe<Scalars['String']['output']>
+  budgetData: Maybe<UserOrderBudgetData>
   callCenterOperatorData: Maybe<Scalars['String']['output']>
   canProcessOrderAuthorization: Maybe<Scalars['Boolean']['output']>
   cancelReason: Maybe<Scalars['String']['output']>
@@ -1749,6 +1753,45 @@ export type UserOrderAttachmentOfferings = {
 export type UserOrderAttachments = {
   content: Maybe<Scalars['JSONObject']['output']>
   name: Maybe<Scalars['String']['output']>
+}
+
+export type UserOrderBudget = {
+  allocations: Maybe<Array<Maybe<UserOrderBudgetAllocation>>>
+  balance: Maybe<UserOrderBudgetBalance>
+  cycleConfiguration: Maybe<UserOrderBudgetCycleConfiguration>
+  id: Maybe<Scalars['String']['output']>
+  name: Maybe<Scalars['String']['output']>
+  unitId: Maybe<Scalars['String']['output']>
+}
+
+export type UserOrderBudgetAllocation = {
+  ToBeSpent: Maybe<Scalars['Float']['output']>
+  balance: Maybe<UserOrderBudgetBalance>
+  id: Maybe<Scalars['String']['output']>
+  linkedEntity: Maybe<UserOrderBudgetAllocationLinkedEntity>
+  reservations: Maybe<Scalars['JSONObject']['output']>
+}
+
+export type UserOrderBudgetAllocationLinkedEntity = {
+  id: Maybe<Scalars['String']['output']>
+  type: Maybe<Scalars['String']['output']>
+}
+
+export type UserOrderBudgetBalance = {
+  amount: Maybe<Scalars['Float']['output']>
+  balanceAdjustment: Maybe<Scalars['Float']['output']>
+  remaining: Maybe<Scalars['Float']['output']>
+}
+
+export type UserOrderBudgetCycleConfiguration = {
+  autoResetOnPeriodEnd: Maybe<Scalars['Boolean']['output']>
+  carryOverBalance: Maybe<Scalars['Boolean']['output']>
+  endDate: Maybe<Scalars['String']['output']>
+  startDate: Maybe<Scalars['String']['output']>
+}
+
+export type UserOrderBudgetData = {
+  budgets: Maybe<Array<Maybe<UserOrderBudget>>>
 }
 
 export type UserOrderCancel = {
@@ -1910,7 +1953,10 @@ export type UserOrderDeliveryOptionsItems = {
   name: Maybe<Scalars['String']['output']>
   price: Maybe<Scalars['Float']['output']>
   quantity: Maybe<Scalars['Int']['output']>
+  sellingPrice: Maybe<Scalars['Float']['output']>
   tax: Maybe<Scalars['Float']['output']>
+  taxPriceTags: Maybe<Array<Maybe<UserOrderPriceTag>>>
+  taxPriceTagsTotal: Maybe<Scalars['Float']['output']>
   total: Maybe<Scalars['Float']['output']>
   uniqueId: Maybe<Scalars['String']['output']>
 }
@@ -2310,6 +2356,7 @@ export type UserOrderRestitutions = {
 
 export type UserOrderResult = {
   allowCancellation: Maybe<Scalars['Boolean']['output']>
+  budgetData: Maybe<UserOrderBudgetData>
   canProcessOrderAuthorization: Maybe<Scalars['Boolean']['output']>
   clientProfileData: Maybe<UserOrderClientProfileData>
   creationDate: Maybe<Scalars['String']['output']>
@@ -2722,7 +2769,9 @@ export type ServerAccountPageQueryQueryVariables = Exact<{
   [key: string]: never
 }>
 
-export type ServerAccountPageQueryQuery = { accountName: string | null }
+export type ServerAccountPageQueryQuery = {
+  accountProfile: { name: string | null }
+}
 
 export type ServerCollectionPageQueryQueryVariables = Exact<{
   slug: Scalars['String']['input']
@@ -2879,7 +2928,6 @@ export type ServerOrderDetailsQueryQueryVariables = Exact<{
 }>
 
 export type ServerOrderDetailsQueryQuery = {
-  accountName: string | null
   userOrder: {
     orderId: string | null
     creationDate: string | null
@@ -3008,8 +3056,10 @@ export type ServerOrderDetailsQueryQuery = {
           name: string | null
           quantity: number | null
           price: number | null
+          sellingPrice: number | null
           imageUrl: string | null
           tax: number | null
+          taxPriceTagsTotal: number | null
           total: number | null
         } | null> | null
       } | null> | null
@@ -3050,7 +3100,20 @@ export type ServerOrderDetailsQueryQuery = {
       email: string | null
       phone: string | null
     } | null
+    budgetData: {
+      budgets: Array<{
+        id: string | null
+        name: string | null
+        balance: { remaining: number | null } | null
+        allocations: Array<{
+          id: string | null
+          reservations: any | null
+          linkedEntity: { id: string | null } | null
+        } | null> | null
+      } | null> | null
+    } | null
   } | null
+  accountProfile: { name: string | null }
 }
 
 export type ServerListOrdersQueryQueryVariables = Exact<{
@@ -3064,10 +3127,10 @@ export type ServerListOrdersQueryQueryVariables = Exact<{
   dateFinal: InputMaybe<Scalars['String']['input']>
   text: InputMaybe<Scalars['String']['input']>
   clientEmail: InputMaybe<Scalars['String']['input']>
+  pendingMyApproval: InputMaybe<Scalars['Boolean']['input']>
 }>
 
 export type ServerListOrdersQueryQuery = {
-  accountName: string | null
   listUserOrders: {
     list: Array<{
       orderId: string | null
@@ -3101,12 +3164,12 @@ export type ServerListOrdersQueryQuery = {
       perPage: number | null
     } | null
   } | null
+  accountProfile: { name: string | null }
 }
 
 export type ServerProfileQueryQueryVariables = Exact<{ [key: string]: never }>
 
 export type ServerProfileQueryQuery = {
-  accountName: string | null
   accountProfile: {
     name: string | null
     email: string | null
@@ -3117,7 +3180,7 @@ export type ServerProfileQueryQuery = {
 export type ServerSecurityQueryVariables = Exact<{ [key: string]: never }>
 
 export type ServerSecurityQuery = {
-  accountName: string | null
+  accountProfile: { name: string | null }
   userDetails: { email: string | null }
 }
 
@@ -3126,7 +3189,7 @@ export type ServerUserDetailsQueryQueryVariables = Exact<{
 }>
 
 export type ServerUserDetailsQueryQuery = {
-  accountName: string | null
+  accountProfile: { name: string | null }
   userDetails: {
     name: string | null
     email: string | null
@@ -3810,6 +3873,8 @@ export type ValidateSessionMutation = {
       userName: string | null
       userEmail: string | null
       savedPostalCode: string | null
+      contractName: string | null
+      organizationManager: boolean | null
     } | null
     marketingData: {
       utmCampaign: string | null
@@ -4584,7 +4649,7 @@ export const SearchEvent_MetadataFragmentDoc = new TypedDocumentString(
 export const ServerAccountPageQueryDocument = {
   __meta__: {
     operationName: 'ServerAccountPageQuery',
-    operationHash: '47315a3cd26ddd9c7fa963778988464341b8193f',
+    operationHash: '9baae331b75848a310fecb457e8c971ae27897ff',
   },
 } as unknown as TypedDocumentString<
   ServerAccountPageQueryQuery,
@@ -4611,7 +4676,7 @@ export const ServerProductQueryDocument = {
 export const ServerOrderDetailsQueryDocument = {
   __meta__: {
     operationName: 'ServerOrderDetailsQuery',
-    operationHash: '2c5dca039e0aa4924e9e583f5afbe522758ca7c4',
+    operationHash: 'bdf677bbccce12186a5ef15aebdce46585a99782',
   },
 } as unknown as TypedDocumentString<
   ServerOrderDetailsQueryQuery,
@@ -4620,7 +4685,7 @@ export const ServerOrderDetailsQueryDocument = {
 export const ServerListOrdersQueryDocument = {
   __meta__: {
     operationName: 'ServerListOrdersQuery',
-    operationHash: 'ee84ac3f5b58c5e1950a927a42c5c1dd6012fcc4',
+    operationHash: '70d06de1da9c11f10ebde31b66fd74eccd456af5',
   },
 } as unknown as TypedDocumentString<
   ServerListOrdersQueryQuery,
@@ -4629,7 +4694,7 @@ export const ServerListOrdersQueryDocument = {
 export const ServerProfileQueryDocument = {
   __meta__: {
     operationName: 'ServerProfileQuery',
-    operationHash: '0ed4b5db8fed122d8418195d01fb91b30261d587',
+    operationHash: '672fe0f00b7b710b63fc6573c0a6b2ec54812b8f',
   },
 } as unknown as TypedDocumentString<
   ServerProfileQueryQuery,
@@ -4638,7 +4703,7 @@ export const ServerProfileQueryDocument = {
 export const ServerSecurityDocument = {
   __meta__: {
     operationName: 'ServerSecurity',
-    operationHash: '63c6eadbe8b77c0c3c91406589755accba5cf155',
+    operationHash: '0890ba3456c40a426893b80b698df7a84cfdd6a1',
   },
 } as unknown as TypedDocumentString<
   ServerSecurityQuery,
@@ -4647,7 +4712,7 @@ export const ServerSecurityDocument = {
 export const ServerUserDetailsQueryDocument = {
   __meta__: {
     operationName: 'ServerUserDetailsQuery',
-    operationHash: '522e5feeb80e67cee931bc98eac9d08ea75c75d2',
+    operationHash: 'e5eb7e46c685d0c7a2ec62c865bfb0a66f81d557',
   },
 } as unknown as TypedDocumentString<
   ServerUserDetailsQueryQuery,
@@ -4791,7 +4856,7 @@ export const ClientTopSearchSuggestionsQueryDocument = {
 export const ValidateSessionDocument = {
   __meta__: {
     operationName: 'ValidateSession',
-    operationHash: '5da2700f5a69ee8835b1cb6c69e14f4b6e12c4df',
+    operationHash: '8c3a5999496e227f167e9dc79697e6c478d48a9e',
   },
 } as unknown as TypedDocumentString<
   ValidateSessionMutation,

@@ -1,8 +1,12 @@
 {
   "name": "@faststore/core",
-  "version": "3.77.2-alpha.22-3",
+  "version": "3.97.1-alpha.0",
   "license": "MIT",
-  "repository": "vtex/faststore",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vtex/faststore",
+    "directory": "packages/core"
+  },
   "browserslist": "supports es6-module and not dead",
   "exports": {
     ".": "./index.ts",
@@ -36,6 +40,9 @@
     "pnpm": "9.15.1",
     "yarn": "1.22.22"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "sideEffects": false,
   "dependencies": {
     "@antfu/ni": "^0.21.12",
@@ -44,11 +51,11 @@
     "@envelop/graphql-jit": "^8.0.3",
     "@envelop/parser-cache": "^6.0.2",
     "@envelop/validation-cache": "^6.0.2",
-    "@faststore/api": "^3.88.6",
-    "@faststore/graphql-utils": "^3.81.0",
-    "@faststore/lighthouse": "^3.81.0",
-    "@faststore/sdk": "^3.88.6",
-    "@faststore/ui": "^3.88.0",
+    "@faststore/api": "workspace:*",
+    "@faststore/graphql-utils": "^3.97.0",
+    "@faststore/lighthouse": "workspace:*",
+    "@faststore/sdk": "workspace:*",
+    "@faststore/ui": "workspace:*",
     "@graphql-codegen/cli": "5.0.2",
     "@graphql-codegen/client-preset": "4.2.6",
     "@graphql-codegen/typescript": "4.0.7",

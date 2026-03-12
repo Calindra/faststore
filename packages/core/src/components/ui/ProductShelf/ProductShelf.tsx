@@ -1,20 +1,13 @@
-import dynamic from 'next/dynamic'
 import { useEffect, useId, useRef } from 'react'
 
 import deepmerge from 'deepmerge'
+import ProductShelfSkeleton from 'src/components/skeletons/ProductShelfSkeleton'
 import { useViewItemListEvent } from 'src/sdk/analytics/hooks/useViewItemListEvent'
-import { useDeliveryPromiseFacets } from 'src/sdk/deliveryPromise/useDeliveryPromiseFacets'
+import { useDeliveryPromiseGlobalFacets } from 'src/sdk/deliveryPromise/useDeliveryPromiseFacets'
 import { useOverrideComponents } from 'src/sdk/overrides/OverrideContext'
 import { useProductsQuery } from 'src/sdk/product/useProductsQuery'
-import { overwriteMerge, textToKebabCase } from 'src/utils/utilities'
-
+import { textToKebabCase, toArray } from 'src/utils/utilities'
 import type { ProductSummary_ProductFragment } from '@generated/graphql'
-
-const ProductShelfSkeleton = dynamic(
-  () =>
-    /* webpackChunkName: "ProductShelfSkeleton" */
-    import('src/components/skeletons/ProductShelfSkeleton')
-)
 
 type Sort =
   | 'discount_desc'
@@ -68,20 +61,16 @@ function ProductShelf(props: ProductShelfProps) {
   const titleId = textToKebabCase(title)
   const id = useId()
   const viewedOnce = useRef(false)
+  const { globalDeliveryFacets } = useDeliveryPromiseGlobalFacets()
 
-  const { deliveryFacets } = useDeliveryPromiseFacets()
-
-  const data = useProductsQuery(
-    {
-      first: numberOfItems,
-      selectedFacets: deepmerge(otherProps.selectedFacets, deliveryFacets, {
-        arrayMerge: overwriteMerge,
-      }),
-      ...otherProps,
-      after: otherProps.after?.toString(),
-    },
-    { suspense: false }
-  )
+  const data = useProductsQuery({
+    ...otherProps,
+    first: numberOfItems,
+    selectedFacets: deepmerge(
+      toArray(otherProps.selectedFacets),
+      globalDeliveryFacets
+    ),
+  })
 
   const products = data?.search?.products
   const productEdges = products?.edges ?? []

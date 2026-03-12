@@ -1,4 +1,4 @@
-import { Button, Icon } from '@faststore/ui'
+import { Icon, IconButton } from '@faststore/ui'
 import type { ServerListOrdersQueryQuery } from '@generated/graphql'
 import { useState } from 'react'
 
@@ -30,6 +30,7 @@ type MyAccountListOrdersTableProps = {
     dateFinal: string
     text: string
     clientEmail: string
+    pendingMyApproval?: boolean
   }
 }
 
@@ -62,36 +63,22 @@ export function Pagination({
   return (
     <div data-fs-list-orders-table-pagination>
       <p>{`${firstIndexLabel} — ${lastIndexLabel} of ${total}`}</p>
-      <Button
+      <IconButton
         size="small"
         variant="tertiary"
         disabled={page === 1}
         onClick={() => handlePageChange(page - 1)}
-        icon={
-          <Icon
-            width={16}
-            height={16}
-            name="CaretLeft"
-            aria-label="Previous Page"
-          />
-        }
-        iconPosition="left"
-      ></Button>
-      <Button
+        icon={<Icon name="CaretLeft" />}
+        aria-label="Previous Page"
+      />
+      <IconButton
         size="small"
         variant="tertiary"
         disabled={page === totalPages}
         onClick={() => handlePageChange(page + 1)}
-        icon={
-          <Icon
-            width={16}
-            height={16}
-            name="CaretRight"
-            aria-label="Next Page"
-          />
-        }
-        iconPosition="left"
-      ></Button>
+        icon={<Icon name="CaretRight" />}
+        aria-label="Next Page"
+      />
     </div>
   )
 }
@@ -166,7 +153,6 @@ export default function MyAccountListOrdersTable({
             const creationDate = item.creationDate
               ? formatOrderDate(item.creationDate, locale)
               : '-'
-            const clientName = item.clientName ? item.clientName : '-'
             const totalPrice = formatPrice(item.totalValue, item.currencyCode)
             const deliveryBy = item.ShippingEstimatedDate
               ? `Delivery by ${formatOrderDate(
@@ -191,7 +177,6 @@ export default function MyAccountListOrdersTable({
 
             return (
               <tr
-                data-fs-list-orders-table-body-row
                 data-fs-list-orders-table-row
                 key={item.orderId}
                 onClick={handleRowClick}
@@ -231,65 +216,22 @@ export default function MyAccountListOrdersTable({
                         </p>
                       </div>
                       {hasOrderOrItemCustomFields && (
-                        <>
-                          <div data-fs-list-orders-table-product-info>
-                            <p data-fs-list-orders-table-product-info-label>
-                              Delivery by
-                            </p>
-                            <p
-                              data-fs-list-orders-table-product-info-value
-                              title={shippingEstimatedDate}
-                            >
-                              {shippingEstimatedDate}
-                            </p>
-                          </div>
-                          <div data-fs-list-orders-table-product-info>
-                            <p data-fs-list-orders-table-product-info-label>
-                              Placed by
-                            </p>
-                            <p
-                              data-fs-list-orders-table-product-info-value
-                              title={clientName}
-                            >
-                              {clientName}
-                            </p>
-                          </div>
-                        </>
+                        <div data-fs-list-orders-table-product-info>
+                          <p data-fs-list-orders-table-product-info-label>
+                            Delivery by
+                          </p>
+                          <p
+                            data-fs-list-orders-table-product-info-value
+                            title={shippingEstimatedDate}
+                          >
+                            {shippingEstimatedDate}
+                          </p>
+                        </div>
                       )}
                     </td>
-                    {!hasOrderOrItemCustomFields && (
-                      <>
-                        <td data-fs-list-orders-table-cell>
-                          <div data-fs-list-orders-table-product-info>
-                            <p data-fs-list-orders-table-product-info-label>
-                              Delivery by
-                            </p>
-                            <p
-                              data-fs-list-orders-table-product-info-value
-                              title={shippingEstimatedDate}
-                            >
-                              {shippingEstimatedDate}
-                            </p>
-                          </div>
-                        </td>
-                        <td data-fs-list-orders-table-cell>
-                          <div data-fs-list-orders-table-product-info>
-                            <p data-fs-list-orders-table-product-info-label>
-                              Placed by
-                            </p>
-                            <p
-                              data-fs-list-orders-table-product-info-value
-                              title={clientName}
-                            >
-                              {clientName}
-                            </p>
-                          </div>
-                        </td>
-                      </>
-                    )}
-                    {hasOrderOrItemCustomFields && (
-                      <>
-                        <td data-fs-list-orders-table-cell>
+                    <td data-fs-list-orders-table-cell>
+                      {hasOrderOrItemCustomFields && (
+                        <>
                           {displayedOrderLevel.length > 0 && (
                             <p
                               data-fs-list-orders-table-product-info-label
@@ -320,8 +262,12 @@ export default function MyAccountListOrdersTable({
                               }
                             />
                           )}
-                        </td>
-                        <td data-fs-list-orders-table-cell>
+                        </>
+                      )}
+                    </td>
+                    <td data-fs-list-orders-table-cell>
+                      {hasOrderOrItemCustomFields && (
+                        <>
                           {displayedItemLevel.length > 0 && (
                             <p
                               data-fs-list-orders-table-product-info-label
@@ -352,9 +298,9 @@ export default function MyAccountListOrdersTable({
                               }
                             />
                           )}
-                        </td>
-                      </>
-                    )}
+                        </>
+                      )}
+                    </td>
                   </>
                 )}
 

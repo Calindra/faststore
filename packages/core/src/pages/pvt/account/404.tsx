@@ -20,7 +20,6 @@ import RenderSections, {
 import { OverriddenDefaultEmptyState as EmptyState } from 'src/components/sections/EmptyState/OverriddenDefaultEmptyState'
 import CUSTOM_COMPONENTS from 'src/customizations/src/components'
 import PLUGINS_COMPONENTS from 'src/plugins'
-import { validateUser } from 'src/sdk/account/validateUser'
 import PageProvider from 'src/sdk/overrides/PageProvider'
 import { execute } from 'src/server'
 import { type PageContentType, getPage } from 'src/server/cms'
@@ -38,7 +37,7 @@ const COMPONENTS: Record<string, ComponentType<any>> = {
 type Props = {
   page: PageContentType
   globalSections: GlobalSectionsData
-  accountName: ServerAccountPageQueryQuery['accountName']
+  accountName: ServerAccountPageQueryQuery['accountProfile']['name']
 }
 
 function Page({
@@ -66,7 +65,9 @@ function Page({
 
 const query = gql(`
   query ServerAccountPageQuery {
-    accountName
+    accountProfile {
+      name
+    }
   }
 `)
 
@@ -75,17 +76,6 @@ export const getServerSideProps: GetServerSideProps<
   Record<string, string>,
   Locator
 > = async (context) => {
-  const isValid = await validateUser(context)
-
-  if (!isValid) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    }
-  }
-
   const { isFaststoreMyAccountEnabled, redirect } = getMyAccountRedirect({
     query: context.query,
   })
@@ -123,6 +113,22 @@ export const getServerSideProps: GetServerSideProps<
     globalSectionsFooterPromise,
   ])
 
+  if (account.errors) {
+    console.error(...account.errors)
+
+    const statusCode: number = (account.errors[0] as any)?.extensions?.status
+
+    // Redirect to 403 for authentication errors (401/403) to handle token refresh
+    if (statusCode === 401 || statusCode === 403) {
+      return {
+        redirect: {
+          destination: `/pvt/account/403?from=${encodeURIComponent('/pvt/account/404')}`,
+          permanent: false,
+        },
+      }
+    }
+  }
+
   const globalSectionsResult = injectGlobalSections({
     globalSections,
     globalSectionsHeader,
@@ -133,7 +139,7 @@ export const getServerSideProps: GetServerSideProps<
     props: {
       page,
       globalSections: globalSectionsResult,
-      accountName: account.data.accountName,
+      accountName: account.data.accountProfile.name,
     },
   }
 }

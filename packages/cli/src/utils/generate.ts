@@ -14,11 +14,11 @@ import path from 'path'
 
 import ora from 'ora'
 
-import { withBasePath } from './directory'
+import { createNextJsPages } from './createNextjsPages'
 import { installDependencies } from './dependencies'
+import { withBasePath } from './directory'
 import { logger } from './logger'
 import { installPlugins } from './plugins'
-import { createNextJsPages } from './createNextjsPages'
 
 interface GenerateOptions {
   setup?: boolean
@@ -26,7 +26,12 @@ interface GenerateOptions {
 }
 
 // package.json is copied manually after filtering its content
-const ignorePaths = ['package.json', 'node_modules', 'cypress.config.ts']
+const ignorePaths = [
+  'package.json',
+  'node_modules',
+  'cypress.config.ts',
+  'base.jsonc', // CP special file, it must not be copied to the merchants' temp dir
+]
 
 function createTmpFolder(basePath: string) {
   const { tmpDir, tmpFolderName } = withBasePath(basePath)
@@ -120,7 +125,7 @@ function copyCoreFiles(basePath: string) {
 function copyPublicFiles(basePath: string) {
   const { userDir, tmpDir } = withBasePath(basePath)
 
-  const allowList = ['json', 'txt', 'xml', 'ico', 'public']
+  const allowList = ['json', 'txt', 'xml', 'ico', 'public', 'svg']
   try {
     if (existsSync(`${userDir}/public`)) {
       copySync(`${userDir}/public`, `${tmpDir}/public`, {

@@ -424,14 +424,15 @@ export const Query = {
     { orderId }: QueryUserOrderArgs,
     ctx: Context
   ) => {
-    const {
-      clients: { commerce },
-    } = ctx
-    if (!orderId) {
-      throw new BadRequestError('Missing orderId')
-    }
-
     try {
+      if (!orderId) {
+        throw new BadRequestError('Missing orderId')
+      }
+
+      const {
+        clients: { commerce },
+      } = ctx
+
       const order = await commerce.oms.userOrder({ orderId })
 
       if (!order) {
@@ -482,6 +483,7 @@ export const Query = {
           email: shopper?.email || '',
           phone: shopper?.phone || '',
         },
+        budgetData: order.budgetData ?? { budgets: [] },
       }
     } catch (error) {
       const errorMessage = (error as Error).message
@@ -530,6 +532,7 @@ export const Query = {
     } = ctx
 
     const orders = await commerce.oms.listUserOrders(filters)
+
     return {
       list: orders.list?.map((order: UserOrderFromList) => ({
         orderId: order.orderId,
@@ -546,59 +549,11 @@ export const Query = {
       paging: orders.paging,
     }
   },
-  accountName: async (_: unknown, __: unknown, ctx: Context) => {
-    const {
-      account,
-      headers,
-      clients: { commerce },
-    } = ctx
-
-    const jwt = parseJwt(getAuthCookie(headers?.cookie ?? '', account))
-
-    if (!jwt?.userId) {
-      return null
-    }
-
-    if (jwt?.isRepresentative) {
-      const sessionData = await commerce.session('').catch(() => null)
-
-      if (!sessionData) {
-        return null
-      }
-
-      const profile = sessionData.namespaces.profile ?? null
-
-      return (
-        `${(profile?.firstName?.value ?? '').trim()} ${(profile?.lastName?.value ?? '').trim()}`.trim() ||
-        ''
-      )
-    }
-
-    const user = await commerce.licenseManager
-      .getUserById({
-        userId: jwt?.userId,
-      })
-      .catch(() => null)
-
-    return user?.name || ''
-  },
-  validateUser: async (_: unknown, __: unknown, ctx: Context) => {
-    const {
-      clients: { commerce },
-    } = ctx
-
-    // This resolver is used to validate if the user is logged in
-    // and has access to the account area.
-    // If the user is not logged in, it will throw an error.
-    // If the user is logged in, it will return true.
-    try {
-      const response = await commerce.vtexid.validate()
-
-      return {
-        isValid: response.authStatus === 'Success',
-      }
-    } catch (error) {
-      throw new ForbiddenError('You are not allowed to access this resource')
+  validateUser: async (_: unknown, __: unknown, _ctx: Context) => {
+    // Authentication is now handled by @auth directive
+    // If we reach here, validation was successful, otherwise an error would have been thrown
+    return {
+      isValid: true,
     }
   },
   // only b2b users
@@ -607,7 +562,6 @@ export const Query = {
       clients: { commerce },
     } = ctx
 
-    // const params = new URLSearchParams()
     const sessionData = await commerce.session('').catch(() => null)
 
     const shopper = sessionData?.namespaces.shopper ?? null

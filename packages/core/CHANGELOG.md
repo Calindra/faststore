@@ -3,6 +3,353 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.97.1](https://github.com/vtex/faststore/compare/v3.97.0...v3.97.1) (2026-02-24)
+
+**Note:** Version bump only for package @faststore/core
+
+# [3.97.0-dev.6](https://github.com/vtex/faststore/compare/v3.97.0-dev.5...v3.97.0-dev.6) (2026-02-19)
+
+### Bug Fixes
+
+- remove query string from preview cookie path ([#3213](https://github.com/vtex/faststore/issues/3213)) ([bc60a59](https://github.com/vtex/faststore/commit/bc60a5968d48f03e0fe52060b19dc8b48f6582f0))
+
+# [3.97.0-dev.5](https://github.com/vtex/faststore/compare/v3.97.0-dev.4...v3.97.0-dev.5) (2026-02-19)
+
+**Note:** Version bump only for package @faststore/core
+
+# [3.97.0-dev.4](https://github.com/vtex/faststore/compare/v3.97.0-dev.3...v3.97.0-dev.4) (2026-02-10)
+
+### Bug Fixes
+
+- scripts improvements - update RC url + Partytown loading + logs + fix bugs. ([#3198](https://github.com/vtex/faststore/issues/3198)) ([9a35b63](https://github.com/vtex/faststore/commit/9a35b63a91bc5cd53de553c053ceeed8bb983184))
+
+# [3.97.0-dev.3](https://github.com/vtex/faststore/compare/v3.97.0-dev.2...v3.97.0-dev.3) (2026-02-06)
+
+### Features
+
+- add budget to order details ([#3130](https://github.com/vtex/faststore/issues/3130)) ([f109b02](https://github.com/vtex/faststore/commit/f109b0271542aef02810d2996f00e075a9b9bde6))
+
+# 3.97.0-dev.2 (2026-02-06)
+
+### Features
+
+- reorder feature ([#3153](https://github.com/vtex/faststore/issues/3153)) ([d0fdeec](https://github.com/vtex/faststore/commit/d0fdeec77cd94e16f1b79dcc927487320983ba0e))
+
+# [3.97.0](https://github.com/vtex/faststore/compare/v3.96.5...v3.97.0) (2026-02-03)
+
+**Note:** Version bump only for package @faststore/core
+
+# [3.97.0-dev.1](https://github.com/vtex/faststore/compare/v3.96.5...v3.97.0-dev.1) (2026-02-03)
+
+# 3.97.0-dev.0 (2026-01-27)
+
+**Note:** Version bump only for package @faststore/core
+
+# [3.97.0-dev.0](https://github.com/vtex/faststore/compare/v3.96.4-dev.0...v3.97.0-dev.0) (2026-01-27)
+
+### Features
+
+- Enable fraction digit formatting for SEO's `product:price:amount` meta tag ([#3179](https://github.com/vtex/faststore/issues/3179)) ([d6e6252](https://github.com/vtex/faststore/commit/d6e6252eb578d782505b8e505ee48cd9fd1526e3))
+
+## [3.96.4-dev.0](https://github.com/vtex/faststore/compare/v3.96.3...v3.96.4-dev.0) (2026-01-21)
+
+# 3.96.0-dev.22 (2026-01-21)
+
+**Note:** Version bump only for package @faststore/core
+
+## [3.96.5](https://github.com/vtex/faststore/compare/v3.96.4...v3.96.5) (2026-02-02)
+
+### Bug Fixes
+
+- normalize set cookies domain host - SFS-3034 ([#3190](https://github.com/vtex/faststore/issues/3190)) ([645c91d](https://github.com/vtex/faststore/commit/645c91debeb16379f41aff6cb2225e2ed3b6086b))
+
+## [3.96.4](https://github.com/vtex/faststore/compare/v3.96.3...v3.96.4) (2026-01-26)
+
+### Bug Fixes
+
+- close filter on apply button click in FilterSlider component ([#3187](https://github.com/vtex/faststore/issues/3187)) ([f3c96eb](https://github.com/vtex/faststore/commit/f3c96eb5e73178d8c863a3e40ac576dc623a0624))
+
+## [3.96.3](https://github.com/vtex/faststore/compare/v3.96.2...v3.96.3) (2026-01-21)
+
+**Note:** Version bump only for package @faststore/core
+
+## [3.96.2](https://github.com/vtex/faststore/compare/v3.96.1...v3.96.2) (2026-01-14)
+
+**Note:** Version bump only for package @faststore/core
+
+## [3.96.1](https://github.com/vtex/faststore/compare/v3.96.0...v3.96.1) (2026-01-09)
+
+**Note:** Version bump only for package @faststore/core
+
+# [3.96.0](https://github.com/vtex/faststore/compare/v3.95.0...v3.96.0) (2025-12-24)
+
+### Features
+
+- version 20251223 ([#3161](https://github.com/vtex/faststore/issues/3161)) ([ad5e8d1](https://github.com/vtex/faststore/commit/ad5e8d12fe45f1fb8e1134165172bf1c6b2a91e2))
+
+# 3.96.0-dev.22 (2026-01-21)
+
+**Note:** Version bump only for package @faststore/core
+
+# [3.96.0-dev.21](https://github.com/vtex/faststore/compare/v3.96.0-dev.20...v3.96.0-dev.21) (2026-01-08)
+
+### Bug Fixes
+
+- Prevent Partytown cross-origin errors in iframe environments ([#3155](https://github.com/vtex/faststore/issues/3155)) ([997252e](https://github.com/vtex/faststore/commit/997252e9a18807f4c26c350197d4f2d139de58f8))
+
+# [3.96.0-dev.20](https://github.com/vtex/faststore/compare/v3.96.0-dev.19...v3.96.0-dev.20) (2026-01-08)
+
+### Bug Fixes
+
+- Add slug field to landing page schema - CROC-185 ([#3166](https://github.com/vtex/faststore/issues/3166)) ([41b9878](https://github.com/vtex/faststore/commit/41b987825ee5ebb7d311eef33e2ca65034dc130d))
+
+# [3.96.0-dev.19](https://github.com/vtex/faststore/compare/v3.96.0-dev.18...v3.96.0-dev.19) (2026-01-08)
+
+### Features
+
+- logout clear storage ([#3163](https://github.com/vtex/faststore/issues/3163)) ([1fbacc3](https://github.com/vtex/faststore/commit/1fbacc3b3e32b4f83a2f56c1f97eb0f8ff843f61))
+
+# 3.96.0-dev.18 (2025-12-24)
+
+**Note:** Version bump only for package @faststore/core
+
+# 3.96.0-dev.17 (2025-12-23)
+
+**Note:** Version bump only for package @faststore/core
+
+# [3.96.0-dev.16](https://github.com/vtex/faststore/compare/v3.96.0-dev.15...v3.96.0-dev.16) (2025-12-23)
+
+**Note:** Version bump only for package @faststore/core
+
+# [3.96.0-dev.15](https://github.com/vtex/faststore/compare/v3.96.0-dev.14...v3.96.0-dev.15) (2025-12-23)
+
+**Note:** Version bump only for package @faststore/core
+
+# [3.96.0-dev.14](https://github.com/vtex/faststore/compare/v3.96.0-dev.13...v3.96.0-dev.14) (2025-12-23)
+
+**Note:** Version bump only for package @faststore/core
+
+# [3.96.0-dev.13](https://github.com/vtex/faststore/compare/v3.96.0-dev.12...v3.96.0-dev.13) (2025-12-23)
+
+**Note:** Version bump only for package @faststore/core
+
+# [3.96.0-dev.12](https://github.com/vtex/faststore/compare/v3.96.0-dev.11...v3.96.0-dev.12) (2025-12-23)
+
+**Note:** Version bump only for package @faststore/core
+
+# 3.96.0-dev.11 (2025-12-23)
+
+### Bug Fixes
+
+- correct comment for platform specific config in discovery configuration ([0fea6fa](https://github.com/vtex/faststore/commit/0fea6faf812c0f0af3f139b6507b2f342264209c))
+
+# 3.96.0-dev.10 (2025-12-23)
+
+**Note:** Version bump only for package @faststore/core
+
+# [3.96.0-dev.9](https://github.com/vtex/faststore/compare/v3.96.0-dev.8...v3.96.0-dev.9) (2025-12-23)
+
+**Note:** Version bump only for package @faststore/core
+
+# [3.96.0-dev.8](https://github.com/vtex/faststore/compare/v3.96.0-dev.7...v3.96.0-dev.8) (2025-12-23)
+
+**Note:** Version bump only for package @faststore/core
+
+# 3.96.0-dev.7 (2025-12-23)
+
+### Bug Fixes
+
+- correct comment for platform specific API configuration in discovery config ([b03968c](https://github.com/vtex/faststore/commit/b03968c84cfb935b71ef64f575dcdf3e8f624b5a))
+
+# 3.96.0-dev.6 (2025-12-23)
+
+**Note:** Version bump only for package @faststore/core
+
+# 3.96.0-dev.5 (2025-12-23)
+
+### Features
+
+- Trigger build ([28b6ec0](https://github.com/vtex/faststore/commit/28b6ec0489080be0a3431ec2ead7bfce0da75a34))
+
+# 3.96.0-dev.4 (2025-12-23)
+
+**Note:** Version bump only for package @faststore/core
+
+# [3.96.0-dev.3](https://github.com/vtex/faststore/compare/v3.96.0-dev.2...v3.96.0-dev.3) (2025-12-22)
+
+**Note:** Version bump only for package @faststore/core
+
+# [3.96.0-dev.2](https://github.com/vtex/faststore/compare/v3.96.0-dev.1...v3.96.0-dev.2) (2025-12-18)
+
+### Bug Fixes
+
+- adds cache busting to bypass cache when logged in/out. ([#3152](https://github.com/vtex/faststore/issues/3152)) ([862ea50](https://github.com/vtex/faststore/commit/862ea50999214771c4fa38fa70db789b4de5e59b))
+
+# [3.96.0-dev.1](https://github.com/vtex/faststore/compare/v3.96.0-dev.0...v3.96.0-dev.1) (2025-12-16)
+
+**Note:** Version bump only for package @faststore/core
+
+# [3.96.0-dev.0](https://github.com/vtex/faststore/compare/v3.95.1-dev.0...v3.96.0-dev.0) (2025-12-10)
+
+### Features
+
+- adds `priceTags` as tax - SFS-2970 ([#3144](https://github.com/vtex/faststore/issues/3144)) ([d1b3869](https://github.com/vtex/faststore/commit/d1b38699f2955890be1759e1d6d6cf55e1c4dda9))
+
+## [3.95.1-dev.0](https://github.com/vtex/faststore/compare/v3.95.0...v3.95.1-dev.0) (2025-12-02)
+
+**Note:** Version bump only for package @faststore/core
+
+# 3.95.0 (2025-12-02)
+
+### Features
+
+- release version 20250212 ([#3138](https://github.com/vtex/faststore/issues/3138)) ([5e51548](https://github.com/vtex/faststore/commit/5e5154898e3756aa8d95efd54d76db0c90248d8d))
+
+# [3.95.0-dev.2](https://github.com/vtex/faststore/compare/v3.94.0...v3.95.0-dev.2) (2025-12-02)
+
+### Features
+
+- release version 20250112 ([#3135](https://github.com/vtex/faststore/issues/3135)) ([65440cd](https://github.com/vtex/faststore/commit/65440cd5607e6946b4023882eacf711c215aa138))
+
+# 3.95.0-dev.1 (2025-12-01)
+
+### Bug Fixes
+
+- remove unnecessary fields from session in validateSession function ([#3124](https://github.com/vtex/faststore/issues/3124)) ([d64b7f6](https://github.com/vtex/faststore/commit/d64b7f61cb62881f448fafad2ed4d4b3771cdeca))
+- Update `validateCart` mutation tests ([#3132](https://github.com/vtex/faststore/issues/3132)) ([c8cbb52](https://github.com/vtex/faststore/commit/c8cbb5204562ddee126c63a576ba1f4d264092f7))
+
+## [3.94.1-dev.0](https://github.com/vtex/faststore/compare/v3.94.0...v3.94.1-dev.0) (2025-11-19)
+
+**Note:** Version bump only for package @faststore/core
+
+# 3.94.0 (2025-11-19)
+
+### Features
+
+- release version 20251119 17 05 ([#3126](https://github.com/vtex/faststore/issues/3126)) ([9753c3f](https://github.com/vtex/faststore/commit/9753c3ff5ea760767978c41ec138b661a87ad731))
+- update version to 3.93.0-dev.4 and clean up changelogs ([#3127](https://github.com/vtex/faststore/issues/3127)) ([0c29d74](https://github.com/vtex/faststore/commit/0c29d749dc2222d01d848ffda9c2ae95dfba22af))
+
+# [3.93.0-dev.4](https://github.com/vtex/faststore/compare/v3.93.0-dev.3...v3.93.0-dev.4) (2025-11-17)
+
+### Bug Fixes
+
+- Show skeleton when product price is validating ([#3112](https://github.com/vtex/faststore/issues/3112)) ([1acb303](https://github.com/vtex/faststore/commit/1acb30334e2a17fe81630d3b0d631152c4e635f3))
+
+# 3.93.0-dev.3 (2025-11-17)
+
+### Bug Fixes
+
+- build among diff modules ([#3119](https://github.com/vtex/faststore/issues/3119)) ([fde7eb6](https://github.com/vtex/faststore/commit/fde7eb6635aaa4e0821fb8f6c6fb71f24604330b))
+
+# [3.93.0-dev.2](https://github.com/vtex/faststore/compare/v3.93.0-dev.1...v3.93.0-dev.2) (2025-11-07)
+
+**Note:** Version bump only for package @faststore/core
+
+# 3.93.0-dev.1 (2025-11-06)
+
+### Bug Fixes
+
+- Handle empty footer logo scenario ([#3094](https://github.com/vtex/faststore/issues/3094)) ([7323d8a](https://github.com/vtex/faststore/commit/7323d8a7d8cb09ad1d7ada7ca3269b8a28c7b91d))
+
+# [3.93.0-dev.0](https://github.com/vtex/faststore/compare/v3.92.1-dev.0...v3.93.0-dev.0) (2025-11-03)
+
+### Features
+
+- Add RTL Support ([#3097](https://github.com/vtex/faststore/issues/3097)) ([e293857](https://github.com/vtex/faststore/commit/e293857070b265419aee793ba09fd0795e7d7b44))
+
+## [3.92.1-dev.0](https://github.com/vtex/faststore/compare/v3.91.3-dev.1...v3.92.1-dev.0) (2025-11-03)
+
+**Note:** Version bump only for package @faststore/core
+
+# [3.92.0](https://github.com/vtex/faststore/compare/v3.91.2...v3.92.0) (2025-11-03)
+
+### Features
+
+- release ([#3092](https://github.com/vtex/faststore/issues/3092)) ([6dfe2ba](https://github.com/vtex/faststore/commit/6dfe2ba42dd03137ea53c85ad5aa3ee5a13c2fbf))
+
+## [3.91.3-dev.1](https://github.com/vtex/faststore/compare/v3.91.3-dev.0...v3.91.3-dev.1) (2025-10-30)
+
+**Note:** Version bump only for package @faststore/core
+
+## 3.91.3-dev.0 (2025-10-30)
+
+### Bug Fixes
+
+- add background color to TextareaField label ([#3079](https://github.com/vtex/faststore/issues/3079)) ([9e5a64d](https://github.com/vtex/faststore/commit/9e5a64d51d9983f028ec5cf0004cfed633b1ee8d)), closes [#2705](https://github.com/vtex/faststore/issues/2705) [/github.com/vtex/faststore/pull/2705#pullrequestreview-2710467780](https://github.com//github.com/vtex/faststore/pull/2705/issues/pullrequestreview-2710467780) [#2705](https://github.com/vtex/faststore/issues/2705) [/github.com/vtex/faststore/pull/2705#pullrequestreview-2710467780](https://github.com//github.com/vtex/faststore/pull/2705/issues/pullrequestreview-2710467780)
+- remove purchaseAgentId filter - SFS-2942 ([#3085](https://github.com/vtex/faststore/issues/3085)) ([270588f](https://github.com/vtex/faststore/commit/270588f1e7490ff94e296c4da7116c4112883359))
+
+## 3.91.2 (2025-10-27)
+
+### Bug Fixes
+
+- update buying policy alert message to include dynamic description SFS-2861 ([#3076](https://github.com/vtex/faststore/issues/3076)) ([f8f470e](https://github.com/vtex/faststore/commit/f8f470e7d70a0a2556e6136d84f57540b734b528))
+- update SEO for search page ([#3081](https://github.com/vtex/faststore/issues/3081)) ([315a244](https://github.com/vtex/faststore/commit/315a244c3ee119f0c5d1f61a095ac70754582026))
+
+## [3.91.1](https://github.com/vtex/faststore/compare/v3.91.0...v3.91.1) (2025-10-24)
+
+### Bug Fixes
+
+- signin button flickering - SFS-2862 ([#3078](https://github.com/vtex/faststore/issues/3078)) ([edd4ac0](https://github.com/vtex/faststore/commit/edd4ac084817467e6dcedc6cd5fe89923b0f55e3))
+
+# [3.91.0](https://github.com/vtex/faststore/compare/v3.90.1...v3.91.0) (2025-10-24)
+
+### Features
+
+- user validation improvements + refresh token SSR and api - SFS-2909 ([#3065](https://github.com/vtex/faststore/issues/3065)) ([97071ee](https://github.com/vtex/faststore/commit/97071ee21fcee0b038dfafa06633ef597136898e))
+
+## [3.90.1](https://github.com/vtex/faststore/compare/v3.90.0...v3.90.1) (2025-10-20)
+
+### Bug Fixes
+
+- selectedFacets value for ProductShelf and ProductTiles ([#3073](https://github.com/vtex/faststore/issues/3073)) ([3e68ca1](https://github.com/vtex/faststore/commit/3e68ca1a600ba35c83d5493e708a8538953c02d0))
+
+# [3.90.0](https://github.com/vtex/faststore/compare/v3.89.6...v3.90.0) (2025-10-13)
+
+### Features
+
+- show manage button only when the user be manage ([#3067](https://github.com/vtex/faststore/issues/3067)) ([08c1798](https://github.com/vtex/faststore/commit/08c17988d1a4d8aaba8016473898d2ee2ce5c244))
+
+## [3.89.6](https://github.com/vtex/faststore/compare/v3.89.5...v3.89.6) (2025-10-09)
+
+### Bug Fixes
+
+- My Account orders list table ([#3066](https://github.com/vtex/faststore/issues/3066)) ([394f401](https://github.com/vtex/faststore/commit/394f40162aa190da328daf40715ac1a1db0d6d70))
+
+## [3.89.5](https://github.com/vtex/faststore/compare/v3.89.4...v3.89.5) (2025-10-08)
+
+### Bug Fixes
+
+- Hide `Placed by` column from orders list and filters ([#3064](https://github.com/vtex/faststore/issues/3064)) ([d6ac4c8](https://github.com/vtex/faststore/commit/d6ac4c82727963cd430aa27a0c56f3d77ebd4870))
+
+## [3.89.4](https://github.com/vtex/faststore/compare/v3.89.3...v3.89.4) (2025-10-06)
+
+### Bug Fixes
+
+- org drawer corporate name - SFS-2904 ([#3062](https://github.com/vtex/faststore/issues/3062)) ([0ab3a92](https://github.com/vtex/faststore/commit/0ab3a925567d5905db8c9c688e1087b649790121))
+
+## [3.89.3](https://github.com/vtex/faststore/compare/v3.89.2...v3.89.3) (2025-10-03)
+
+**Note:** Version bump only for package @faststore/core
+
+## 3.89.2 (2025-10-02)
+
+### Bug Fixes
+
+- Filter quantity badge and labels references SFS-2896 ([#3061](https://github.com/vtex/faststore/issues/3061)) ([cfcf650](https://github.com/vtex/faststore/commit/cfcf650b5d1462c3988bc83fe2cb83981a2afa04))
+- refactor `ProductShelf` component to import directly - SFS-2895 ([#3059](https://github.com/vtex/faststore/issues/3059)) ([24ee8fb](https://github.com/vtex/faststore/commit/24ee8fb8020cf037f4fe83b7ace1a747c383cbcf))
+
+## [3.89.1](https://github.com/vtex/faststore/compare/v3.89.0...v3.89.1) (2025-10-02)
+
+### Bug Fixes
+
+- updates contract name SFS-2863 ([#3051](https://github.com/vtex/faststore/issues/3051)) ([3b884e4](https://github.com/vtex/faststore/commit/3b884e49eabbbd4d5832f342c759d1301c98dc0e))
+
+# [3.89.0](https://github.com/vtex/faststore/compare/v3.88.7...v3.89.0) (2025-10-02)
+
+### Features
+
+- My Account QA SFS-2859 ([#3040](https://github.com/vtex/faststore/issues/3040)) ([5e36a5f](https://github.com/vtex/faststore/commit/5e36a5f31acb1523024ad6e7063ca51aabe2f303)), closes [/github.com/vtex/faststore/blob/af6d2acbbc2fb72778c7223897ec7846736b4c87/packages/core/src/components/account/orders/MyAccountOrderDetails/MyAccountOrderDetails.tsx#L1](https://github.com//github.com/vtex/faststore/blob/af6d2acbbc2fb72778c7223897ec7846736b4c87/packages/core/src/components/account/orders/MyAccountOrderDetails/MyAccountOrderDetails.tsx/issues/L1)
+
 ## [3.88.7](https://github.com/vtex/faststore/compare/v3.88.6...v3.88.7) (2025-09-25)
 
 ### Bug Fixes

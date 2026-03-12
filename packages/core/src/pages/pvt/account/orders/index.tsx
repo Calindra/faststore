@@ -16,7 +16,7 @@ import type {
 } from '@generated/graphql'
 import { default as AfterSection } from 'src/customizations/src/myAccount/extensions/orders/after'
 import { default as BeforeSection } from 'src/customizations/src/myAccount/extensions/orders/before'
-import type { MyAccountProps } from 'src/experimental/myAccountSeverSideProps'
+import type { MyAccountProps } from 'src/experimental/myAccountServerSideProps'
 import { execute } from 'src/server'
 import { injectGlobalSections } from 'src/server/cms/global'
 import { getMyAccountRedirect } from 'src/utils/myAccountRedirect'
@@ -25,7 +25,6 @@ import { groupOrderStatusByLabel } from 'src/utils/userOrderStatus'
 import storeConfig from 'discovery.config'
 import { MyAccountListOrders } from 'src/components/account/orders/MyAccountListOrders'
 import { getIsRepresentative } from 'src/sdk/account/getIsRepresentative'
-import { validateUser } from 'src/sdk/account/validateUser'
 import PageProvider from 'src/sdk/overrides/PageProvider'
 import { extractStatusFromError } from 'src/utils/utilities'
 
@@ -46,7 +45,7 @@ type ListOrdersPageProps = {
     dateFinal: string
     text: string
     clientEmail: string
-    purchaseAgentId?: string
+    pendingMyApproval?: boolean
   }
 } & MyAccountProps
 
@@ -86,8 +85,8 @@ export default function ListOrdersPage({
 }
 
 const query = gql(`
-  query ServerListOrdersQuery ($page: Int,$perPage: Int, $status: [String], $dateInitial: String, $dateFinal: String, $text: String, $clientEmail: String) {
-    listUserOrders (page: $page, perPage: $perPage, status: $status, dateInitial: $dateInitial, dateFinal: $dateFinal, text: $text, clientEmail: $clientEmail) {
+  query ServerListOrdersQuery ($page: Int,$perPage: Int, $status: [String], $dateInitial: String, $dateFinal: String, $text: String, $clientEmail: String, $pendingMyApproval: Boolean) {
+    listUserOrders (page: $page, perPage: $perPage, status: $status, dateInitial: $dateInitial, dateFinal: $dateFinal, text: $text, clientEmail: $clientEmail, pendingMyApproval: $pendingMyApproval) {
       list {
         orderId
         creationDate
@@ -120,7 +119,9 @@ const query = gql(`
         perPage
       }
     }
-    accountName
+    accountProfile {
+      name
+    }
   }
 `)
 
@@ -129,17 +130,6 @@ export const getServerSideProps: GetServerSideProps<
   Record<string, string>,
   Locator
 > = async (context) => {
-  const isValid = await validateUser(context)
-
-  if (!isValid) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    }
-  }
-
   const isRepresentative = getIsRepresentative({
     headers: context.req.headers as Record<string, string>,
     account: storeConfig.api.storeId,
@@ -172,10 +162,7 @@ export const getServerSideProps: GetServerSideProps<
   const dateFinal = (context.query.dateFinal as string | undefined) || ''
   const text = (context.query.text as string | undefined) || ''
   const clientEmail = (context.query.clientEmail as string | undefined) || ''
-  // TODO: Integration: ensure `purchaseAgentId` is mapped to `purchase_agent_id`
-  // when calling the OMS API. Keep camelCase across the frontend.
-  const purchaseAgentId =
-    (context.query.purchaseAgentId as string | undefined) || ''
+  const pendingMyApproval = context.query.pendingMyApproval === 'true'
 
   // Map labels from FastStore status to API status
   const groupedStatus = groupOrderStatusByLabel()
@@ -209,6 +196,7 @@ export const getServerSideProps: GetServerSideProps<
           dateFinal,
           text,
           clientEmail,
+          pendingMyApproval,
         },
         operation: query,
       },
@@ -223,11 +211,17 @@ export const getServerSideProps: GetServerSideProps<
     console.error(...listOrders.errors)
 
     const status = extractStatusFromError(listOrders.errors[0])
-    const isForbidden = status === 403 || status === 401
+
+    // Redirect to 403 for authentication errors (401/403) to handle token refresh
+    // Redirect to 404 for other errors
+    const destination =
+      status === 403 || status === 401
+        ? `/pvt/account/403?from=${encodeURIComponent('/pvt/account/orders')}`
+        : '/pvt/account/404'
 
     return {
       redirect: {
-        destination: isForbidden ? '/pvt/account/403' : '/pvt/account/404',
+        destination,
         permanent: false,
       },
     }
@@ -242,7 +236,7 @@ export const getServerSideProps: GetServerSideProps<
   return {
     props: {
       globalSections: globalSectionsResult,
-      accountName: listOrders.data.accountName,
+      accountName: listOrders.data.accountProfile.name,
       listOrders: listOrders.data.listUserOrders,
       total: listOrders.data.listUserOrders.paging.total,
       perPage: listOrders.data.listUserOrders.paging.perPage,
@@ -253,7 +247,7 @@ export const getServerSideProps: GetServerSideProps<
         dateFinal,
         text,
         clientEmail,
-        purchaseAgentId,
+        pendingMyApproval,
       },
       isRepresentative,
     },

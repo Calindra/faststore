@@ -1,6 +1,3 @@
-/* ######################################### */
-/* Mocked Page until development is finished, it will be removed after */
-
 import type { Locator } from '@vtex/client-cms'
 import type { GetServerSideProps } from 'next'
 import { NextSeo } from 'next-seo'
@@ -20,9 +17,8 @@ import type {
 } from '@generated/graphql'
 import { default as AfterSection } from 'src/customizations/src/myAccount/extensions/profile/after'
 import { default as BeforeSection } from 'src/customizations/src/myAccount/extensions/profile/before'
-import type { MyAccountProps } from 'src/experimental/myAccountSeverSideProps'
+import type { MyAccountProps } from 'src/experimental/myAccountServerSideProps'
 import { getIsRepresentative } from 'src/sdk/account/getIsRepresentative'
-import { validateUser } from 'src/sdk/account/validateUser'
 import { injectGlobalSections } from 'src/server/cms/global'
 import { getMyAccountRedirect } from 'src/utils/myAccountRedirect'
 
@@ -36,7 +32,7 @@ const COMPONENTS: Record<string, ComponentType<any>> = {
   ...CUSTOM_COMPONENTS,
 }
 
-type ProfilePagePros = {
+type ProfilePageProps = {
   accountProfile: {
     name: string | null
     email: string | null
@@ -46,10 +42,10 @@ type ProfilePagePros = {
 
 export default function Profile({
   globalSections: globalSectionsProp,
-  accountName,
   accountProfile,
+  accountName,
   isRepresentative,
-}: ProfilePagePros) {
+}: ProfilePageProps) {
   const { sections: globalSections, settings: globalSettings } =
     globalSectionsProp ?? {}
 
@@ -73,7 +69,6 @@ export default function Profile({
 
 const query = gql(`
   query ServerProfileQuery {
-    accountName
     accountProfile {
       name
       email
@@ -87,22 +82,6 @@ export const getServerSideProps: GetServerSideProps<
   Record<string, string>,
   Locator
 > = async (context) => {
-  const isValid = await validateUser(context)
-
-  if (!isValid) {
-    return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
-    }
-  }
-
-  const isRepresentative = getIsRepresentative({
-    headers: context.req.headers as Record<string, string>,
-    account: storeConfig.api.storeId,
-  })
-
   const { isFaststoreMyAccountEnabled, redirect } = getMyAccountRedirect({
     query: context.query,
   })
@@ -110,6 +89,11 @@ export const getServerSideProps: GetServerSideProps<
   if (!isFaststoreMyAccountEnabled) {
     return { redirect }
   }
+
+  const isRepresentative = getIsRepresentative({
+    headers: context.req.headers as Record<string, string>,
+    account: storeConfig.api.storeId,
+  })
 
   const [
     globalSectionsPromise,
@@ -135,8 +119,13 @@ export const getServerSideProps: GetServerSideProps<
     console.error(...profile.errors)
 
     const statusCode: number = (profile.errors[0] as any)?.extensions?.status
+
+    // Redirect to 403 for authentication errors (401/403) to handle token refresh
+    // Redirect to 404 for other errors
     const destination: string =
-      statusCode === 403 ? '/pvt/account/403' : '/pvt/account/404'
+      statusCode === 401 || statusCode === 403
+        ? `/pvt/account/403?from=${encodeURIComponent('/pvt/account/profile')}`
+        : '/pvt/account/404'
 
     return {
       redirect: {
@@ -155,7 +144,7 @@ export const getServerSideProps: GetServerSideProps<
   return {
     props: {
       globalSections: globalSectionsResult,
-      accountName: profile.data.accountName,
+      accountName: profile.data.accountProfile.name,
       accountProfile: profile.data.accountProfile,
       isRepresentative,
     },

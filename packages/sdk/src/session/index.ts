@@ -47,6 +47,8 @@ export interface B2bInfo {
   userName: string
   userEmail: string
   savedPostalCode: string
+  contractName: string
+  organizationManager: boolean
 }
 
 export interface Session {
