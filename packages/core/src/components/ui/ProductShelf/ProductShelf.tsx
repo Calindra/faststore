@@ -70,6 +70,7 @@ function ProductShelf(props: ProductShelfProps) {
       toArray(otherProps.selectedFacets),
       globalDeliveryFacets
     ),
+    after: otherProps.after?.toString(),
   })
 
   const products = data?.search?.products
