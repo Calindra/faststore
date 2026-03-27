@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.98.0-dev.3](https://github.com/vtex/faststore/compare/v3.98.0-dev.2...v3.98.0-dev.3) (2026-03-12)
+
+### Features
+
+- Add ActivityFlow data parameters with search-related information ([#3105](https://github.com/vtex/faststore/issues/3105)) ([8f69ff8](https://github.com/vtex/faststore/commit/8f69ff855c31abedba66071132240c53a93ab56d))
+
+# [3.98.0-dev.2](https://github.com/vtex/faststore/compare/v3.98.0-dev.1...v3.98.0-dev.2) (2026-03-03)
+
+### Features
+
+- add mpn (manufacturer code) to product's structured data ([#3234](https://github.com/vtex/faststore/issues/3234)) ([9597e39](https://github.com/vtex/faststore/commit/9597e39a8d63a651b815f90fe3b1ea5409258ca3))
+
+# 3.98.0-dev.1 (2026-02-24)
+
+**Note:** Version bump only for package @faststore/api
+
+# [3.98.0-dev.0](https://github.com/vtex/faststore/compare/v3.97.0-dev.6...v3.98.0-dev.0) (2026-02-24)
+
+### Features
+
+- release version 20260224 ([#3225](https://github.com/vtex/faststore/issues/3225)) ([7a52516](https://github.com/vtex/faststore/commit/7a5251677a8f67066a2e060191b896ae6d0b0d9a))
+
 ## [3.97.1](https://github.com/vtex/faststore/compare/v3.97.0...v3.97.1) (2026-02-24)
 
 **Note:** Version bump only for package @faststore/api

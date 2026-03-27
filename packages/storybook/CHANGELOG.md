@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.98.0-dev.9](https://github.com/vtex/faststore/compare/v3.98.0-dev.8...v3.98.0-dev.9) (2026-03-27)
+
+**Note:** Version bump only for package @faststore/storybook
+
+# [3.98.0-dev.8](https://github.com/vtex/faststore/compare/v3.98.0-dev.7...v3.98.0-dev.8) (2026-03-27)
+
+### Features
+
+- Add Quick Order Full Feature ([#3197](https://github.com/vtex/faststore/issues/3197)) ([f5518d7](https://github.com/vtex/faststore/commit/f5518d7f205dccad99b6ea0a127fd09cf77d1edb))
+
+# [3.98.0-dev.3](https://github.com/vtex/faststore/compare/v3.98.0-dev.2...v3.98.0-dev.3) (2026-03-12)
+
+**Note:** Version bump only for package @faststore/storybook
+
+# 3.98.0-dev.1 (2026-02-24)
+
+**Note:** Version bump only for package @faststore/storybook
+
+# [3.98.0-dev.0](https://github.com/vtex/faststore/compare/v3.97.0-dev.6...v3.98.0-dev.0) (2026-02-24)
+
+### Features
+
+- release version 20260224 ([#3225](https://github.com/vtex/faststore/issues/3225)) ([7a52516](https://github.com/vtex/faststore/commit/7a5251677a8f67066a2e060191b896ae6d0b0d9a))
+
 ## [3.97.1](https://github.com/vtex/faststore/compare/v3.97.0...v3.97.1) (2026-02-24)
 
 **Note:** Version bump only for package @faststore/storybook
