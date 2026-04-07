@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.98.1](https://github.com/vtex/faststore/compare/v3.98.0...v3.98.1) (2026-04-07)
+
+### Bug Fixes
+
+- simplify city and postal code display logic in `RegionBar` and `RegionButton` ([#3259](https://github.com/vtex/faststore/issues/3259)) ([8944bee](https://github.com/vtex/faststore/commit/8944bee9cb92ccea2b6ca24309cfa5478b6f4d0d))
+
 # 3.98.0 (2026-03-27)
 
 ### Bug Fixes
