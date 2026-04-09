@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.98.3](https://github.com/vtex/faststore/compare/v3.98.2...v3.98.3) (2026-04-09)
+
+### Bug Fixes
+
+- Store ID param sent to Content Platform client ([#3265](https://github.com/vtex/faststore/issues/3265)) ([63fffd8](https://github.com/vtex/faststore/commit/63fffd878403c4d0c9aff8f6d56064dfa42ab833))
+
 ## [3.98.2](https://github.com/vtex/faststore/compare/v3.98.1...v3.98.2) (2026-04-09)
 
 ### Bug Fixes
