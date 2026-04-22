@@ -1438,6 +1438,8 @@ export type StoreProduct = {
   image: Array<StoreImage>
   /** Indicates product group related to this product. */
   isVariantOf: StoreProductGroup
+  /** Manufacturer Part Number. Identifies the product to its manufacturer. */
+  mpn: Scalars['String']['output']
   /** Product name. */
   name: Scalars['String']['output']
   /** Aggregate offer information. */
@@ -1549,6 +1551,8 @@ export type StoreSearchResult = {
   metadata: Maybe<SearchMetadata>
   /** Search result products. */
   products: StoreProductConnection
+  /** Search result searchId. Unique identifier for the search query can be used to correlate search analytics events. */
+  searchId: Scalars['String']['output']
   /** Search result suggestions. */
   suggestions: StoreSuggestions
 }
@@ -2606,6 +2610,7 @@ export type ProductDetailsFragment_ProductFragment = {
       priceWithTaxes: number
       listPrice: number
       listPriceWithTaxes: number
+      quantity: number
       seller: { identifier: string }
     }>
   }
@@ -2796,6 +2801,7 @@ export type ServerProductQueryQuery = {
   product: {
     sku: string
     gtin: string
+    mpn: string
     name: string
     description: string
     releaseDate: string
@@ -2830,6 +2836,7 @@ export type ServerProductQueryQuery = {
         priceWithTaxes: number
         listPrice: number
         listPriceWithTaxes: number
+        quantity: number
         seller: { identifier: string }
       }>
     }
@@ -3451,7 +3458,124 @@ export type ClientAllVariantProductsQueryQuery = {
   }
 }
 
-export type ClientManyProductsQueryQueryVariables = Exact<{
+export type ClientProductQueryQueryVariables = Exact<{
+  locator: Array<IStoreSelectedFacet> | IStoreSelectedFacet
+}>
+
+export type ClientProductQueryQuery = {
+  product: {
+    sku: string
+    name: string
+    gtin: string
+    refId: string
+    description: string
+    unitMultiplier: number | null
+    slug: string
+    hasSpecifications: boolean | null
+    id: string
+    seo: {
+      title: string
+      titleTemplate: string
+      description: string
+      canonical: string
+    }
+    breadcrumbList: {
+      numberOfItems: number
+      itemListElement: Array<{ item: string; name: string; position: number }>
+    }
+    isVariantOf: {
+      name: string
+      productGroupID: string
+      skuVariants: {
+        activeVariations: any | null
+        slugsMap: any | null
+        availableVariations: any | null
+        allVariantProducts: Array<{
+          sku: string
+          name: string
+          productID: string
+          slug: string
+          image: Array<{ url: string; alternateName: string }>
+          offers: {
+            highPrice: number
+            lowPrice: number
+            lowPriceWithTaxes: number
+            offerCount: number
+            priceCurrency: string
+            offers: Array<{
+              listPrice: number
+              listPriceWithTaxes: number
+              sellingPrice: number
+              priceCurrency: string
+              price: number
+              priceWithTaxes: number
+              priceValidUntil: string
+              itemCondition: string
+              availability: string
+              quantity: number
+            }>
+          }
+          additionalProperty: Array<{
+            propertyID: string
+            value: any
+            name: string
+            valueReference: any
+          }>
+          specificationGroups: Array<{
+            name: string
+            originalName: string
+            specifications: Array<{
+              name: string
+              originalName: string
+              values: Array<string>
+            }>
+          }>
+        }> | null
+      } | null
+    }
+    image: Array<{ url: string; alternateName: string }>
+    brand: { name: string }
+    offers: {
+      lowPrice: number
+      lowPriceWithTaxes: number
+      offers: Array<{
+        availability: string
+        price: number
+        priceWithTaxes: number
+        listPrice: number
+        listPriceWithTaxes: number
+        quantity: number
+        seller: { identifier: string }
+      }>
+    }
+    additionalProperty: Array<{
+      propertyID: string
+      value: any
+      name: string
+      valueReference: any
+    }>
+    skuSpecifications: Array<{
+      field: { name: string; originalName: string | null; id: string | null }
+      values: Array<{
+        name: string
+        originalName: string | null
+        id: string | null
+        fieldId: string | null
+      }>
+    }>
+    specificationGroups: Array<{
+      name: string
+      originalName: string
+      specifications: Array<{
+        name: string
+        originalName: string
+        values: Array<string>
+      }>
+    }>
+  }
+}
+
+export type ClientManyProductsQueryWithSearchIdQueryVariables = Exact<{
   first: Scalars['Int']['input']
   after: InputMaybe<Scalars['String']['input']>
   sort: StoreSort
@@ -3460,8 +3584,9 @@ export type ClientManyProductsQueryQueryVariables = Exact<{
   sponsoredCount: InputMaybe<Scalars['Int']['input']>
 }>
 
-export type ClientManyProductsQueryQuery = {
+export type ClientManyProductsQueryWithSearchIdQuery = {
   search: {
+    searchId: string
     products: {
       pageInfo: { totalCount: number }
       edges: Array<{
@@ -3564,61 +3689,55 @@ export type SearchEvent_MetadataFragment = {
   fuzzy: string | null
 }
 
-export type ClientProductQueryQueryVariables = Exact<{
-  locator: Array<IStoreSelectedFacet> | IStoreSelectedFacet
+export type ClientManyProductsQueryQueryVariables = Exact<{
+  first: Scalars['Int']['input']
+  after: InputMaybe<Scalars['String']['input']>
+  sort: StoreSort
+  term: Scalars['String']['input']
+  selectedFacets: Array<IStoreSelectedFacet> | IStoreSelectedFacet
+  sponsoredCount: InputMaybe<Scalars['Int']['input']>
 }>
 
-export type ClientProductQueryQuery = {
-  product: {
-    sku: string
-    name: string
-    gtin: string
-    refId: string
-    description: string
-    unitMultiplier: number | null
-    slug: string
-    hasSpecifications: boolean | null
-    id: string
-    seo: {
-      title: string
-      titleTemplate: string
-      description: string
-      canonical: string
-    }
-    breadcrumbList: {
-      numberOfItems: number
-      itemListElement: Array<{ item: string; name: string; position: number }>
-    }
-    isVariantOf: {
-      name: string
-      productGroupID: string
-      skuVariants: {
-        activeVariations: any | null
-        slugsMap: any | null
-        availableVariations: any | null
-        allVariantProducts: Array<{
+export type ClientManyProductsQueryQuery = {
+  search: {
+    products: {
+      pageInfo: { totalCount: number }
+      edges: Array<{
+        node: {
+          slug: string
           sku: string
           name: string
-          productID: string
-          slug: string
+          gtin: string
+          unitMultiplier: number | null
+          hasSpecifications: boolean | null
+          id: string
+          brand: { name: string; brandName: string }
+          isVariantOf: {
+            productGroupID: string
+            name: string
+            skuVariants: {
+              allVariantsByName: any | null
+              activeVariations: any | null
+              slugsMap: any | null
+              availableVariations: any | null
+              allVariantProducts: Array<{
+                name: string
+                productID: string
+              }> | null
+            } | null
+          }
           image: Array<{ url: string; alternateName: string }>
           offers: {
-            highPrice: number
             lowPrice: number
             lowPriceWithTaxes: number
-            offerCount: number
-            priceCurrency: string
             offers: Array<{
+              availability: string
+              price: number
               listPrice: number
               listPriceWithTaxes: number
-              sellingPrice: number
-              priceCurrency: string
-              price: number
               priceWithTaxes: number
-              priceValidUntil: string
-              itemCondition: string
-              availability: string
               quantity: number
+              seller: { identifier: string }
             }>
           }
           additionalProperty: Array<{
@@ -3627,56 +3746,13 @@ export type ClientProductQueryQuery = {
             name: string
             valueReference: any
           }>
-          specificationGroups: Array<{
-            name: string
-            originalName: string
-            specifications: Array<{
-              name: string
-              originalName: string
-              values: Array<string>
-            }>
-          }>
-        }> | null
-      } | null
-    }
-    image: Array<{ url: string; alternateName: string }>
-    brand: { name: string }
-    offers: {
-      lowPrice: number
-      lowPriceWithTaxes: number
-      offers: Array<{
-        availability: string
-        price: number
-        priceWithTaxes: number
-        listPrice: number
-        listPriceWithTaxes: number
-        seller: { identifier: string }
+          advertisement: { adId: string; adResponseId: string } | null
+          deliveryPromiseBadges: Array<{
+            typeName: string | null
+          } | null> | null
+        }
       }>
     }
-    additionalProperty: Array<{
-      propertyID: string
-      value: any
-      name: string
-      valueReference: any
-    }>
-    skuSpecifications: Array<{
-      field: { name: string; originalName: string | null; id: string | null }
-      values: Array<{
-        name: string
-        originalName: string | null
-        id: string | null
-        fieldId: string | null
-      }>
-    }>
-    specificationGroups: Array<{
-      name: string
-      originalName: string
-      specifications: Array<{
-        name: string
-        originalName: string
-        values: Array<string>
-      }>
-    }>
   }
 }
 
@@ -3769,6 +3845,7 @@ export type ClientSearchSuggestionsQueryQueryVariables = Exact<{
 
 export type ClientSearchSuggestionsQueryQuery = {
   search: {
+    searchId: string
     suggestions: {
       terms: Array<{ value: string }>
       products: Array<{
@@ -4246,6 +4323,7 @@ export const ProductDetailsFragment_ProductFragmentDoc =
       priceWithTaxes
       listPrice
       listPriceWithTaxes
+      quantity
       seller {
         identifier
       }
@@ -4667,7 +4745,7 @@ export const ServerCollectionPageQueryDocument = {
 export const ServerProductQueryDocument = {
   __meta__: {
     operationName: 'ServerProductQuery',
-    operationHash: '157eb69eb080db0a3a168c8a121c66eafefc5f7d',
+    operationHash: '86e13ee49eb06f223f9bcfe46a1e13d266946e46',
   },
 } as unknown as TypedDocumentString<
   ServerProductQueryQuery,
@@ -4790,14 +4868,23 @@ export const ClientAllVariantProductsQueryDocument = {
   ClientAllVariantProductsQueryQuery,
   ClientAllVariantProductsQueryQueryVariables
 >
-export const ClientManyProductsQueryDocument = {
+export const ClientProductQueryDocument = {
   __meta__: {
-    operationName: 'ClientManyProductsQuery',
-    operationHash: 'e49027bc29aa10cbf7bbb0ed62239af8de1653f0',
+    operationName: 'ClientProductQuery',
+    operationHash: '181b4d016c43b3a2936ee7e2a09da328b43ac6e5',
   },
 } as unknown as TypedDocumentString<
-  ClientManyProductsQueryQuery,
-  ClientManyProductsQueryQueryVariables
+  ClientProductQueryQuery,
+  ClientProductQueryQueryVariables
+>
+export const ClientManyProductsQueryWithSearchIdDocument = {
+  __meta__: {
+    operationName: 'ClientManyProductsQueryWithSearchId',
+    operationHash: '23be1e1fcaf0bd2719a9324272c891c922045180',
+  },
+} as unknown as TypedDocumentString<
+  ClientManyProductsQueryWithSearchIdQuery,
+  ClientManyProductsQueryWithSearchIdQueryVariables
 >
 export const ClientProductGalleryQueryDocument = {
   __meta__: {
@@ -4808,14 +4895,14 @@ export const ClientProductGalleryQueryDocument = {
   ClientProductGalleryQueryQuery,
   ClientProductGalleryQueryQueryVariables
 >
-export const ClientProductQueryDocument = {
+export const ClientManyProductsQueryDocument = {
   __meta__: {
-    operationName: 'ClientProductQuery',
-    operationHash: '7b404261ff9855fa149f97768f585559dc819bee',
+    operationName: 'ClientManyProductsQuery',
+    operationHash: 'e49027bc29aa10cbf7bbb0ed62239af8de1653f0',
   },
 } as unknown as TypedDocumentString<
-  ClientProductQueryQuery,
-  ClientProductQueryQueryVariables
+  ClientManyProductsQueryQuery,
+  ClientManyProductsQueryQueryVariables
 >
 export const ClientManyProductsSelectedQueryDocument = {
   __meta__: {
@@ -4838,7 +4925,7 @@ export const ClientProfileQueryDocument = {
 export const ClientSearchSuggestionsQueryDocument = {
   __meta__: {
     operationName: 'ClientSearchSuggestionsQuery',
-    operationHash: '35f1838f1381829e6ecf2cbce538654d974a2552',
+    operationHash: '0c15259a1ce08cbe55e9226073bb163c49b9a727',
   },
 } as unknown as TypedDocumentString<
   ClientSearchSuggestionsQueryQuery,

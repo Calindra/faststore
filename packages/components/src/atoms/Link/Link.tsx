@@ -33,7 +33,10 @@ type LinkComponent = <C extends LinkElementType = 'a'>(
   props: LinkProps<C>
 ) => ReactElement | null
 
-const Link = forwardRef(function Link<C extends LinkElementType = 'a'>(
+const Link = forwardRef<
+  HTMLAnchorElement,
+  Omit<LinkProps<LinkElementType>, 'ref'>
+>(function Link<C extends LinkElementType = 'a'>(
   {
     as,
     children,
