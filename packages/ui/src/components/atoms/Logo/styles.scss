@@ -1,7 +1,7 @@
 [data-fs-logo] {
   display: flex;
-  height: 100%;
   width: var(--fs-logo-width);
+  height: 100%;
 
   [data-fs-image] {
     object-fit: contain;

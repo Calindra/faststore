@@ -14,7 +14,7 @@ import {
   type UserOrderCancel,
   type UserOrderListResult,
 } from '../../../..'
-import type { Context, Options } from '../../index'
+import type { GraphqlContext } from '../../index'
 import { getWithAppKeyAndToken } from '../../utils/auth'
 import type { Channel } from '../../utils/channel'
 import {
@@ -27,7 +27,11 @@ import type { Address, AddressInput } from './types/Address'
 import type { Brand } from './types/Brand'
 import type { CategoryTree } from './types/CategoryTree'
 import type { MasterDataResponse } from './types/Newsletter'
-import type { OrderForm, OrderFormInputItem } from './types/OrderForm'
+import type {
+  ClientPreferencesData,
+  OrderForm,
+  OrderFormInputItem,
+} from './types/OrderForm'
 import type { PickupPoints, PickupPointsInput } from './types/PickupPoints'
 import type { PortalPagetype } from './types/Portal'
 import type { PortalProduct } from './types/Product'
@@ -54,7 +58,7 @@ const BASE_INIT = {
 
 export const VtexCommerce = (
   { account, environment, incrementAddress, subDomainPrefix }: Options,
-  ctx: Context
+  ctx: GraphqlContext
 ) => {
   const base = `https://${account}.${environment}.com.br`
   const storeCookies = getStoreCookie(ctx)
@@ -214,6 +218,28 @@ export const VtexCommerce = (
           {
             headers,
             body: JSON.stringify(marketingData),
+            method: 'POST',
+          },
+          { storeCookies }
+        )
+      },
+      clientPreferencesData: ({
+        id,
+        clientPreferencesData,
+      }: {
+        id: string
+        clientPreferencesData: ClientPreferencesData
+      }): Promise<OrderForm> => {
+        const headers: HeadersInit = withCookie({
+          'content-type': 'application/json',
+          'X-FORWARDED-HOST': forwardedHost,
+        })
+
+        return fetchAPI(
+          `${base}/api/checkout/pub/orderForm/${id}/attachments/clientPreferencesData`,
+          {
+            headers,
+            body: JSON.stringify(clientPreferencesData),
             method: 'POST',
           },
           { storeCookies }
@@ -427,7 +453,7 @@ export const VtexCommerce = (
 
       params.set(
         'items',
-        'profile.id,profile.email,profile.firstName,profile.lastName,shopper.firstName,shopper.lastName,shopper.organizationManager,store.channel,store.countryCode,store.cultureInfo,store.currencyCode,store.currencySymbol,authentication.customerId,authentication.storeUserId,authentication.storeUserEmail,authentication.unitId,authentication.unitName,checkout.regionId,public.postalCode'
+        'profile.id,profile.email,profile.firstName,profile.lastName,profile.phone,shopper.firstName,shopper.lastName,shopper.organizationManager,store.channel,store.countryCode,store.cultureInfo,store.currencyCode,store.currencySymbol,authentication.customerId,authentication.storeUserId,authentication.storeUserEmail,authentication.unitId,authentication.unitName,checkout.regionId,public.postalCode'
       )
 
       const headers: HeadersInit = withCookie({
@@ -671,6 +697,23 @@ export const VtexCommerce = (
 
         return fetchAPI(
           `${base}/api/license-manager/pvt/users/${email}`,
+          {
+            method: 'GET',
+            headers,
+          },
+          {}
+        )
+      },
+      getUserRoles: ({
+        userId,
+      }: { userId: string }): Promise<{
+        Email: string
+        Roles: Array<{ Id: number; Name: string }>
+      }> => {
+        const headers: HeadersInit = withAutCookie(forwardedHost, account)
+
+        return fetchAPI(
+          `${base}/api/license-manager/storefront/users/${userId}/roles`,
           {
             method: 'GET',
             headers,

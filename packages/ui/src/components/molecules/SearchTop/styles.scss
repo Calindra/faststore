@@ -63,14 +63,13 @@
 
     [data-fs-search-top-item-link] {
       display: flex;
+      column-gap: var(--fs-search-top-item-column-gap);
       align-items: flex-end;
       justify-content: flex-start;
       width: 100%;
-      padding-left: var(--fs-search-top-padding-left);
       padding-right: var(--fs-search-top-padding-right);
-      column-gap: var(--fs-search-top-item-column-gap);
+      padding-left: var(--fs-search-top-padding-left);
     }
-
   }
 
   [data-fs-search-top-item-badge] [data-fs-badge-wrapper] { display: inline-block; }

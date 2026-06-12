@@ -3,9 +3,215 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.2.0](https://github.com/vtex/faststore/compare/v4.1.2...v4.2.0) (2026-06-01)
+
+### Features
+
+- release version 2026 06 01 ([#3370](https://github.com/vtex/faststore/issues/3370)) ([61fcbdf](https://github.com/vtex/faststore/commit/61fcbdfde6a8bb6eb6f0f00d9b5ac3f28421dbf3))
+- Release version 2026 06 01 1 ([#3373](https://github.com/vtex/faststore/issues/3373)) ([df3cb4d](https://github.com/vtex/faststore/commit/df3cb4de391a252831dd28cf3bd46f7493bea742))
+
+# [4.2.0-dev.5](https://github.com/vtex/faststore/compare/v4.2.0-dev.4...v4.2.0-dev.5) (2026-06-01)
+
+**Note:** Version bump only for package @faststore/ui
+
+# 4.2.0-dev.4 (2026-06-01)
+
+### Bug Fixes
+
+- preview pnpm pack ([#3367](https://github.com/vtex/faststore/issues/3367)) ([186579c](https://github.com/vtex/faststore/commit/186579c4cca44e4d21c25068f075c0fbb6a56d96))
+
+# [4.2.0-dev.3](https://github.com/vtex/faststore/compare/v4.2.0-dev.2...v4.2.0-dev.3) (2026-06-01)
+
+**Note:** Version bump only for package @faststore/ui
+
+# [4.2.0-dev.2](https://github.com/vtex/faststore/compare/v4.2.0-dev.1...v4.2.0-dev.2) (2026-06-01)
+
+**Note:** Version bump only for package @faststore/ui
+
+# 4.2.0-dev.1 (2026-06-01)
+
+### Bug Fixes
+
+- createNextJSPages throwing preventing copy of store discovery-co… ([#3356](https://github.com/vtex/faststore/issues/3356)) ([cf318ab](https://github.com/vtex/faststore/commit/cf318abfecf4c6497d40bfe58203acc90b199696))
+
+# [4.2.0-dev.0](https://github.com/vtex/faststore/compare/v4.1.2-dev.8...v4.2.0-dev.0) (2026-06-01)
+
+**Note:** Version bump only for package @faststore/ui
+
+## [4.1.2-dev.8](https://github.com/vtex/faststore/compare/v4.1.2-dev.7...v4.1.2-dev.8) (2026-05-28)
+
+**Note:** Version bump only for package @faststore/ui
+
+## [4.1.2-dev.7](https://github.com/vtex/faststore/compare/v4.1.2-dev.6...v4.1.2-dev.7) (2026-05-28)
+
+**Note:** Version bump only for package @faststore/ui
+
+## [4.1.2-dev.6](https://github.com/vtex/faststore/compare/v4.1.2-dev.5...v4.1.2-dev.6) (2026-05-27)
+
+**Note:** Version bump only for package @faststore/ui
+
+## [4.1.2-dev.5](https://github.com/vtex/faststore/compare/v4.1.2-dev.4...v4.1.2-dev.5) (2026-05-21)
+
+**Note:** Version bump only for package @faststore/ui
+
+## [4.1.2-dev.4](https://github.com/vtex/faststore/compare/v4.1.2-dev.3...v4.1.2-dev.4) (2026-05-20)
+
+**Note:** Version bump only for package @faststore/ui
+
+## [4.1.2-dev.3](https://github.com/vtex/faststore/compare/v4.1.2-dev.2...v4.1.2-dev.3) (2026-05-20)
+
+### Bug Fixes
+
+- **ui:** use dvh for SlideOver height on mobile - SFS-3108 ([#3333](https://github.com/vtex/faststore/issues/3333)) ([487fe0f](https://github.com/vtex/faststore/commit/487fe0f452b25a3653091aeec647ab7f6bcb97d4))
+
+## [4.1.2-dev.2](https://github.com/vtex/faststore/compare/v4.1.2-dev.1...v4.1.2-dev.2) (2026-05-19)
+
+**Note:** Version bump only for package @faststore/ui
+
+## 4.1.2-dev.1 (2026-05-19)
+
+**Note:** Version bump only for package @faststore/ui
+
+## 4.1.2-dev.0 (2026-05-15)
+
+**Note:** Version bump only for package @faststore/ui
+
+## 4.1.1 (2026-05-15)
+
+### Bug Fixes
+
+- graduate version 4.1.1 ([#3331](https://github.com/vtex/faststore/issues/3331)) ([c26d990](https://github.com/vtex/faststore/commit/c26d990010d8643ceb2ed95ab1737f4eca80e240))
+- version bump 4.1.1 ([#3329](https://github.com/vtex/faststore/issues/3329)) ([59345b3](https://github.com/vtex/faststore/commit/59345b3584c3ec5fc6f532e1b5c1bcce9c5c5b97)), closes [#3318](https://github.com/vtex/faststore/issues/3318) [#3312](https://github.com/vtex/faststore/issues/3312) [#3319](https://github.com/vtex/faststore/issues/3319) [#3327](https://github.com/vtex/faststore/issues/3327) [#3320](https://github.com/vtex/faststore/issues/3320) [#3314](https://github.com/vtex/faststore/issues/3314) [#3317](https://github.com/vtex/faststore/issues/3317)
+
+## [4.1.1-dev.1](https://github.com/vtex/faststore/compare/v4.1.0-dev.11...v4.1.1-dev.1) (2026-05-15)
+
+**Note:** Version bump only for package @faststore/ui
+
+# 4.1.0-dev.11 (2026-05-15)
+
+**Note:** Version bump only for package @faststore/ui
+
+# [4.1.0-dev.10](https://github.com/vtex/faststore/compare/v4.1.0...v4.1.0-dev.10) (2026-05-15)
+
+**Note:** Version bump only for package @faststore/ui
+
+# [4.1.0-dev.9](https://github.com/vtex/faststore/compare/v4.1.0-dev.8...v4.1.0-dev.9) (2026-05-15)
+
+**Note:** Version bump only for package @faststore/ui
+
+# [4.1.0-dev.8](https://github.com/vtex/faststore/compare/v4.1.0-dev.7...v4.1.0-dev.8) (2026-05-15)
+
+**Note:** Version bump only for package @faststore/ui
+
+# [4.1.0-dev.7](https://github.com/vtex/faststore/compare/v4.1.0-dev.6...v4.1.0-dev.7) (2026-05-15)
+
+**Note:** Version bump only for package @faststore/ui
+
+# [4.1.0-dev.6](https://github.com/vtex/faststore/compare/v4.1.0-dev.5...v4.1.0-dev.6) (2026-05-14)
+
+**Note:** Version bump only for package @faststore/ui
+
+# [4.1.0-dev.5](https://github.com/vtex/faststore/compare/v4.1.0-dev.4...v4.1.0-dev.5) (2026-05-14)
+
+**Note:** Version bump only for package @faststore/ui
+
+# [4.1.0-dev.4](https://github.com/vtex/faststore/compare/v4.1.0-dev.3...v4.1.0-dev.4) (2026-05-13)
+
+**Note:** Version bump only for package @faststore/ui
+
+# [4.1.0-dev.3](https://github.com/vtex/faststore/compare/v4.1.0-dev.2...v4.1.0-dev.3) (2026-05-13)
+
+**Note:** Version bump only for package @faststore/ui
+
+# [4.1.0-dev.2](https://github.com/vtex/faststore/compare/v4.1.0-dev.1...v4.1.0-dev.2) (2026-05-12)
+
+**Note:** Version bump only for package @faststore/ui
+
+# 4.1.0 (2026-05-11)
+
+### Features
+
+- version bump 4.1.0 ([#3310](https://github.com/vtex/faststore/issues/3310)) ([1ea7bac](https://github.com/vtex/faststore/commit/1ea7bac649d783e50a9e79f8fe412009ae4a87f7)), closes [#3309](https://github.com/vtex/faststore/issues/3309) [#3308](https://github.com/vtex/faststore/issues/3308) [#3306](https://github.com/vtex/faststore/issues/3306) [#3304](https://github.com/vtex/faststore/issues/3304) [#3301](https://github.com/vtex/faststore/issues/3301)
+
+# [4.1.0-dev.1](https://github.com/vtex/faststore/compare/v4.1.0-dev.0...v4.1.0-dev.1) (2026-05-11)
+
+### Bug Fixes
+
+- PLP "Load more products" overwriting list instead of appending ([#3308](https://github.com/vtex/faststore/issues/3308)) ([e8b08cd](https://github.com/vtex/faststore/commit/e8b08cd4ffeeac63e1ede45ddd75043ef7695813)), closes [#3015](https://github.com/vtex/faststore/issues/3015) [#3015](https://github.com/vtex/faststore/issues/3015)
+
+# [4.1.0-dev.0](https://github.com/vtex/faststore/compare/v4.0.1-dev.2...v4.1.0-dev.0) (2026-05-11)
+
+**Note:** Version bump only for package @faststore/ui
+
+## [4.0.1-dev.2](https://github.com/vtex/faststore/compare/v4.0.1-dev.1...v4.0.1-dev.2) (2026-05-11)
+
+**Note:** Version bump only for package @faststore/ui
+
+## [4.0.1-dev.1](https://github.com/vtex/faststore/compare/v4.0.1-dev.0...v4.0.1-dev.1) (2026-05-07)
+
+**Note:** Version bump only for package @faststore/ui
+
+## [4.0.1-dev.0](https://github.com/vtex/faststore/compare/v4.0.0...v4.0.1-dev.0) (2026-05-07)
+
+**Note:** Version bump only for package @faststore/ui
+
+# [4.0.0](https://github.com/vtex/faststore/compare/v3.99.0...v4.0.0) (2026-05-07)
+
+### Features
+
+- FastStore v4 ([#3302](https://github.com/vtex/faststore/issues/3302)) ([c7ca1a2](https://github.com/vtex/faststore/commit/c7ca1a2a9a6161bdf30e33a965ecf2fda9ef3fbf))
+
+# [4.0.0-dev.4](https://github.com/vtex/faststore/compare/v4.0.0-dev.3...v4.0.0-dev.4) (2026-05-07)
+
+**Note:** Version bump only for package @faststore/ui
+
+# [4.0.0-dev.3](https://github.com/vtex/faststore/compare/v4.0.0-dev.2...v4.0.0-dev.3) (2026-05-07)
+
+**Note:** Version bump only for package @faststore/ui
+
+# [4.0.0-dev.2](https://github.com/vtex/faststore/compare/v4.0.0-dev.1...v4.0.0-dev.2) (2026-05-07)
+
+**Note:** Version bump only for package @faststore/ui
+
+# 3.99.0-dev.9 (2026-05-07)
+
+### Bug Fixes
+
+- release command ([e912b5e](https://github.com/vtex/faststore/commit/e912b5e10cf61e65f24502fb077c06799009da61))
+
+# 3.99.0-dev.8 (2026-05-04)
+
+**Note:** Version bump only for package @faststore/ui
+
+# 3.99.0-dev.6 (2026-05-04)
+
+**Note:** Version bump only for package @faststore/ui
+
+# 3.99.0-dev.5 (2026-05-04)
+
+### Bug Fixes
+
+- Enhance session validation logic to skip token refresh in local … ([#3285](https://github.com/vtex/faststore/issues/3285)) ([41a330a](https://github.com/vtex/faststore/commit/41a330a9704a29369141e6e78b1f6d01e5a2e1a5))
+
+# 3.99.0-dev.4 (2026-04-28)
+
+**Note:** Version bump only for package @faststore/ui
+
+# 3.99.0-dev.3 (2026-04-23)
+
+### Features
+
+- add isGift field to StoreOffer type and resolvers - SFS-3040 ([#3220](https://github.com/vtex/faststore/issues/3220)) ([e10fc92](https://github.com/vtex/faststore/commit/e10fc92633a5296a5b03286028d31d9c280561c6))
+
+# [3.99.0-dev.1](https://github.com/vtex/faststore/compare/v3.99.0-dev.0...v3.99.0-dev.1) (2026-04-15)
+
+**Note:** Version bump only for package @faststore/ui
+
 ## [3.98.1](https://github.com/vtex/faststore/compare/v3.98.0...v3.98.1) (2026-04-07)
 
 **Note:** Version bump only for package @faststore/ui
+
+## [3.98.1-dev.0](https://github.com/vtex/faststore/compare/v3.98.0-dev.10...v3.98.1-dev.0) (2026-03-27)
 
 # 3.98.0 (2026-03-27)
 
@@ -45,21 +251,17 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package @faststore/ui
 
+# [3.97.0](https://github.com/vtex/faststore/compare/v3.96.5...v3.97.0) (2026-02-03)
+
+**Note:** Version bump only for package @faststore/ui
+
 # [3.97.0-dev.5](https://github.com/vtex/faststore/compare/v3.97.0-dev.4...v3.97.0-dev.5) (2026-02-19)
 
 **Note:** Version bump only for package @faststore/ui
 
 # 3.97.0-dev.2 (2026-02-06)
 
-# [3.97.0](https://github.com/vtex/faststore/compare/v3.96.5...v3.97.0) (2026-02-03)
-
-**Note:** Version bump only for package @faststore/ui
-
 ## [3.96.4-dev.0](https://github.com/vtex/faststore/compare/v3.96.3...v3.96.4-dev.0) (2026-01-21)
-
-# 3.96.0-dev.22 (2026-01-21)
-
-**Note:** Version bump only for package @faststore/ui
 
 # [3.96.0](https://github.com/vtex/faststore/compare/v3.95.0...v3.96.0) (2025-12-24)
 

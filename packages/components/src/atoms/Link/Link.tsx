@@ -1,5 +1,5 @@
-import React, { forwardRef } from 'react'
 import type { ElementType, ReactElement } from 'react'
+import React, { forwardRef } from 'react'
 import type {
   PolymorphicComponentPropsWithRef,
   PolymorphicRef,

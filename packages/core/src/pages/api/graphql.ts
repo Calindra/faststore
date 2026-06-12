@@ -8,7 +8,10 @@ import { parse } from 'cookie'
 import type { NextApiHandler, NextApiRequest } from 'next'
 
 import discoveryConfig from 'discovery.config'
-import { getJWTAutCookie, isExpired } from 'src/utils/getCookie'
+import { getJWTAutCookie } from 'src/utils/getCookie'
+import { getRequestHostname } from 'src/utils/getRequestHostname'
+import { isLocalHost } from 'src/utils/isLocalHost'
+import { shouldForceRefreshTokenForValidateSession } from 'src/utils/validateSessionRefreshToken'
 import { execute } from '../../server'
 
 const DEFAULT_MAX_AGE = 5 * 60 // 5 minutes
@@ -17,26 +20,6 @@ const ALLOWED_HOST_SUFFIXES = ['localhost', '.vtex.app', '.localhost']
 
 // Example: "Set-Cookie: key=value; Domain=example.com; Path=/"
 const MATCH_DOMAIN_REGEXP = /(?:^|;\s*)(?:domain=)([^;]+)/i
-
-/**
- * Extracts hostname from the incoming request.
- */
-const getRequestHostname = ({
-  request,
-}: {
-  request: NextApiRequest
-}): string | null => {
-  const hostHeader = request.headers.host?.trim()
-  if (!hostHeader) {
-    return null
-  }
-
-  try {
-    return new URL(`https://${hostHeader}`).hostname
-  } catch {
-    return null
-  }
-}
 
 /**
  * Checks whether the cookie domain should be replaced by host.
@@ -84,7 +67,7 @@ const normalizeSetCookieDomain = ({
     return setCookie
   }
 
-  const host = getRequestHostname({ request })
+  const host = getRequestHostname(request.headers.host)
   if (!host) {
     return setCookie
   }
@@ -160,7 +143,10 @@ const handler: NextApiHandler = async (request, response) => {
     // value is used to cache bust the request if there is a VtexIdclientAutCookie
     const { operation, variables, query, v: value } = parseRequest(request)
 
+    const isLocal = isLocalHost(getRequestHostname(request.headers.host))
+
     if (
+      !isLocal &&
       operation.__meta__.operationName === 'ValidateSession' &&
       discoveryConfig.experimental?.refreshToken
     ) {
@@ -169,27 +155,10 @@ const handler: NextApiHandler = async (request, response) => {
         account: discoveryConfig.api.storeId,
       })
 
-      const tokenExpired = Boolean(jwt && isExpired(Number(jwt?.exp)))
-
-      const refreshAfterExist = !!variables?.session?.refreshAfter
-
-      const refreshAfterExpired =
-        refreshAfterExist && isExpired(Number(variables.session.refreshAfter))
-
-      const tokenExistAndIsFirstRefreshTokenRequest =
-        !!jwt && !refreshAfterExist
-
-      // when token expired, browser clears the cookie, but we still have the refreshAfter in session and the refresh token cookie
-      const tokenNotExistAndRefreshAfterExistAndIsExpired =
-        !jwt && !!refreshAfterExist && refreshAfterExpired
-
-      const tokenExpiredAndRefreshAfterIsNullOrExpired =
-        tokenExpired && (!refreshAfterExist || refreshAfterExpired)
-
-      const shouldRefreshToken =
-        tokenExistAndIsFirstRefreshTokenRequest ||
-        tokenNotExistAndRefreshAfterExistAndIsExpired ||
-        tokenExpiredAndRefreshAfterIsNullOrExpired
+      const shouldRefreshToken = shouldForceRefreshTokenForValidateSession({
+        jwt,
+        sessionRefreshAfter: variables?.session?.refreshAfter,
+      })
 
       if (shouldRefreshToken) {
         throw new UnauthorizedError(
@@ -221,7 +190,7 @@ const handler: NextApiHandler = async (request, response) => {
 
     if (hasErrors) {
       const error = errors.find(isFastStoreError)
-      console.error(error)
+      console.error('Graphql execution returned with error: ', error)
 
       response.status(error?.extensions.status ?? 500).end()
       return
@@ -276,7 +245,10 @@ const handler: NextApiHandler = async (request, response) => {
     response.setHeader('content-type', 'application/json')
     response.send(JSON.stringify({ data, errors }))
   } catch (err) {
-    console.error(err)
+    console.error(
+      'Something unexpected occurred querying Graphql endpoint: \n',
+      err
+    )
 
     if (err instanceof BadRequestError) {
       response.status(400).end()

@@ -31,13 +31,11 @@
 
   [data-fs-cart-sidebar-title] {
     display: flex;
+    column-gap: var(--fs-cart-sidebar-header-title-column-gap);
     align-items: center;
-
     font-size: var(--fs-text-size-4);
     font-weight: var(--fs-text-weight-bold);
     line-height: 1.12;
-
-    column-gap: var(--fs-cart-sidebar-header-title-column-gap);
   }
 
   [data-fs-cart-sidebar-list] {
@@ -49,9 +47,9 @@
   }
 
   [data-fs-cart-sidebar-footer] {
-    padding: var(--fs-spacing-3);
     position: sticky;
     bottom: 0;
+    padding: var(--fs-spacing-3);
     margin-top: auto;
     background-color: var(--fs-cart-sidebar-footer-bkg-color);
     box-shadow: var(--fs-cart-sidebar-footer-box-shadow);

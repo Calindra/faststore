@@ -24,8 +24,8 @@
   }
 
   &[data-fs-price-variant="spot"] {
+    font-weight: var(--fs-price-spot-font-weight);
     line-height: 1.7;
     color: var(--fs-price-spot-color);
-    font-weight: var(--fs-price-spot-font-weight);
   }
 }

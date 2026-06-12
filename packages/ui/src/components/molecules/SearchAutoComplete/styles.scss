@@ -44,13 +44,13 @@
 
   [data-fs-search-auto-complete-item-link] {
     display: flex;
+    column-gap: var(--fs-search-auto-complete-item-column-gap);
     align-items: center;
     justify-content: flex-start;
     width: 100%;
-    color: var(--fs-color-neutral-6);
-    padding-left: var(--fs-search-auto-complete-padding-left);
     padding-right: var(--fs-search-auto-complete-padding-right);
-    column-gap: var(--fs-search-auto-complete-item-column-gap);
+    padding-left: var(--fs-search-auto-complete-padding-left);
+    color: var(--fs-color-neutral-6);
     &:visited { color: var(--fs-color-neutral-6); }
 
     [data-fs-search-auto-complete-item-suggestion] {
@@ -58,7 +58,6 @@
       color: var(--fs-color-text);
     }
   }
-
 
   [data-fs-search-auto-complete-item-icon] {
     flex-grow: 0;

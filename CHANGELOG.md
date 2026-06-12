@@ -3,6 +3,278 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.2.0](https://github.com/vtex/faststore/compare/v4.1.2...v4.2.0) (2026-06-01)
+
+### Bug Fixes
+
+- preview pnpm pack ([#3367](https://github.com/vtex/faststore/issues/3367)) ([48c36c5](https://github.com/vtex/faststore/commit/48c36c5ee90fc20ce7eb188b034db8f59627afb2))
+
+### Features
+
+- release version 2026 06 01 ([#3370](https://github.com/vtex/faststore/issues/3370)) ([61fcbdf](https://github.com/vtex/faststore/commit/61fcbdfde6a8bb6eb6f0f00d9b5ac3f28421dbf3))
+- Release version 2026 06 01 1 ([#3373](https://github.com/vtex/faststore/issues/3373)) ([df3cb4d](https://github.com/vtex/faststore/commit/df3cb4de391a252831dd28cf3bd46f7493bea742))
+
+# [4.2.0-dev.5](https://github.com/vtex/faststore/compare/v4.2.0-dev.4...v4.2.0-dev.5) (2026-06-01)
+
+**Note:** Version bump only for package faststore
+
+# 4.2.0-dev.4 (2026-06-01)
+
+### Bug Fixes
+
+- preview pnpm pack ([#3367](https://github.com/vtex/faststore/issues/3367)) ([186579c](https://github.com/vtex/faststore/commit/186579c4cca44e4d21c25068f075c0fbb6a56d96))
+
+# [4.2.0-dev.3](https://github.com/vtex/faststore/compare/v4.2.0-dev.2...v4.2.0-dev.3) (2026-06-01)
+
+### Performance Improvements
+
+- **core:** SSR ProductGallery and fix CLS on screen-size detection (VTE-9) ([#3349](https://github.com/vtex/faststore/issues/3349)) ([e70a23b](https://github.com/vtex/faststore/commit/e70a23b54504be4cddc97e76c89cf4323fe0941e)), closes [#3345](https://github.com/vtex/faststore/issues/3345)
+
+# [4.2.0-dev.2](https://github.com/vtex/faststore/compare/v4.2.0-dev.1...v4.2.0-dev.2) (2026-06-01)
+
+### Bug Fixes
+
+- strip packageManager from generated .faststore/package.json ([#3335](https://github.com/vtex/faststore/issues/3335)) ([5a2b793](https://github.com/vtex/faststore/commit/5a2b793c4b12f986c72e801fb03809b568a99344))
+
+# 4.2.0-dev.1 (2026-06-01)
+
+### Bug Fixes
+
+- createNextJSPages throwing preventing copy of store discovery-co… ([#3356](https://github.com/vtex/faststore/issues/3356)) ([cf318ab](https://github.com/vtex/faststore/commit/cf318abfecf4c6497d40bfe58203acc90b199696))
+- **sdk:** refetch first PLP page from page-load time, not build time ([#3350](https://github.com/vtex/faststore/issues/3350)) ([608c636](https://github.com/vtex/faststore/commit/608c6362eff32b0dabba9d51ada09e50699cd3c8)), closes [#3345](https://github.com/vtex/faststore/issues/3345)
+
+# [4.2.0-dev.0](https://github.com/vtex/faststore/compare/v4.1.2-dev.8...v4.2.0-dev.0) (2026-06-01)
+
+### Features
+
+- paginate listEntries with scroll ([#3282](https://github.com/vtex/faststore/issues/3282)) ([2e43804](https://github.com/vtex/faststore/commit/2e43804b7c3ee336eee5a19f1a11d3185c01102d))
+
+## [4.1.2-dev.8](https://github.com/vtex/faststore/compare/v4.1.2-dev.7...v4.1.2-dev.8) (2026-05-28)
+
+### Bug Fixes
+
+- localization race condition ([#3281](https://github.com/vtex/faststore/issues/3281)) ([75cb5df](https://github.com/vtex/faststore/commit/75cb5dfb5dd3dcd58a15273df5f4c20bb1c8987b)), closes [#3111](https://github.com/vtex/faststore/issues/3111) [#3111](https://github.com/vtex/faststore/issues/3111)
+
+## [4.1.2-dev.7](https://github.com/vtex/faststore/compare/v4.1.2-dev.6...v4.1.2-dev.7) (2026-05-28)
+
+**Note:** Version bump only for package faststore
+
+## [4.1.2-dev.6](https://github.com/vtex/faststore/compare/v4.1.2-dev.5...v4.1.2-dev.6) (2026-05-27)
+
+**Note:** Version bump only for package faststore
+
+## [4.1.2-dev.5](https://github.com/vtex/faststore/compare/v4.1.2-dev.4...v4.1.2-dev.5) (2026-05-21)
+
+### Bug Fixes
+
+- url resolution in windows ([#3337](https://github.com/vtex/faststore/issues/3337)) ([2476091](https://github.com/vtex/faststore/commit/24760916bdcfc73c7d4ef7f92829976d4f1f97d6))
+
+## [4.1.2-dev.4](https://github.com/vtex/faststore/compare/v4.1.2-dev.3...v4.1.2-dev.4) (2026-05-20)
+
+**Note:** Version bump only for package faststore
+
+## [4.1.2-dev.3](https://github.com/vtex/faststore/compare/v4.1.2-dev.2...v4.1.2-dev.3) (2026-05-20)
+
+### Bug Fixes
+
+- **ui:** use dvh for SlideOver height on mobile - SFS-3108 ([#3333](https://github.com/vtex/faststore/issues/3333)) ([487fe0f](https://github.com/vtex/faststore/commit/487fe0f452b25a3653091aeec647ab7f6bcb97d4))
+
+## [4.1.2-dev.2](https://github.com/vtex/faststore/compare/v4.1.2-dev.1...v4.1.2-dev.2) (2026-05-19)
+
+### Bug Fixes
+
+- generate plugin themes with Sass [@use](https://github.com/use) instead of [@import](https://github.com/import) ([#3283](https://github.com/vtex/faststore/issues/3283)) ([22c0e74](https://github.com/vtex/faststore/commit/22c0e74d7d3b3714a5e9b6917d7cc60aa36eeb69))
+
+## 4.1.2-dev.1 (2026-05-19)
+
+### Bug Fixes
+
+- bypass refresh-token flow on localhost in 403 page and useRefreshToken hook ([#3325](https://github.com/vtex/faststore/issues/3325)) ([d48571a](https://github.com/vtex/faststore/commit/d48571a15176497b019bae1462617c3159459421)), closes [#3285](https://github.com/vtex/faststore/issues/3285) [#3285](https://github.com/vtex/faststore/issues/3285)
+
+## 4.1.2-dev.0 (2026-05-15)
+
+### Bug Fixes
+
+- bump version ([4fbfa64](https://github.com/vtex/faststore/commit/4fbfa649afc57218dbf8020abc7333c05b0b034f))
+
+## 4.1.1 (2026-05-15)
+
+### Bug Fixes
+
+- graduate version 4.1.1 ([#3331](https://github.com/vtex/faststore/issues/3331)) ([c26d990](https://github.com/vtex/faststore/commit/c26d990010d8643ceb2ed95ab1737f4eca80e240))
+- version bump 4.1.1 ([#3329](https://github.com/vtex/faststore/issues/3329)) ([59345b3](https://github.com/vtex/faststore/commit/59345b3584c3ec5fc6f532e1b5c1bcce9c5c5b97)), closes [#3318](https://github.com/vtex/faststore/issues/3318) [#3312](https://github.com/vtex/faststore/issues/3312) [#3319](https://github.com/vtex/faststore/issues/3319) [#3327](https://github.com/vtex/faststore/issues/3327) [#3320](https://github.com/vtex/faststore/issues/3320) [#3314](https://github.com/vtex/faststore/issues/3314) [#3317](https://github.com/vtex/faststore/issues/3317)
+
+## [4.1.1-dev.1](https://github.com/vtex/faststore/compare/v4.1.0-dev.11...v4.1.1-dev.1) (2026-05-15)
+
+**Note:** Version bump only for package faststore
+
+# 4.1.0-dev.11 (2026-05-15)
+
+**Note:** Version bump only for package faststore
+
+# [4.1.0-dev.10](https://github.com/vtex/faststore/compare/v4.1.0...v4.1.0-dev.10) (2026-05-15)
+
+**Note:** Version bump only for package faststore
+
+# [4.1.0-dev.9](https://github.com/vtex/faststore/compare/v4.1.0-dev.8...v4.1.0-dev.9) (2026-05-15)
+
+**Note:** Version bump only for package faststore
+
+# [4.1.0-dev.8](https://github.com/vtex/faststore/compare/v4.1.0-dev.7...v4.1.0-dev.8) (2026-05-15)
+
+**Note:** Version bump only for package faststore
+
+# [4.1.0-dev.7](https://github.com/vtex/faststore/compare/v4.1.0-dev.6...v4.1.0-dev.7) (2026-05-15)
+
+**Note:** Version bump only for package faststore
+
+# [4.1.0-dev.6](https://github.com/vtex/faststore/compare/v4.1.0-dev.5...v4.1.0-dev.6) (2026-05-14)
+
+**Note:** Version bump only for package faststore
+
+# [4.1.0-dev.5](https://github.com/vtex/faststore/compare/v4.1.0-dev.4...v4.1.0-dev.5) (2026-05-14)
+
+### Bug Fixes
+
+- region slider section render ([#3318](https://github.com/vtex/faststore/issues/3318)) ([f9f5e0d](https://github.com/vtex/faststore/commit/f9f5e0dbd6c3e92b24a3fb1e21a95bfb1c6744f1)), closes [#2887](https://github.com/vtex/faststore/issues/2887) [#2961](https://github.com/vtex/faststore/issues/2961) [#3071](https://github.com/vtex/faststore/issues/3071)
+
+# [4.1.0-dev.4](https://github.com/vtex/faststore/compare/v4.1.0-dev.3...v4.1.0-dev.4) (2026-05-13)
+
+**Note:** Version bump only for package faststore
+
+# [4.1.0-dev.3](https://github.com/vtex/faststore/compare/v4.1.0-dev.2...v4.1.0-dev.3) (2026-05-13)
+
+**Note:** Version bump only for package faststore
+
+# [4.1.0-dev.2](https://github.com/vtex/faststore/compare/v4.1.0-dev.1...v4.1.0-dev.2) (2026-05-12)
+
+### Bug Fixes
+
+- allow_all_components for CMS ([#3312](https://github.com/vtex/faststore/issues/3312)) ([eadeaa3](https://github.com/vtex/faststore/commit/eadeaa36782b40be0fe7fb16604f7a5bc3da2b79))
+
+# 4.1.0 (2026-05-11)
+
+### Features
+
+- version bump 4.1.0 ([#3310](https://github.com/vtex/faststore/issues/3310)) ([1ea7bac](https://github.com/vtex/faststore/commit/1ea7bac649d783e50a9e79f8fe412009ae4a87f7)), closes [#3309](https://github.com/vtex/faststore/issues/3309) [#3308](https://github.com/vtex/faststore/issues/3308) [#3306](https://github.com/vtex/faststore/issues/3306) [#3304](https://github.com/vtex/faststore/issues/3304) [#3301](https://github.com/vtex/faststore/issues/3301)
+
+# [4.1.0-dev.1](https://github.com/vtex/faststore/compare/v4.1.0-dev.0...v4.1.0-dev.1) (2026-05-11)
+
+### Bug Fixes
+
+- PLP "Load more products" overwriting list instead of appending ([#3308](https://github.com/vtex/faststore/issues/3308)) ([e8b08cd](https://github.com/vtex/faststore/commit/e8b08cd4ffeeac63e1ede45ddd75043ef7695813)), closes [#3015](https://github.com/vtex/faststore/issues/3015) [#3015](https://github.com/vtex/faststore/issues/3015)
+
+# [4.1.0-dev.0](https://github.com/vtex/faststore/compare/v4.0.1-dev.2...v4.1.0-dev.0) (2026-05-11)
+
+### Features
+
+- user details adjusts - SFS-2950 ([#3306](https://github.com/vtex/faststore/issues/3306)) ([70b018d](https://github.com/vtex/faststore/commit/70b018d713b4ec0da698bfc377332b356d9fa9cd))
+
+## [4.0.1-dev.2](https://github.com/vtex/faststore/compare/v4.0.1-dev.1...v4.0.1-dev.2) (2026-05-11)
+
+### Bug Fixes
+
+- localization selector stale and reset selection for unsaved changes ([#3301](https://github.com/vtex/faststore/issues/3301)) ([023e52e](https://github.com/vtex/faststore/commit/023e52ee3c8798cfc9f12ed98e99e8efacb1f1d5))
+
+## [4.0.1-dev.1](https://github.com/vtex/faststore/compare/v4.0.1-dev.0...v4.0.1-dev.1) (2026-05-07)
+
+### Bug Fixes
+
+- updates schemas vtex.faststore ([#3304](https://github.com/vtex/faststore/issues/3304)) ([490175f](https://github.com/vtex/faststore/commit/490175ff4cc06bf23f7957bbd1f9d002baa13e43))
+
+## [4.0.1-dev.0](https://github.com/vtex/faststore/compare/v4.0.0...v4.0.1-dev.0) (2026-05-07)
+
+# 4.0.0-dev.4 (2026-05-07)
+
+**Note:** Version bump only for package faststore
+
+# [4.0.0](https://github.com/vtex/faststore/compare/v3.99.0...v4.0.0) (2026-05-07)
+
+### Features
+
+- FastStore v4 ([#3302](https://github.com/vtex/faststore/issues/3302)) ([c7ca1a2](https://github.com/vtex/faststore/commit/c7ca1a2a9a6161bdf30e33a965ecf2fda9ef3fbf))
+
+# [4.0.0-dev.4](https://github.com/vtex/faststore/compare/v4.0.0-dev.3...v4.0.0-dev.4) (2026-05-07)
+
+### Bug Fixes
+
+- add repository field to diagnostics package for OIDC provenance ([d1e40ab](https://github.com/vtex/faststore/commit/d1e40abe742b469a68b3d178c10ef56e5184ec29))
+
+# [4.0.0-dev.3](https://github.com/vtex/faststore/compare/v4.0.0-dev.2...v4.0.0-dev.3) (2026-05-07)
+
+### Features
+
+- trigger v4 publish ([bb56584](https://github.com/vtex/faststore/commit/bb565843917c61b4d0023c2ad21284a1aa95c55e))
+
+# [4.0.0-dev.2](https://github.com/vtex/faststore/compare/v4.0.0-dev.1...v4.0.0-dev.2) (2026-05-07)
+
+### Features
+
+- force publish all packages on v4 release ([0e765a3](https://github.com/vtex/faststore/commit/0e765a335da1f16b4a4298caa31900286f324ea8))
+
+# [4.0.0-dev.1](https://github.com/vtex/faststore/compare/v4.0.0-dev.0...v4.0.0-dev.1) (2026-05-07)
+
+### Features
+
+- trigger v4 publish ([7f725d2](https://github.com/vtex/faststore/commit/7f725d27575619a2475b273b779906a745166f84))
+
+# 3.99.0-dev.9 (2026-05-07)
+
+### Bug Fixes
+
+- release command ([e912b5e](https://github.com/vtex/faststore/commit/e912b5e10cf61e65f24502fb077c06799009da61))
+
+# 3.99.0-dev.8 (2026-05-04)
+
+**Note:** Version bump only for package faststore
+
+# [3.99.0-dev.7](https://github.com/vtex/faststore/compare/v3.99.0-dev.6...v3.99.0-dev.7) (2026-05-04)
+
+### Bug Fixes
+
+- fixing preview tag style ([#3058](https://github.com/vtex/faststore/issues/3058)) ([5084915](https://github.com/vtex/faststore/commit/50849157ac190a57fc151e7e6c9cb10df487bff6))
+
+# 3.99.0-dev.6 (2026-05-04)
+
+### Bug Fixes
+
+- Base CMS schema ([#3290](https://github.com/vtex/faststore/issues/3290)) ([3455e89](https://github.com/vtex/faststore/commit/3455e89295e197f4bd18c0b5f84d7b01c0d67009))
+
+# 3.99.0-dev.5 (2026-05-04)
+
+### Bug Fixes
+
+- Enhance session validation logic to skip token refresh in local … ([#3285](https://github.com/vtex/faststore/issues/3285)) ([41a330a](https://github.com/vtex/faststore/commit/41a330a9704a29369141e6e78b1f6d01e5a2e1a5))
+
+# 3.99.0-dev.4 (2026-04-28)
+
+### Bug Fixes
+
+- Refactor token refresh logic in GraphQL API handler - SFS-3104 ([#3263](https://github.com/vtex/faststore/issues/3263)) ([695ab6a](https://github.com/vtex/faststore/commit/695ab6a9413eb53ef457cfc890c74e41c29c1ab8))
+
+# 3.99.0-dev.3 (2026-04-23)
+
+### Features
+
+- add isGift field to StoreOffer type and resolvers - SFS-3040 ([#3220](https://github.com/vtex/faststore/issues/3220)) ([e10fc92](https://github.com/vtex/faststore/commit/e10fc92633a5296a5b03286028d31d9c280561c6))
+- Enhance session management with logout - SFS-3105 ([#3268](https://github.com/vtex/faststore/issues/3268)) ([9468e32](https://github.com/vtex/faststore/commit/9468e32a3531ca3c91c7f82a34ac1c750c6a26ef))
+
+# [3.99.0-dev.2](https://github.com/vtex/faststore/compare/v3.99.0-dev.1...v3.99.0-dev.2) (2026-04-21)
+
+### Bug Fixes
+
+- Prevent IDB writes before store hydration completes - SFS-3121 ([#3267](https://github.com/vtex/faststore/issues/3267)) ([0b23e52](https://github.com/vtex/faststore/commit/0b23e526db23d7338c0eda75b673bb0bea05eef3))
+
+# [3.99.0-dev.1](https://github.com/vtex/faststore/compare/v3.99.0-dev.0...v3.99.0-dev.1) (2026-04-15)
+
+**Note:** Version bump only for package faststore
+
+# [3.99.0-dev.0](https://github.com/vtex/faststore/compare/v3.98.1-dev.0...v3.99.0-dev.0) (2026-03-31)
+
+### Features
+
+- Add Shopping Assistant component to FastStore schema ([#3255](https://github.com/vtex/faststore/issues/3255)) ([f4c8ea6](https://github.com/vtex/faststore/commit/f4c8ea65da468d26acac198071882523a8a57215))
+
 ## [3.98.4](https://github.com/vtex/faststore/compare/v3.98.3...v3.98.4) (2026-04-15)
 
 **Note:** Version bump only for package faststore
@@ -34,6 +306,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 - version 2026 03 27 ([#3251](https://github.com/vtex/faststore/issues/3251)) ([f330a43](https://github.com/vtex/faststore/commit/f330a43661567ad8edb468acd3416bb7ffacd8b6))
+
+# [3.98.0-dev.10](https://github.com/vtex/faststore/compare/v3.98.0-dev.9...v3.98.0-dev.10) (2026-03-27)
+
+**Note:** Version bump only for package faststore
 
 # [3.98.0-dev.9](https://github.com/vtex/faststore/compare/v3.98.0-dev.8...v3.98.0-dev.9) (2026-03-27)
 
@@ -95,6 +371,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package faststore
 
+# [3.97.0](https://github.com/vtex/faststore/compare/v3.96.5...v3.97.0) (2026-02-03)
+
+**Note:** Version bump only for package faststore
+
 # [3.97.0-dev.6](https://github.com/vtex/faststore/compare/v3.97.0-dev.5...v3.97.0-dev.6) (2026-02-19)
 
 ### Bug Fixes
@@ -123,10 +403,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - reorder feature ([#3153](https://github.com/vtex/faststore/issues/3153)) ([d0fdeec](https://github.com/vtex/faststore/commit/d0fdeec77cd94e16f1b79dcc927487320983ba0e))
 
-# [3.97.0](https://github.com/vtex/faststore/compare/v3.96.5...v3.97.0) (2026-02-03)
-
-**Note:** Version bump only for package faststore
-
 # [3.97.0-dev.1](https://github.com/vtex/faststore/compare/v3.96.5...v3.97.0-dev.1) (2026-02-03)
 
 # 3.97.0-dev.0 (2026-01-27)
@@ -139,12 +415,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 - Enable fraction digit formatting for SEO's `product:price:amount` meta tag ([#3179](https://github.com/vtex/faststore/issues/3179)) ([d6e6252](https://github.com/vtex/faststore/commit/d6e6252eb578d782505b8e505ee48cd9fd1526e3))
 
-## [3.96.4-dev.0](https://github.com/vtex/faststore/compare/v3.96.3...v3.96.4-dev.0) (2026-01-21)
-
-# 3.96.0-dev.22 (2026-01-21)
-
-**Note:** Version bump only for package faststore
-
 ## [3.96.5](https://github.com/vtex/faststore/compare/v3.96.4...v3.96.5) (2026-02-02)
 
 ### Bug Fixes
@@ -156,6 +426,8 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Bug Fixes
 
 - close filter on apply button click in FilterSlider component ([#3187](https://github.com/vtex/faststore/issues/3187)) ([f3c96eb](https://github.com/vtex/faststore/commit/f3c96eb5e73178d8c863a3e40ac576dc623a0624))
+
+## [3.96.4-dev.0](https://github.com/vtex/faststore/compare/v3.96.3...v3.96.4-dev.0) (2026-01-21)
 
 ## [3.96.3](https://github.com/vtex/faststore/compare/v3.96.2...v3.96.3) (2026-01-21)
 
@@ -178,6 +450,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 - version 20251223 ([#3161](https://github.com/vtex/faststore/issues/3161)) ([ad5e8d1](https://github.com/vtex/faststore/commit/ad5e8d12fe45f1fb8e1134165172bf1c6b2a91e2))
+
+# 3.96.0-dev.22 (2026-01-21)
+
+**Note:** Version bump only for package faststore
 
 # 3.96.0-dev.22 (2026-01-21)
 
@@ -293,16 +569,16 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [3.95.1-dev.0](https://github.com/vtex/faststore/compare/v3.95.0...v3.95.1-dev.0) (2025-12-02)
 
-# 3.95.0-dev.3 (2025-12-02)
-
-**Note:** Version bump only for package faststore
-
 # 3.95.0 (2025-12-02)
 
 ### Features
 
 - release graduate ([#3139](https://github.com/vtex/faststore/issues/3139)) ([90285fc](https://github.com/vtex/faststore/commit/90285fcc453531a897ba52adcb14032e8ebd8065))
 - release version 20250212 ([#3138](https://github.com/vtex/faststore/issues/3138)) ([5e51548](https://github.com/vtex/faststore/commit/5e5154898e3756aa8d95efd54d76db0c90248d8d))
+
+# 3.95.0-dev.3 (2025-12-02)
+
+**Note:** Version bump only for package faststore
 
 # [3.95.0-dev.2](https://github.com/vtex/faststore/compare/v3.94.0...v3.95.0-dev.2) (2025-12-02)
 
@@ -325,16 +601,16 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## [3.94.1-dev.0](https://github.com/vtex/faststore/compare/v3.94.0...v3.94.1-dev.0) (2025-11-19)
 
-# 3.93.0-dev.4 (2025-11-17)
-
-**Note:** Version bump only for package faststore
-
 # 3.94.0 (2025-11-19)
 
 ### Features
 
 - release version 20251119 17 05 ([#3126](https://github.com/vtex/faststore/issues/3126)) ([9753c3f](https://github.com/vtex/faststore/commit/9753c3ff5ea760767978c41ec138b661a87ad731))
 - update version to 3.93.0-dev.4 and clean up changelogs ([#3127](https://github.com/vtex/faststore/issues/3127)) ([0c29d74](https://github.com/vtex/faststore/commit/0c29d749dc2222d01d848ffda9c2ae95dfba22af))
+
+# 3.93.0-dev.4 (2025-11-17)
+
+**Note:** Version bump only for package faststore
 
 # [3.93.0-dev.4](https://github.com/vtex/faststore/compare/v3.93.0-dev.3...v3.93.0-dev.4) (2025-11-17)
 

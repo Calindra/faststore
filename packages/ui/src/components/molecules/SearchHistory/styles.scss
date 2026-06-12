@@ -66,12 +66,12 @@
 
     [data-fs-search-history-item-link] {
       display: flex;
+      column-gap: var(--fs-search-history-item-column-gap);
       align-items: center;
       justify-content: flex-start;
       width: 100%;
-      padding-left: var(--fs-search-history-padding-left);
       padding-right: var(--fs-search-history-padding-right);
-      column-gap: var(--fs-search-history-item-column-gap);
+      padding-left: var(--fs-search-history-padding-left);
     }
 
     [data-fs-search-history-item-icon] {
